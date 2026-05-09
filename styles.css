@@ -5,15 +5,15 @@
    ────────────────────────────────────────────────────────── */
 
 :root {
-  --bg:        #efe6cb;
-  --bg-card:   #f6efd6;
-  --bg-soft:   #faf5e3;
+  --bg:        #fbf9f2;
+  --bg-card:   #ffffff;
+  --bg-soft:   #fbf7e6;
   --ink:       #172a4d;
   --ink-soft:  #3a4a6c;
   --ink-muted: #6e7891;
   --accent:    #a33a3a;
-  --rule:      #c9bd9d;
-  --rule-soft: #ddd1ae;
+  --rule:      #d8cdaf;
+  --rule-soft: #e8dec3;
 
   --serif-en:  'Cormorant Garamond', 'EB Garamond', Georgia, serif;
   --serif-ko:  'Noto Serif KR', 'Nanum Myeongjo', serif;
@@ -49,7 +49,7 @@ html[data-lang="en"] .lang-opt[data-lang-ko] { display: none; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(239, 230, 203, 0.92);
+  background: rgba(251, 249, 242, 0.92);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--rule-soft);
