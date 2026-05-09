@@ -26,7 +26,7 @@
 
 * { box-sizing: border-box; }
 
-html, body { margin: 0; padding: 0; }
+html, body { margin: 0; padding: 0; overflow-x: hidden; }
 
 body {
   background: var(--bg);
@@ -117,6 +117,15 @@ html[data-lang="en"] .lang-opt[data-lang-ko] { display: none; }
   .topbar-inner { gap: 0.5rem; padding: 0.6rem 1rem; }
   .brand-ko { font-size: 0.95rem; }
 }
+@media (max-width: 480px) {
+  .anchor-nav { gap: 0.55rem; font-size: 0.76rem; }
+  .topbar-inner { gap: 0.4rem; padding: 0.55rem 0.8rem; }
+  .lang-toggle { padding: 0.3rem 0.5rem; font-size: 0.7rem; letter-spacing: 0.04em; }
+  .brand-en { font-size: 0.62rem; letter-spacing: 0.14em; }
+}
+@media (max-width: 480px) {
+  .anchor-nav { display: none; }
+}
 
 /* ── Main layout ────────────────────────────────────────── */
 main {
@@ -189,7 +198,9 @@ main {
   margin: 0 0 1.4rem;
   padding-bottom: 1.2rem;
   border-bottom: 1px solid var(--rule-soft);
-  display: inline-block;
+  display: block;
+  text-align: center;
+  word-break: keep-all;
 }
 .seagull {
   display: block;
@@ -251,6 +262,11 @@ main {
   .card-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
 }
 .card-block + .card-block { margin-top: 0; }
+.card > .card-block + .card-block {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule-soft);
+}
 .card-block.highlight {
   background: var(--bg-soft);
   border-radius: var(--radius);
@@ -424,13 +440,15 @@ main {
 .map-figure.map-missing {
   aspect-ratio: 4 / 3;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
 }
 .map-figure.map-missing img { display: none; }
+.map-figure.map-missing figcaption { display: none; }
 .map-figure.map-missing::before {
-  content: '약도 이미지 자리 · assets/map-area.png 또는 assets/map-detail.png';
+  content: '약도 이미지 자리 · assets/map-detail.png';
   font-family: var(--sans);
   font-size: 0.78rem;
   color: var(--ink-muted);
@@ -548,6 +566,7 @@ main {
   border-radius: 2px;
   display: inline-block;
   align-self: start;
+  justify-self: start;
 }
 .wifi-qr img { display: block; }
 

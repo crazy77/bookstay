@@ -8,56 +8,37 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { width: 1200px; height: 600px; overflow: hidden; }
+html, body { width: 1200px; height: 630px; overflow: hidden; }
 body {
   background: #efe6cb;
   display: flex;
   align-items: center;
-  padding: 0 90px;
-  gap: 90px;
+  justify-content: center;
+  padding: 0 80px;
+  gap: 70px;
   font-family: 'Noto Serif KR', serif;
   color: #172a4d;
   position: relative;
 }
-.logo { width: 380px; height: 380px; flex-shrink: 0; }
+.logo { width: 400px; height: 400px; flex-shrink: 0; }
 .logo img { width: 100%; height: 100%; display: block; }
 .text { display: flex; flex-direction: column; }
 .title-ko {
-  font-size: 96px;
+  font-size: 130px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   line-height: 1;
-  margin-bottom: 14px;
+  margin-bottom: 22px;
+  white-space: nowrap;
 }
 .title-en {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 38px;
+  font-size: 52px;
   color: #3a4a6c;
   letter-spacing: 0.22em;
-}
-.divider {
-  width: 60px;
-  height: 1px;
-  background: #c9bd9d;
-  margin: 28px 0 22px;
-}
-.tagline-ko {
-  font-size: 24px;
-  letter-spacing: 0.06em;
-  color: #3a4a6c;
-  font-weight: 400;
-  line-height: 1.55;
-  max-width: 520px;
-  margin-bottom: 10px;
-}
-.tagline-en {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 22px;
-  color: #6e7891;
-  letter-spacing: 0.03em;
-  line-height: 1.5;
+  line-height: 1;
+  white-space: nowrap;
 }
 .corner {
   position: absolute;
@@ -81,9 +62,6 @@ body {
 <div class="text">
   <div class="title-ko">해묘서가</div>
   <div class="title-en">BOOKSTAY</div>
-  <div class="divider"></div>
-  <div class="tagline-ko">한림항 앞 작은 책방<br>갈매기를 부르는 다른 이름</div>
-  <div class="tagline-en">A bookstay by Hallim Port · Jeju</div>
 </div>
 </body>
 </html>
