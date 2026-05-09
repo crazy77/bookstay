@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>해묘서가 · 게스트 안내</title>
+<meta name="description" content="제주 한림항 북스테이 해묘서가 게스트 안내">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top">
+      <span class="brand-ko">해묘서가</span>
+      <span class="brand-en">BOOKSTAY</span>
+    </a>
+    <nav class="anchor-nav" aria-label="섹션 이동">
+      <a href="#arrival">도착</a>
+      <a href="#room">객실</a>
+      <a href="#library">서가</a>
+      <a href="#around">주변</a>
+    </nav>
+    <button class="lang-toggle" id="langToggle" type="button" aria-label="언어 전환">
+      <span class="lang-opt" data-lang-ko>EN</span>
+      <span class="lang-opt" data-lang-en>한국어</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ─────────────────────── HERO ─────────────────────── -->
+  <section class="hero">
+    <div class="hero-logo">
+      <!-- TODO: assets/logo.png 로 로고 파일 저장 -->
+      <img src="assets/logo.png" alt="해묘서가 BOOKSTAY" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-fallback',textContent:'해묘서가'}))">
+    </div>
+    <h1 class="hero-title">
+      <em>Welcome</em>
+      <span>해묘서가에 오신 것을 환영합니다</span>
+    </h1>
+    <div class="hero-copy toggle">
+      <p lang="ko" class="etymology">해묘(海猫) · 바다의 고양이, 갈매기를 부르는 또 다른 이름.</p>
+      <p lang="ko">
+        한림항 앞 좁은 골목 안에 자리한 작은 책방.<br>
+        갈매기처럼 잠시 내려앉아, 책장과 바다 사이에서 며칠 머무시기를.<br>
+        TV 없이, 책과 음악과 파도 소리만 남는 밤을 권합니다.
+      </p>
+      <p lang="en" class="etymology">Haemyo (海猫) · "sea cat" — another name for the seagull.</p>
+      <p lang="en">
+        A small bookstay tucked into an alley by Hallim Port.<br>
+        Settle here the way a gull settles, briefly, between the shelves and the sea —<br>
+        a TV-free night, with only books, music, and the sound of waves.
+      </p>
+    </div>
+    <img class="seagull" src="assets/symbol.png" alt="" aria-hidden="true">
+  </section>
+
+  <!-- ─────────────────────── 1. ARRIVAL ─────────────────────── -->
+  <section id="arrival" class="card">
+    <header class="card-head">
+      <em>Getting here</em>
+      <span>찾아오는 법</span>
+    </header>
+
+    <div class="address toggle">
+      <p lang="ko"><strong>주소</strong> · 제주특별자치도 제주시 한림읍 대림1길 1-1</p>
+      <p lang="en"><strong>Address</strong> · 1-1 Daerim 1-gil, Hallim-eup, Jeju-si, Jeju-do</p>
+    </div>
+
+    <div class="route-buttons">
+      <a class="route-btn" href="https://kko.to/UpwYBL_n3J" target="_blank" rel="noopener">
+        <span class="route-btn-en">By transit</span>
+        <span class="route-btn-ko">대중교통 길찾기</span>
+        <span class="route-btn-meta">제주공항 → 해묘서가 · KakaoMap</span>
+      </a>
+      <a class="route-btn" href="https://kko.to/BullgJyS7h" target="_blank" rel="noopener">
+        <span class="route-btn-en">By car</span>
+        <span class="route-btn-ko">자동차 길찾기</span>
+        <span class="route-btn-meta">제주공항 → 해묘서가 · KakaoMap</span>
+      </a>
+    </div>
+
+    <figure class="map-figure single-map">
+      <img src="assets/map-detail.png" alt="대림1길 골목 진입 상세도" onerror="this.parentElement.classList.add('map-missing')">
+      <figcaption class="toggle">
+        <span lang="ko">골목 진입 상세 — 대림1길 1-1</span>
+        <span lang="en">Alley detail · Daerim 1-gil 1-1</span>
+      </figcaption>
+    </figure>
+
+    <div class="callout toggle">
+      <p lang="ko">
+        ※ 대림1길은 좁은 골목입니다. 한림로에서 대림1길 표지판을 보고 진입한 뒤,
+        골목 안쪽 <strong>1-1번지</strong>까지 천천히 들어오시면 우측에 해묘서가가 있습니다.
+      </p>
+      <p lang="en">
+        Note · Daerim 1-gil is a narrow alley. Once you turn from Hallim-ro,
+        walk slowly into the alley to <strong>building 1-1</strong> — Haemyo is on your right.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 2. DOOR ─────────────────────── -->
+  <section id="door" class="card">
+    <header class="card-head">
+      <em>The door</em>
+      <span>문 여는 법</span>
+    </header>
+
+    <div class="door-code">
+      <div class="code-label toggle">
+        <span lang="ko">도어락 비밀번호</span>
+        <span lang="en">Door code</span>
+      </div>
+      <div class="code-value">[ 비밀번호★ ]</div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 3. ROOM (WIFI + SPEAKER) ─────────────────────── -->
+  <section id="room" class="card">
+    <header class="card-head">
+      <em>Room essentials</em>
+      <span>객실 안내</span>
+    </header>
+
+    <!-- WIFI -->
+    <div class="card-block" id="wifi">
+      <h3 class="block-head">
+        <em>WiFi</em>
+        <span>와이파이</span>
+      </h3>
+      <div class="wifi-grid">
+        <div class="wifi-info">
+          <dl>
+            <dt class="toggle">
+              <span lang="ko">네트워크</span><span lang="en">Network</span>
+            </dt>
+            <dd><code>fanta</code></dd>
+            <dt class="toggle">
+              <span lang="ko">비밀번호</span><span lang="en">Password</span>
+            </dt>
+            <dd><code>12121212</code></dd>
+          </dl>
+          <p class="wifi-note toggle">
+            <span lang="ko">QR을 카메라로 스캔하면 자동 연결됩니다.</span>
+            <span lang="en">Scan the QR with your camera to connect automatically.</span>
+          </p>
+          <button type="button" class="copy-btn" data-copy="12121212">
+            <span class="toggle">
+              <span lang="ko">비밀번호 복사</span>
+              <span lang="en">Copy password</span>
+            </span>
+          </button>
+        </div>
+        <div class="wifi-qr">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?data=WIFI%3AT%3AWPA%3BS%3Afanta%3BP%3A12121212%3B%3B&size=300x300&margin=10"
+            alt="WiFi QR"
+            width="180" height="180">
+        </div>
+      </div>
+    </div>
+
+    <!-- SPEAKER -->
+    <div class="card-block" id="speaker">
+      <h3 class="block-head">
+        <em>Room audio · Marshall Acton III</em>
+        <span>스피커 사용법</span>
+      </h3>
+
+      <ol class="block-list numbered toggle">
+        <li lang="ko"><strong>전원</strong> · 상단 우측 토글을 위로 ↑</li>
+        <li lang="ko"><strong>페어링</strong> · SOURCE 버튼을 길게 눌러 BT LED가 빨간색으로 깜박일 때까지</li>
+        <li lang="ko"><strong>연결</strong> · 휴대폰 블루투스에서 <code>ACTON III</code> 선택</li>
+        <li lang="en"><strong>Power</strong> · Flip the right toggle up ↑</li>
+        <li lang="en"><strong>Pair</strong> · Hold SOURCE until the BT LED pulses red</li>
+        <li lang="en"><strong>Connect</strong> · Select <code>ACTON III</code> in your phone's Bluetooth settings</li>
+      </ol>
+
+      <p class="speaker-tip toggle">
+        <span lang="ko">※ 음량은 왼쪽 노브로 조절합니다. BASS·TREBLE의 빨간 점이 12시일 때가 기본 음질입니다.</span>
+        <span lang="en">※ Volume is the leftmost knob. Default tone is when the BASS·TREBLE red dots align at 12 o'clock.</span>
+      </p>
+
+      <div class="callout toggle">
+        <ul lang="ko" class="bare-list">
+          <li>22시 이후에는 음량 5 이하로 부탁드립니다</li>
+          <li>10분 미사용 시 자동 절전 모드</li>
+          <li>사용 후에는 토글을 내려 전원을 꺼주세요</li>
+        </ul>
+        <ul lang="en" class="bare-list">
+          <li>After 10 pm · please keep the volume at 5 or below</li>
+          <li>Auto-standby kicks in after 10 minutes of inactivity</li>
+          <li>Please switch off via the toggle when finished</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 4. LIBRARY ─────────────────────── -->
+  <section id="library" class="card">
+    <header class="card-head">
+      <em>The library</em>
+      <span>서가 안내</span>
+    </header>
+
+    <div class="card-grid">
+      <div class="card-block">
+        <h3 class="block-head">
+          <em>The shelves</em>
+          <span>서가</span>
+        </h3>
+        <div class="block-body toggle">
+          <p lang="ko">
+            신간을 중심으로 큐레이션한 책장입니다. 권 수는 넉넉하니
+            천천히 둘러보고 마음에 드는 책을 자유롭게 꺼내 읽어주세요.
+            읽으신 책은 <strong>제자리에 꽂아주시면</strong> 다음 손님께도 같은 풍경이 됩니다.
+          </p>
+          <p lang="ko" class="muted"><em>※ 임시 안내 문구입니다 — 호스트가 직접 다듬어주세요</em></p>
+          <p lang="en">
+            A curated shelf focused on recent titles, with plenty to choose from.
+            Take your time, pull anything that catches your eye, and
+            <strong>please return the book to its spot</strong> so the next guest meets the same shelf.
+          </p>
+          <p lang="en" class="muted"><em>※ Placeholder copy — host to revise</em></p>
+        </div>
+      </div>
+
+      <div class="card-block highlight" id="share">
+        <h3 class="block-head">
+          <em>Take-home shelf</em>
+          <span>나눔서가</span>
+          <span class="badge toggle">
+            <span lang="ko">자유롭게 가져가세요</span>
+            <span lang="en">Yours to keep</span>
+          </span>
+        </h3>
+        <div class="block-body toggle">
+          <p lang="ko">
+            구서적 위주로 채워둔 작은 코너입니다.
+            마음에 드는 책이 있다면 <strong>자유롭게 가져가셔도 됩니다.</strong>
+            제주에서의 기억이 한 권의 책으로 함께 돌아가길 바랍니다.
+          </p>
+          <p lang="ko" class="muted"><em>※ 임시 안내 문구입니다 — 호스트가 직접 다듬어주세요</em></p>
+          <p lang="en">
+            A small corner of older books we'd love to send home with you.
+            If something catches your eye, <strong>please feel free to take it</strong> —
+            no need to return it.
+          </p>
+          <p lang="en" class="muted"><em>※ Placeholder copy — host to revise</em></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 5. AROUND ─────────────────────── -->
+  <section id="around" class="card">
+    <header class="card-head">
+      <em>Around Hallim</em>
+      <span>주변 안내</span>
+    </header>
+
+    <div class="card-grid">
+      <div class="card-block">
+        <h3 class="block-head">
+          <em>Books &amp; culture</em>
+          <span>책·문화 공간</span>
+        </h3>
+        <ul class="place-list toggle">
+          <li lang="ko"><strong>달리책방</strong> · 한림의 독립서점 <span class="meta">한림읍 월계로 18 1층</span></li>
+          <li lang="ko"><strong>파출소 옆 책방</strong> · 한림읍 중심의 무인 동네서점</li>
+          <li lang="ko"><strong>한림공원</strong> · 아열대 식물원, 협재굴·쌍용굴 <span class="meta">한림로 300</span></li>
+          <li lang="ko"><strong>비양도</strong> · 한림항에서 배로 15분, 한 바퀴 두 시간 산책길</li>
+          <li lang="en"><strong>Dali Bookshop</strong> · An independent bookshop in Hallim <span class="meta">[address placeholder]</span></li>
+          <li lang="en"><strong>Bookshop next to the police box</strong> · An unmanned neighborhood bookshop in Hallim</li>
+          <li lang="en"><strong>Hallim Park</strong> · Subtropical gardens and the Hyeopjae &amp; Ssangyong caves</li>
+          <li lang="en"><strong>Biyang-do</strong> · 15-minute ferry from Hallim Port — a two-hour walk around the island</li>
+        </ul>
+      </div>
+
+      <div class="card-block">
+        <h3 class="block-head">
+          <em>Beaches &amp; outdoors</em>
+          <span>바다와 산책</span>
+        </h3>
+        <ul class="place-list toggle">
+          <li lang="ko"><strong>협재해수욕장</strong> · 에메랄드빛 모래사장 <span class="meta">차로 10분</span></li>
+          <li lang="ko"><strong>금능해수욕장</strong> · 협재 옆, 한적한 분위기</li>
+          <li lang="ko"><strong>곽지해수욕장</strong> · 노을 명소</li>
+          <li lang="ko"><strong>한림항 방파제</strong> · 도보권, 아침 산책 추천</li>
+          <li lang="en"><strong>Hyeopjae Beach</strong> · Emerald shallows and white sand <span class="meta">10 min by car</span></li>
+          <li lang="en"><strong>Geumneung Beach</strong> · Quieter neighbor of Hyeopjae</li>
+          <li lang="en"><strong>Gwakji Beach</strong> · A favorite spot for sunsets</li>
+          <li lang="en"><strong>Hallim Port breakwater</strong> · Within walking distance — recommended at sunrise</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card-grid restaurants">
+      <div class="card-block">
+        <h3 class="block-head">
+          <em>Walking distance</em>
+          <span>도보권 맛집</span>
+        </h3>
+        <ul class="place-list toggle">
+          <li lang="ko"><strong>롯타이</strong> · 태국 음식, 외국인 셰프가 직접 요리</li>
+          <li lang="ko"><strong>옥만이네</strong> · 갈비찜·반찬</li>
+          <li lang="ko"><strong>최정가네 칼국수</strong> · 보말칼국수</li>
+          <li lang="ko"><strong>도담한식</strong> · 정갈한 한식 한 상</li>
+          <li lang="ko"><strong>수제옛날통닭</strong> · 야식</li>
+          <li lang="en"><strong>Rot Thai</strong> · Thai cuisine cooked by a foreign chef</li>
+          <li lang="en"><strong>Okmanine</strong> · Braised short ribs &amp; banchan</li>
+          <li lang="en"><strong>Choijeong-ga Kalguksu</strong> · Bomal (sea snail) noodle soup</li>
+          <li lang="en"><strong>Dodam Hansik</strong> · Traditional Korean set meal</li>
+          <li lang="en"><strong>Sujae Old-style Fried Chicken</strong> · Late-night comfort food</li>
+        </ul>
+      </div>
+
+      <div class="card-block">
+        <h3 class="block-head">
+          <em>A short drive away</em>
+          <span>차로 한 잔</span>
+        </h3>
+        <ul class="place-list toggle">
+          <li lang="ko"><strong>회나루</strong> · 회·한치물회 <span class="meta">옹포1길 14</span></li>
+          <li lang="ko"><strong>수우동</strong> · 우동·튀김</li>
+          <li lang="ko"><strong>한림칼국수</strong> · 보말칼국수</li>
+          <li lang="ko"><strong>호텔샌드</strong> · 협재 해변 카페</li>
+          <li lang="en"><strong>Hoenaru</strong> · Sashimi &amp; cold raw-fish soup <span class="meta">14 Ongpo 1-gil</span></li>
+          <li lang="en"><strong>Suudon</strong> · Udon &amp; tempura</li>
+          <li lang="en"><strong>Hallim Kalguksu</strong> · Sea-snail noodle soup</li>
+          <li lang="en"><strong>Hotel Sand</strong> · Cafe on Hyeopjae Beach</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="around-note toggle">
+      <span lang="ko">※ 호스트가 즐겨 찾는 곳 위주로 정리했습니다. 영업시간·휴무일은 방문 전 확인 부탁드립니다.</span>
+      <span lang="en">※ Host's personal favorites — please check hours and closing days before visiting.</span>
+    </p>
+  </section>
+
+</main>
+
+<!-- ─────────────────────── FOOTER ─────────────────────── -->
+<footer class="site-foot">
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <span class="brand-ko">해묘서가</span>
+      <span class="brand-en">BOOKSTAY · HALLIM, JEJU</span>
+    </div>
+    <div class="foot-meta toggle">
+      <p lang="ko">
+        호스트 · <a href="tel:01096765402">010-9676-5402</a><br>
+        체크아웃 · <em>[시간 placeholder]</em><br>
+        문의 사항은 언제든 연락 주세요.
+      </p>
+      <p lang="en">
+        Host · <a href="tel:+821096765402">010-9676-5402</a><br>
+        Check-out · <em>[time placeholder]</em><br>
+        Reach out any time.
+      </p>
+    </div>
+    <img class="seagull" src="assets/symbol.png" alt="" aria-hidden="true">
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
