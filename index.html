@@ -105,7 +105,10 @@
     </div>
 
     <figure class="map-figure single-map">
-      <img src="assets/map-detail.png" alt="대림1길 골목 진입 상세도" onerror="this.parentElement.classList.add('map-missing')">
+      <picture>
+        <source media="(max-width: 600px)" srcset="assets/map-detail-mobile.png">
+        <img src="assets/map-detail.png" alt="대림1길 골목 진입 상세도" onerror="this.closest('figure').classList.add('map-missing')">
+      </picture>
       <figcaption class="toggle">
         <span lang="ko">골목 진입 상세 — 대림1길 1-1</span>
         <span lang="en">Alley detail · Daerim 1-gil 1-1</span>
