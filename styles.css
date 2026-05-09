@@ -699,6 +699,22 @@ main {
 }
 .foot-meta a { color: var(--accent); text-decoration: none; }
 .foot-meta a:hover { text-decoration: underline; }
+.phone-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.1rem 0.5rem;
+  border: 1px solid var(--rule-soft);
+  border-radius: 999px;
+  transition: all 0.15s;
+}
+.phone-link:hover {
+  background: var(--accent);
+  color: var(--bg-card) !important;
+  border-color: var(--accent);
+  text-decoration: none !important;
+}
+.phone-link svg { display: block; flex-shrink: 0; }
 .site-foot .seagull { margin-top: 1.5rem; opacity: 0.5; }
 
 /* ── Code & inline ──────────────────────────────────────── */

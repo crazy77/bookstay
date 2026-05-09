@@ -39,8 +39,8 @@
     </a>
     <nav class="anchor-nav" aria-label="섹션 이동">
       <a href="#arrival">도착</a>
-      <a href="#room">객실</a>
       <a href="#library">서가</a>
+      <a href="#room">객실</a>
       <a href="#around">주변</a>
     </nav>
     <button class="lang-toggle" id="langToggle" type="button" aria-label="언어 전환">
@@ -124,19 +124,59 @@
     </div>
   </section>
 
-  <!-- ─────────────────────── 2. DOOR ─────────────────────── -->
-  <section id="door" class="card">
+  <!-- ─────────────────────── 2. LIBRARY ─────────────────────── -->
+  <section id="library" class="card">
     <header class="card-head">
-      <em>The door</em>
-      <span>문 여는 법</span>
+      <em>The library</em>
+      <span>서가 안내</span>
     </header>
 
-    <div class="door-code">
-      <div class="code-label toggle">
-        <span lang="ko">도어락 비밀번호</span>
-        <span lang="en">Door code</span>
+    <div class="card-grid">
+      <div class="card-block">
+        <h3 class="block-head">
+          <em>The shelves</em>
+          <span>서가</span>
+        </h3>
+        <div class="block-body toggle">
+          <p lang="ko">
+            신간을 중심으로 큐레이션한 책장입니다. 권 수는 넉넉하니
+            천천히 둘러보고 마음에 드는 책을 자유롭게 꺼내 읽어주세요.
+            읽으신 책은 <strong>제자리에 꽂아주시면</strong> 다음 손님께도 같은 풍경이 됩니다.
+          </p>
+          <p lang="ko" class="muted"><em>※ 임시 안내 문구입니다 — 호스트가 직접 다듬어주세요</em></p>
+          <p lang="en">
+            A curated shelf focused on recent titles, with plenty to choose from.
+            Take your time, pull anything that catches your eye, and
+            <strong>please return the book to its spot</strong> so the next guest meets the same shelf.
+          </p>
+          <p lang="en" class="muted"><em>※ Placeholder copy — host to revise</em></p>
+        </div>
       </div>
-      <div class="password-value">[ 1013★ ]</div>
+
+      <div class="card-block highlight" id="share">
+        <h3 class="block-head">
+          <em>Take-home shelf</em>
+          <span>나눔서가</span>
+          <span class="badge toggle">
+            <span lang="ko">자유롭게 가져가세요</span>
+            <span lang="en">Yours to keep</span>
+          </span>
+        </h3>
+        <div class="block-body toggle">
+          <p lang="ko">
+            구서적 위주로 채워둔 작은 코너입니다.
+            마음에 드는 책이 있다면 <strong>자유롭게 가져가셔도 됩니다.</strong>
+            제주에서의 기억이 한 권의 책으로 함께 돌아가길 바랍니다.
+          </p>
+          <p lang="ko" class="muted"><em>※ 임시 안내 문구입니다 — 호스트가 직접 다듬어주세요</em></p>
+          <p lang="en">
+            A small corner of older books we'd love to send home with you.
+            If something catches your eye, <strong>please feel free to take it</strong> —
+            no need to return it.
+          </p>
+          <p lang="en" class="muted"><em>※ Placeholder copy — host to revise</em></p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -221,63 +261,7 @@
     </div>
   </section>
 
-  <!-- ─────────────────────── 4. LIBRARY ─────────────────────── -->
-  <section id="library" class="card">
-    <header class="card-head">
-      <em>The library</em>
-      <span>서가 안내</span>
-    </header>
-
-    <div class="card-grid">
-      <div class="card-block">
-        <h3 class="block-head">
-          <em>The shelves</em>
-          <span>서가</span>
-        </h3>
-        <div class="block-body toggle">
-          <p lang="ko">
-            신간을 중심으로 큐레이션한 책장입니다. 권 수는 넉넉하니
-            천천히 둘러보고 마음에 드는 책을 자유롭게 꺼내 읽어주세요.
-            읽으신 책은 <strong>제자리에 꽂아주시면</strong> 다음 손님께도 같은 풍경이 됩니다.
-          </p>
-          <p lang="ko" class="muted"><em>※ 임시 안내 문구입니다 — 호스트가 직접 다듬어주세요</em></p>
-          <p lang="en">
-            A curated shelf focused on recent titles, with plenty to choose from.
-            Take your time, pull anything that catches your eye, and
-            <strong>please return the book to its spot</strong> so the next guest meets the same shelf.
-          </p>
-          <p lang="en" class="muted"><em>※ Placeholder copy — host to revise</em></p>
-        </div>
-      </div>
-
-      <div class="card-block highlight" id="share">
-        <h3 class="block-head">
-          <em>Take-home shelf</em>
-          <span>나눔서가</span>
-          <span class="badge toggle">
-            <span lang="ko">자유롭게 가져가세요</span>
-            <span lang="en">Yours to keep</span>
-          </span>
-        </h3>
-        <div class="block-body toggle">
-          <p lang="ko">
-            구서적 위주로 채워둔 작은 코너입니다.
-            마음에 드는 책이 있다면 <strong>자유롭게 가져가셔도 됩니다.</strong>
-            제주에서의 기억이 한 권의 책으로 함께 돌아가길 바랍니다.
-          </p>
-          <p lang="ko" class="muted"><em>※ 임시 안내 문구입니다 — 호스트가 직접 다듬어주세요</em></p>
-          <p lang="en">
-            A small corner of older books we'd love to send home with you.
-            If something catches your eye, <strong>please feel free to take it</strong> —
-            no need to return it.
-          </p>
-          <p lang="en" class="muted"><em>※ Placeholder copy — host to revise</em></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─────────────────────── 5. AROUND ─────────────────────── -->
+  <!-- ─────────────────────── 4. AROUND ─────────────────────── -->
   <section id="around" class="card">
     <header class="card-head">
       <em>Around Hallim</em>
@@ -375,12 +359,14 @@
     </div>
     <div class="foot-meta toggle">
       <p lang="ko">
-        호스트 · <a href="tel:01096765402">010-9676-5402</a><br>
+        호스트 ·
+        <a class="phone-link" href="tel:01096765402"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.25 1.12.37 2.32.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>010-9676-5402</a><br>
         체크아웃 · <em>오전 11시 30분까지</em><br>
         문의 사항은 언제든 연락 주세요.
       </p>
       <p lang="en">
-        Host · <a href="tel:+821096765402">010-9676-5402</a><br>
+        Host ·
+        <a class="phone-link" href="tel:+821096765402"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.25 1.12.37 2.32.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>010-9676-5402</a><br>
         Check-out · <em>11:30 AM</em><br>
         Reach out any time.
       </p>
