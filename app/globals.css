@@ -51,17 +51,23 @@
     @apply rounded-sm bg-canvas-muted px-1.5 font-sans text-[0.92em];
   }
 
-  /* 언어 토글 (ko / en / zh) */
+  /* 언어 토글 (ko / en / zh) — 자손 + toggle과 lang이 같은 노드 */
   html[data-lang='ko'] .toggle [lang='en'],
-  html[data-lang='ko'] .toggle [lang='zh'] {
+  html[data-lang='ko'] .toggle [lang='zh'],
+  html[data-lang='ko'] .toggle[lang='en'],
+  html[data-lang='ko'] .toggle[lang='zh'] {
     display: none !important;
   }
   html[data-lang='en'] .toggle [lang='ko'],
-  html[data-lang='en'] .toggle [lang='zh'] {
+  html[data-lang='en'] .toggle [lang='zh'],
+  html[data-lang='en'] .toggle[lang='ko'],
+  html[data-lang='en'] .toggle[lang='zh'] {
     display: none !important;
   }
   html[data-lang='zh'] .toggle [lang='ko'],
-  html[data-lang='zh'] .toggle [lang='en'] {
+  html[data-lang='zh'] .toggle [lang='en'],
+  html[data-lang='zh'] .toggle[lang='ko'],
+  html[data-lang='zh'] .toggle[lang='en'] {
     display: none !important;
   }
 }
