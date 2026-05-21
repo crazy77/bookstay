@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { HomeFooter, HomePage } from '@/components/home/HomePage';
+import { HomeTopbar } from '@/components/home/HomeTopbar';
 import {
   SITE_DESCRIPTION,
   SITE_OG_DESCRIPTION,
@@ -28,6 +29,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="flex min-h-screen flex-col">
+      <HomeTopbar />
       <HomePage />
       <HomeFooter />
     </div>

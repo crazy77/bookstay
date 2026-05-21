@@ -42,6 +42,25 @@
     @apply cursor-pointer rounded-sm border border-border bg-transparent px-2.5 py-1.5 font-sans text-[0.78rem] tracking-widest text-ink transition-colors hover:bg-canvas-muted;
   }
 
+  /* 임시 테마 미리보기 */
+  .theme-picker {
+    @apply inline-flex items-center gap-1 rounded-sm border border-dashed border-accent/50 bg-canvas-muted/80 px-1.5 py-0.5;
+  }
+  .theme-picker-label {
+    @apply font-sans text-[0.65rem] font-medium tracking-wide text-accent;
+  }
+  .theme-picker-select {
+    @apply max-w-[6.25rem] cursor-pointer border-0 bg-transparent py-1 pl-0 font-sans text-[0.72rem] tracking-wide text-ink outline-none;
+  }
+  @media (max-width: 380px) {
+    .theme-picker-label {
+      @apply sr-only;
+    }
+    .theme-picker-select {
+      @apply max-w-[5.25rem];
+    }
+  }
+
   @media (max-width: 480px) {
     .topbar-inner {
       @apply gap-2 px-3 py-2;

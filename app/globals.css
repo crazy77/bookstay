@@ -71,4 +71,78 @@
   }
 }
 
+/* ── 임시 테마 미리보기 (data-theme on <html>) — 결정 후 삭제 ── */
+html[data-theme='cream'],
+html:not([data-theme]) {
+  --color-canvas: #fbf9f2;
+  --color-surface: #ffffff;
+  --color-canvas-muted: #fbf9f2;
+  --color-ink: #172a4d;
+  --color-ink-secondary: #3a4a6c;
+  --color-ink-muted: #6e7891;
+  --color-accent: #a33a3a;
+  --color-border: #d8cdaf;
+  --color-border-muted: #e8dec3;
+}
+
+html[data-theme='white'] {
+  --color-canvas: #ffffff;
+  --color-surface: #ffffff;
+  --color-canvas-muted: #f4f4f4;
+  --color-ink: #1c2838;
+  --color-ink-secondary: #404a5c;
+  --color-ink-muted: #6a7384;
+  --color-accent: #8f3232;
+  --color-border: #e0e0e0;
+  --color-border-muted: #ececec;
+}
+
+html[data-theme='cool'] {
+  --color-canvas: #f5f8fb;
+  --color-surface: #ffffff;
+  --color-canvas-muted: #eaf0f6;
+  --color-ink: #1a2f4a;
+  --color-ink-secondary: #3a5570;
+  --color-ink-muted: #5f758c;
+  --color-accent: #2f6b8f;
+  --color-border: #c5d4e4;
+  --color-border-muted: #dce6f0;
+}
+
+html[data-theme='red'] {
+  --color-canvas: #fdf3f0;
+  --color-surface: #ffffff;
+  --color-canvas-muted: #fae8e3;
+  --color-ink: #3a1c24;
+  --color-ink-secondary: #6a3848;
+  --color-ink-muted: #9a6672;
+  --color-accent: #c43636;
+  --color-border: #e4b0a4;
+  --color-border-muted: #f0d4cc;
+}
+
+html[data-theme='violet'] {
+  --color-canvas: #f4f2fa;
+  --color-surface: #ffffff;
+  --color-canvas-muted: #ebe6f6;
+  --color-ink: #261f3d;
+  --color-ink-secondary: #4a4068;
+  --color-ink-muted: #7a7296;
+  --color-accent: #6b4c96;
+  --color-border: #ccc2e6;
+  --color-border-muted: #e0d8f0;
+}
+
+html[data-theme='wood'] {
+  --color-canvas: #2a221b;
+  --color-surface: #352b22;
+  --color-canvas-muted: #322820;
+  --color-ink: #f7f2ea;
+  --color-ink-secondary: #d6cdc0;
+  --color-ink-muted: #a89886;
+  --color-accent: #d06058;
+  --color-border: #5c4a38;
+  --color-border-muted: #463a2e;
+}
+
 @import './styles/haemyo.css';

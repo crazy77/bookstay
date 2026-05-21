@@ -30,7 +30,7 @@ export function HomeHeroPhoto({ onPhotoReady }: HomeHeroPhotoProps) {
             대표 사진
           </span>
           <span className="font-sans text-[0.72rem] tracking-wide text-ink-muted">
-            public/assets/hero.jpg
+            public/assets/hero.png
           </span>
         </div>
       )}

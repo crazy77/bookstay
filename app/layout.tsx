@@ -5,6 +5,7 @@ import {
   SITE_OG_DESCRIPTION,
   SITE_OG_IMAGE,
 } from '@/lib/site';
+import { ThemeProvider } from '@/providers/ThemeProvider';
 import './globals.css';
 
 const cormorant = Cormorant_Garamond({
@@ -65,9 +66,20 @@ export default function RootLayout({
     <html
       lang="ko"
       data-lang="ko"
+      data-theme="cream"
+      suppressHydrationWarning
       className={`${cormorant.variable} ${notoSerif.variable} ${inter.variable}`}
     >
-      <body className="min-h-screen">{children}</body>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('haemyo.theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
+          }}
+        />
+      </head>
+      <body className="min-h-screen">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

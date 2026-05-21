@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useId, useState } from 'react';
 import { LangToggle } from '@/components/ui/LangToggle';
+import { ThemePicker } from '@/components/ui/ThemePicker';
 const NAV = [
   { href: '#checkin', label: '체크인' },
   { href: '#arrival', label: '오시는 길' },
@@ -72,6 +73,7 @@ export function GuideTopbar() {
         </nav>
 
         <div className="topbar-actions">
+          <ThemePicker />
           <LangToggle />
           <button
             type="button"
