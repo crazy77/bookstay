@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import { Cormorant_Garamond, Inter, Noto_Serif_KR } from 'next/font/google';
-import { SITE_DESCRIPTION, SITE_OG_DESCRIPTION } from '@/lib/site';
+import {
+  SITE_DESCRIPTION,
+  SITE_OG_DESCRIPTION,
+  SITE_OG_IMAGE,
+} from '@/lib/site';
 import './globals.css';
 
 const cormorant = Cormorant_Garamond({
@@ -43,11 +47,12 @@ export const metadata: Metadata = {
     description: SITE_OG_DESCRIPTION,
     locale: 'ko_KR',
     type: 'website',
-    images: [{ url: '/assets/og-image.png?v=5', width: 1200, height: 630 }],
+    images: [SITE_OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     description: SITE_OG_DESCRIPTION,
+    images: [SITE_OG_IMAGE.url],
   },
 };
 

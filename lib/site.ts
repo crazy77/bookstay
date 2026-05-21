@@ -13,6 +13,14 @@ export const SITE_DESCRIPTION =
 export const SITE_OG_DESCRIPTION =
   '제주 한림 북스테이 해묘서가 — 갈매기를 부르는 다른 이름, 해묘(海猫).';
 
+/** OG·카카오 링크 미리보기 — 버전 올리면 캐시 갱신 */
+export const SITE_OG_IMAGE = {
+  url: '/assets/og-image.png?v=5',
+  width: 1200,
+  height: 630,
+  alt: '해묘서가 BOOKSTAY',
+} as const;
+
 export const NAVER_BOOK_URL =
   process.env.NEXT_PUBLIC_NAVER_BOOK_URL ??
   'https://booking.naver.com/booking/3/bizes/1573091/items/7340362';
