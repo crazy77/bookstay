@@ -6,10 +6,12 @@ export function CopyButton({
   text,
   labelKo,
   labelEn,
+  labelZh,
 }: {
   text: string;
   labelKo: string;
   labelEn: string;
+  labelZh: string;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -30,6 +32,7 @@ export function CopyButton({
       <span className="toggle">
         <span lang="ko">{labelKo}</span>
         <span lang="en">{labelEn}</span>
+        <span lang="zh">{labelZh}</span>
       </span>
     </button>
   );

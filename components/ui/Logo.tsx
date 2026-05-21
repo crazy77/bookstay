@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import { cn } from '@/lib/cn';
 
@@ -26,11 +27,12 @@ export function Logo({ variant = 'guide', className }: LogoProps) {
   }
 
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
+    <Image
       className={cn('site-logo block', variantClass[variant], className)}
       src="/assets/logo.png"
       alt="해묘서가 BOOKSTAY"
+      width={500}
+      height={500}
       onError={() => setFailed(true)}
     />
   );

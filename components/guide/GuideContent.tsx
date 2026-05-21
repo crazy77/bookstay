@@ -1,12 +1,20 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { CardHead } from '@/components/ui/CardHead';
+import { BlockHead, CardHead } from '@/components/ui/CardHead';
 import { CopyButton } from '@/components/ui/CopyButton';
 import { Logo } from '@/components/ui/Logo';
 import { Seagull } from '@/components/ui/Seagull';
 import { FoodSpotCard } from '@/components/guide/FoodSpotCard';
 import { MapFigure } from '@/components/guide/MapFigure';
+import { GUIDE_ZH } from '@/data/guide-content.zh';
 import { FOOD_CATEGORIES } from '@/data/food-spots';
+import { FOOD_INTRO, FOOD_NOTE } from '@/data/food-spots-i18n';
+import {
+  GUIDE_BLOCK,
+  GUIDE_HEAD,
+  ROUTE_BTN,
+  WIFI_LABELS,
+} from '@/data/guide-i18n';
 import {
   INSTAGRAM_DM_URL,
   KAKAO_CAR_URL,
@@ -21,9 +29,10 @@ export function GuideContent() {
         <div className="hero-logo">
           <Logo />
         </div>
-        <h1 className="hero-title">
-          <em>Welcome</em>
-          <span>해묘서가에 오신 것을 환영합니다</span>
+        <h1 className="hero-title toggle">
+          <span lang="ko">{GUIDE_HEAD.hero.ko}</span>
+          <span lang="en">{GUIDE_HEAD.hero.en}</span>
+          <span lang="zh">{GUIDE_HEAD.hero.zh}</span>
         </h1>
         <div className="hero-copy toggle">
           <p lang="ko">
@@ -42,12 +51,13 @@ export function GuideContent() {
             <br />
             Please read the guidelines below for a pleasant and safe visit.
           </p>
+          <p lang="zh">{GUIDE_ZH.heroCopy}</p>
         </div>
         <Seagull />
       </section>
 
       <section id="checkin" className="card">
-        <CardHead en="Check-in & Check-out" ko="체크인 & 체크아웃" />
+        <CardHead title={GUIDE_HEAD.checkin} />
         <div className="block-body toggle">
           <ul lang="ko" className="bare-list guide-rules">
             <li>
@@ -70,16 +80,16 @@ export function GuideContent() {
             </li>
             <li>Gate and entrance door-lock codes are sent on the day of arrival.</li>
           </ul>
+          <ul lang="zh" className="bare-list guide-rules">
+            {GUIDE_ZH.checkin}
+          </ul>
         </div>
       </section>
 
       <section id="arrival" className="card">
-        <CardHead en="Parking & directions" ko="주차 및 오시는 길" />
+        <CardHead title={GUIDE_HEAD.arrival} />
         <div className="card-block">
-          <h3 className="block-head">
-            <em>Parking</em>
-            <span>주차</span>
-          </h3>
+          <BlockHead title={GUIDE_BLOCK.parking} />
           <div className="block-body toggle">
             <p lang="ko">
               주차는 도보 1분 거리에 있는 공영주차장을 이용할 수 있습니다. 도로
@@ -89,13 +99,11 @@ export function GuideContent() {
               Use the public parking lot about a 1-minute walk away, or park along the
               roadside where space is available.
             </p>
+            <p lang="zh">{GUIDE_ZH.parking}</p>
           </div>
         </div>
         <div className="card-block">
-          <h3 className="block-head">
-            <em>By transit</em>
-            <span>대중교통</span>
-          </h3>
+          <BlockHead title={GUIDE_BLOCK.transit} />
           <ul className="block-list toggle">
             <li lang="ko">
               <strong>202번</strong> 제주버스터미널 방면 · 한림천주교회 정류장 하차
@@ -118,6 +126,11 @@ export function GuideContent() {
               <strong>Bus 102</strong> express · both directions, get off at Hallim
               transfer stop
             </li>
+            {GUIDE_ZH.transit.map((item) => (
+              <li key={item.key} lang="zh">
+                {item}
+              </li>
+            ))}
           </ul>
         </div>
         <div className="address toggle">
@@ -127,16 +140,41 @@ export function GuideContent() {
           <p lang="en">
             <strong>Address</strong> · 1-1 Daerim 1-gil, Hallim-eup, Jeju-si, Jeju-do
           </p>
+          <p lang="zh">{GUIDE_ZH.address}</p>
         </div>
         <div className="route-buttons">
-          <a className="route-btn" href={KAKAO_TRANSIT_URL} target="_blank" rel="noopener noreferrer">
-            <span className="route-btn-en">By transit</span>
-            <span className="route-btn-ko">대중교통 길찾기</span>
+          <a
+            className="route-btn toggle"
+            href={KAKAO_TRANSIT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span lang="en" className="route-btn-label">
+              {ROUTE_BTN.transit.en}
+            </span>
+            <span lang="ko" className="route-btn-label">
+              {ROUTE_BTN.transit.ko}
+            </span>
+            <span lang="zh" className="route-btn-label">
+              {ROUTE_BTN.transit.zh}
+            </span>
             <span className="route-btn-meta">제주공항 → 해묘서가 · KakaoMap</span>
           </a>
-          <a className="route-btn" href={KAKAO_CAR_URL} target="_blank" rel="noopener noreferrer">
-            <span className="route-btn-en">By car</span>
-            <span className="route-btn-ko">자동차 길찾기</span>
+          <a
+            className="route-btn toggle"
+            href={KAKAO_CAR_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span lang="en" className="route-btn-label">
+              {ROUTE_BTN.car.en}
+            </span>
+            <span lang="ko" className="route-btn-label">
+              {ROUTE_BTN.car.ko}
+            </span>
+            <span lang="zh" className="route-btn-label">
+              {ROUTE_BTN.car.zh}
+            </span>
             <span className="route-btn-meta">제주공항 → 해묘서가 · KakaoMap</span>
           </a>
         </div>
@@ -152,11 +190,12 @@ export function GuideContent() {
             slowly into the alley to <strong>building 1-1</strong> — Haemyo is on your
             right.
           </p>
+          <p lang="zh">{GUIDE_ZH.routeCallout}</p>
         </div>
       </section>
 
       <section id="library" className="card">
-        <CardHead en="The library" ko="서가 이용 안내" />
+        <CardHead title={GUIDE_HEAD.library} />
         <div className="block-body toggle">
           <p lang="ko">
             책장에 비치된 모든 책은 자유롭게 읽으실 수 있습니다. 다음 손님을 위해 읽고
@@ -174,11 +213,16 @@ export function GuideContent() {
             These books hold precious memories for us as hosts. Please do not take any
             book home with you.
           </p>
+          {GUIDE_ZH.library.map((para, i) => (
+            <p key={i} lang="zh">
+              {para}
+            </p>
+          ))}
         </div>
       </section>
 
       <section id="room" className="card">
-        <CardHead en="Room guide" ko="객실 이용 안내" />
+        <CardHead title={GUIDE_HEAD.room} />
         <div className="card-block">
           <div className="block-body toggle">
             <ul lang="ko" className="bare-list guide-rules">
@@ -188,9 +232,9 @@ export function GuideContent() {
                 <strong>늦은 시간에는 특히 조심</strong>해 주시면 감사하겠습니다.
               </li>
               <li>
-                해묘서가는 한림항 바로 옆이라, 밤에 뱃고동이나 무전 소리가 간혹 들릴
-                수 있습니다. 잠이 가벼우시면 객실에 준비해 둔{' '}
-                <strong>이어플러그</strong>를 사용해 보세요.
+                해묘서가 바로 앞에는 한림항이 있어요. 가끔 밤에 들리는 소리는 만선을
+                꿈꾸며 출항하는 배들이 밤바다에 내뿜는 뱃고동 소리입니다. 놀라지
+                않으셔도 돼요.
               </li>
               <li>
                 취사는 <strong>6박 이상</strong> 머무시는 손님에 한해 허용됩니다. 외부
@@ -235,9 +279,9 @@ export function GuideContent() {
                 easily. Please be especially <strong>quiet at night</strong>.
               </li>
               <li>
-                We&apos;re right beside Hallim Port — boat horns or radio chatter may
-                reach you at night. <strong>Earplugs</strong> are in the room if
-                you&apos;d like a quieter sleep.
+                Hallim Port is right in front of Haemyo. On some nights you may hear
+                ship horns — boats setting out on the dark sea, dreaming of a full
+                hold. Nothing to worry about.
               </li>
               <li>
                 Cooking is allowed for stays of <strong>6 nights or more</strong>.
@@ -272,40 +316,44 @@ export function GuideContent() {
                 in the bathroom — see the attached guide.
               </li>
             </ul>
+            <ul lang="zh" className="bare-list guide-rules">
+              {GUIDE_ZH.room}
+            </ul>
           </div>
         </div>
 
         <div className="card-block" id="wifi">
-          <h3 className="block-head">
-            <em>WiFi</em>
-            <span>와이파이</span>
-          </h3>
+          <BlockHead title={GUIDE_BLOCK.wifi} />
           <div className="wifi-grid">
             <div className="wifi-info">
               <dl>
                 <dt className="toggle">
-                  <span lang="ko">네트워크</span>
-                  <span lang="en">Network</span>
+                  <span lang="ko">{WIFI_LABELS.network.ko}</span>
+                  <span lang="en">{WIFI_LABELS.network.en}</span>
+                  <span lang="zh">{WIFI_LABELS.network.zh}</span>
                 </dt>
                 <dd>
                   <code>{WIFI.ssid}</code>
                 </dd>
                 <dt className="toggle">
-                  <span lang="ko">비밀번호</span>
-                  <span lang="en">Password</span>
+                  <span lang="ko">{WIFI_LABELS.password.ko}</span>
+                  <span lang="en">{WIFI_LABELS.password.en}</span>
+                  <span lang="zh">{WIFI_LABELS.password.zh}</span>
                 </dt>
                 <dd>
                   <code>{WIFI.password}</code>
                 </dd>
               </dl>
               <p className="wifi-note toggle">
-                <span lang="ko">QR을 카메라로 스캔하면 자동 연결됩니다.</span>
-                <span lang="en">Scan the QR with your camera to connect automatically.</span>
+                <span lang="ko">{WIFI_LABELS.note.ko}</span>
+                <span lang="en">{WIFI_LABELS.note.en}</span>
+                <span lang="zh">{WIFI_LABELS.note.zh}</span>
               </p>
               <CopyButton
                 text={WIFI.password}
-                labelKo="비밀번호 복사"
-                labelEn="Copy password"
+                labelKo={WIFI_LABELS.copy.ko}
+                labelEn={WIFI_LABELS.copy.en}
+                labelZh={WIFI_LABELS.copy.zh}
               />
             </div>
             <div className="wifi-qr">
@@ -321,10 +369,7 @@ export function GuideContent() {
         </div>
 
         <div className="card-block" id="speaker">
-          <h3 className="block-head">
-            <em>Room audio · Marshall Acton III</em>
-            <span>스피커 사용법</span>
-          </h3>
+          <BlockHead title={GUIDE_BLOCK.speaker} />
           <ol className="block-list numbered toggle">
             <li lang="ko">
               <strong>전원</strong> · 상단 우측 토글을 위로 ↑
@@ -346,6 +391,11 @@ export function GuideContent() {
               <strong>Connect</strong> · Select <code>ACTON III</code> in your
               phone&apos;s Bluetooth settings
             </li>
+            {GUIDE_ZH.speakerSteps.map((item) => (
+              <li key={item.key} lang="zh">
+                {item}
+              </li>
+            ))}
           </ol>
           <p className="speaker-tip toggle">
             <span lang="ko">
@@ -356,6 +406,7 @@ export function GuideContent() {
               ※ Volume is the leftmost knob. Default tone is when the BASS·TREBLE red
               dots align at 12 o&apos;clock.
             </span>
+            <span lang="zh">{GUIDE_ZH.speakerTip}</span>
           </p>
           <div className="callout toggle">
             <ul lang="ko" className="bare-list">
@@ -368,30 +419,46 @@ export function GuideContent() {
               <li>Auto-standby kicks in after 10 minutes of inactivity</li>
               <li>Please switch off via the toggle when finished</li>
             </ul>
+            <ul lang="zh" className="bare-list">
+              {GUIDE_ZH.speakerCallout}
+            </ul>
           </div>
         </div>
       </section>
 
       <section id="food" className="card food-guide">
-        <CardHead en="Host picks" ko="도보맛집" />
-        <p className="food-intro">
-          해묘서가는 읍내 중심가에 가까워 도보로 로컬 맛집 탐방이 가능합니다.
-          해묘서가에 머무시는 동안 이 리스트를 참조해서 맛있는 여행을 떠나 보세요.
+        <CardHead title={GUIDE_HEAD.food} />
+        <p className="food-intro toggle">
+          <span lang="ko">{FOOD_INTRO.ko}</span>
+          <span lang="en">{FOOD_INTRO.en}</span>
+          <span lang="zh">{FOOD_INTRO.zh}</span>
         </p>
         {FOOD_CATEGORIES.map((cat) => (
           <div
-            key={cat.title}
+            key={cat.title.ko}
             className={`food-category${cat.drive ? ' food-category--drive' : ''}`}
           >
-            <h3 className="food-cat-head">{cat.title}</h3>
-            {cat.note ? <p className="food-cat-note">{cat.note}</p> : null}
+            <h3 className="food-cat-head toggle">
+              <span lang="ko">{cat.title.ko}</span>
+              <span lang="en">{cat.title.en}</span>
+              <span lang="zh">{cat.title.zh}</span>
+            </h3>
+            {cat.note ? (
+              <p className="food-cat-note toggle">
+                <span lang="ko">{cat.note.ko}</span>
+                <span lang="en">{cat.note.en}</span>
+                <span lang="zh">{cat.note.zh}</span>
+              </p>
+            ) : null}
             {cat.spots.map((spot) => (
-              <FoodSpotCard key={spot.name} spot={spot} />
+              <FoodSpotCard key={spot.name.ko} spot={spot} />
             ))}
           </div>
         ))}
-        <p className="food-note">
-          ※ 영업시간·휴무일·메뉴는 변동될 수 있으니 방문 전에 확인해 주세요.
+        <p className="food-note toggle">
+          <span lang="ko">{FOOD_NOTE.ko}</span>
+          <span lang="en">{FOOD_NOTE.en}</span>
+          <span lang="zh">{FOOD_NOTE.zh}</span>
         </p>
       </section>
     </main>

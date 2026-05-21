@@ -88,22 +88,19 @@
     @apply py-12 text-center sm:py-16;
   }
   .hero-logo {
-    @apply mx-auto mb-8 flex size-[120px] items-center justify-center sm:size-[150px] sm:mb-8;
+    @apply mx-auto mb-8 flex size-[120px] items-center justify-center sm:mb-8 sm:size-[150px];
   }
   .hero-logo .site-logo {
-    @apply block size-full object-contain;
-  }
-  .logo-fallback {
-    @apply font-serif-ko text-2xl tracking-[0.15em] text-ink;
+    @apply size-full max-h-full max-w-full;
   }
   .hero-title {
-    @apply mb-6 font-normal;
+    @apply mb-6 font-serif-ko text-[clamp(1.25rem,3.6vw,1.65rem)] font-medium leading-snug tracking-[0.1em] text-ink;
   }
-  .hero-title em {
-    @apply mb-2 block font-serif-en text-[clamp(2.4rem,6vw,3.4rem)] leading-none text-ink italic;
+  .hero-title [lang] {
+    @apply block;
   }
-  .hero-title span {
-    @apply block font-serif-ko text-[clamp(0.95rem,2vw,1.05rem)] font-normal tracking-widest text-ink-secondary;
+  .hero-title [lang='en'] {
+    @apply font-serif-en text-[clamp(2rem,5vw,2.6rem)] font-normal leading-none tracking-normal italic;
   }
   .hero-copy {
     @apply mx-auto max-w-lg font-serif-ko text-[1.02rem] leading-[1.85] text-ink-secondary;
@@ -196,11 +193,14 @@
   .card-head {
     @apply mb-8 border-b border-border pb-5;
   }
-  .card-head em {
-    @apply mb-1.5 block font-serif-en text-[clamp(1.7rem,3.2vw,2.1rem)] leading-tight font-medium text-ink italic;
+  .card-head__title {
+    @apply m-0 font-serif-ko text-[clamp(1.2rem,3vw,1.45rem)] font-semibold leading-snug tracking-[0.06em] text-ink;
   }
-  .card-head span {
-    @apply font-serif-ko text-sm tracking-widest text-ink-secondary;
+  .card-head__title [lang] {
+    @apply block;
+  }
+  .card-head__title [lang='en'] {
+    @apply font-serif-en text-[clamp(1.7rem,3.2vw,2.1rem)] font-medium italic;
   }
 
   .card > .card-block + .card-block {
@@ -211,13 +211,13 @@
   }
 
   .block-head {
-    @apply mb-3.5 font-normal;
+    @apply mb-3.5 font-serif-ko text-lg font-semibold leading-snug text-ink;
   }
-  .block-head em {
-    @apply block font-serif-en text-xl leading-tight text-ink italic;
+  .block-head [lang] {
+    @apply block;
   }
-  .block-head span {
-    @apply mt-0.5 inline-block font-serif-ko text-[0.78rem] tracking-[0.1em] text-ink-muted;
+  .block-head [lang='en'] {
+    @apply font-serif-en text-xl font-normal italic;
   }
   .block-head .badge {
     @apply mt-2.5 block rounded-none bg-transparent p-0 font-serif-ko text-base font-medium tracking-wide text-accent;
@@ -286,11 +286,11 @@
   .route-btn {
     @apply relative flex flex-col gap-0.5 overflow-hidden rounded-sm bg-ink px-5 py-4 text-surface no-underline transition-[background,transform] hover:-translate-y-px hover:bg-accent;
   }
-  .route-btn-en {
-    @apply font-serif-en text-lg tracking-wide italic;
-  }
-  .route-btn-ko {
+  .route-btn-label {
     @apply font-serif-ko text-[0.92rem] tracking-widest;
+  }
+  .route-btn-label[lang='en'] {
+    @apply font-serif-en text-lg tracking-wide italic;
   }
   .route-btn-meta {
     @apply mt-1 font-sans text-[0.72rem] tracking-wide opacity-70;
@@ -414,7 +414,7 @@
     @apply m-0 min-w-0 flex-1 font-serif-ko text-[1.08rem] font-semibold leading-snug text-ink;
   }
   .food-walk {
-    @apply shrink-0 font-serif-en text-[0.78rem] tracking-wide text-accent italic;
+    @apply shrink-0 font-sans text-sm font-bold tracking-wide text-accent;
   }
   .food-walk--far {
     @apply text-ink-muted;

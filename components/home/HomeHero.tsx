@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { HomeBookCta } from '@/components/home/HomeBookCta';
 import { HomeHeroPhoto } from '@/components/home/HomeHeroPhoto';
-import { Seagull } from '@/components/ui/Seagull';
 import { cn } from '@/lib/cn';
 import { SITE_LEAD, SITE_NAME_LINE } from '@/lib/site';
 import { Logo } from '@/components/ui/Logo';
@@ -46,8 +45,6 @@ export function HomeHero() {
           이용 안내
         </Link>
       </p>
-
-      <Seagull className="mt-8" />
     </section>
   );
 }

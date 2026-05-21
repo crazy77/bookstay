@@ -1,3 +1,4 @@
+import { FOOTER_META } from '@/data/guide-i18n';
 import { INSTAGRAM_DM_URL } from '@/lib/site';
 import { Seagull } from '@/components/ui/Seagull';
 
@@ -11,7 +12,7 @@ export function GuideFooter() {
         </div>
         <div className="foot-meta toggle">
           <p lang="ko">
-            문의 ·{' '}
+            {FOOTER_META.contact.ko} ·{' '}
             <a
               className="contact-link"
               href={INSTAGRAM_DM_URL}
@@ -21,12 +22,12 @@ export function GuideFooter() {
               @bookstay_haemyo DM
             </a>
             <br />
-            체크아웃 · <em>오전 11시까지</em>
+            {FOOTER_META.checkoutLabel.ko} · <em>{FOOTER_META.checkout.ko}</em>
             <br />
-            궁금한 점은 인스타그램 메시지로 보내 주세요.
+            {FOOTER_META.line2.ko}
           </p>
           <p lang="en">
-            Contact ·{' '}
+            {FOOTER_META.contact.en} ·{' '}
             <a
               className="contact-link"
               href={INSTAGRAM_DM_URL}
@@ -36,9 +37,24 @@ export function GuideFooter() {
               @bookstay_haemyo DM
             </a>
             <br />
-            Check-out · <em>11:00 AM</em>
+            {FOOTER_META.checkoutLabel.en} · <em>{FOOTER_META.checkout.en}</em>
             <br />
-            Please message us on Instagram anytime.
+            {FOOTER_META.line2.en}
+          </p>
+          <p lang="zh">
+            {FOOTER_META.contact.zh} ·{' '}
+            <a
+              className="contact-link"
+              href={INSTAGRAM_DM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              @bookstay_haemyo DM
+            </a>
+            <br />
+            {FOOTER_META.checkoutLabel.zh} · <em>{FOOTER_META.checkout.zh}</em>
+            <br />
+            {FOOTER_META.line2.zh}
           </p>
         </div>
         <Seagull />

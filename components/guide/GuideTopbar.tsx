@@ -4,13 +4,7 @@ import Link from 'next/link';
 import { useEffect, useId, useState } from 'react';
 import { LangToggle } from '@/components/ui/LangToggle';
 import { ThemePicker } from '@/components/ui/ThemePicker';
-const NAV = [
-  { href: '#checkin', label: '체크인' },
-  { href: '#arrival', label: '오시는 길' },
-  { href: '#library', label: '서가' },
-  { href: '#room', label: '객실' },
-  { href: '#food', label: '도보맛집' },
-] as const;
+import { GUIDE_NAV } from '@/data/guide-i18n';
 
 function MenuIcon({ open }: { open: boolean }) {
   return (
@@ -65,9 +59,11 @@ export function GuideTopbar() {
           className="anchor-nav anchor-nav--desktop"
           aria-label="섹션 이동"
         >
-          {NAV.map(({ href, label }) => (
-            <a key={href} href={href}>
-              {label}
+          {GUIDE_NAV.map(({ href, label }) => (
+            <a key={href} href={href} className="toggle">
+              <span lang="ko">{label.ko}</span>
+              <span lang="en">{label.en}</span>
+              <span lang="zh">{label.zh}</span>
             </a>
           ))}
         </nav>
@@ -94,9 +90,11 @@ export function GuideTopbar() {
         aria-label="섹션 이동"
         hidden={!open}
       >
-        {NAV.map(({ href, label }) => (
-          <a key={href} href={href} onClick={() => setOpen(false)}>
-            {label}
+        {GUIDE_NAV.map(({ href, label }) => (
+          <a key={href} href={href} className="toggle" onClick={() => setOpen(false)}>
+            <span lang="ko">{label.ko}</span>
+            <span lang="en">{label.en}</span>
+            <span lang="zh">{label.zh}</span>
           </a>
         ))}
       </nav>

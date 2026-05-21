@@ -46,7 +46,7 @@ Vercel · Framework Preset: **Next.js** (Install Command: `bun install`, Bun loc
 - **홈·UI** — `components/home/*`, `components/ui/button.tsx` 등 Tailwind 유틸리티 직접 사용
 - **병합** — `lib/cn.ts` (`clsx` + `tailwind-merge`)
 
-로고 크기: 홈 `Logo variant="home"` → `w-[6.5rem]` (한 곳만 수정)
+로고: `Logo` — `public/assets/logo.png`. 홈 크기 `w-[6.5rem]`은 `Logo.tsx`에서 조정. 파비콘·OG도 동일 파일.
 
 ### OG / 소셜 공유 이미지
 

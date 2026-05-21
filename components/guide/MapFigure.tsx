@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { MAP_CAPTION } from '@/data/guide-i18n';
 
 export function MapFigure() {
   const [missing, setMissing] = useState(false);
@@ -20,8 +21,9 @@ export function MapFigure() {
         />
       </picture>
       <figcaption className="toggle">
-        <span lang="ko">골목 진입 상세 — 대림1길 1-1</span>
-        <span lang="en">Alley detail · Daerim 1-gil 1-1</span>
+        <span lang="ko">{MAP_CAPTION.ko}</span>
+        <span lang="en">{MAP_CAPTION.en}</span>
+        <span lang="zh">{MAP_CAPTION.zh}</span>
       </figcaption>
     </figure>
   );
