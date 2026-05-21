@@ -2,7 +2,7 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? 'https://haemyo.vercel.app';
 
 /** 홈 히어로·메타 공통 한 줄 */
-export const SITE_LEAD = '한림항 골목 안, 책과 바다가 맞닿는 북스테이.';
+export const SITE_LEAD = '한림항 골목, 책과 바다가 맞닿는 북스테이';
 
 export const SITE_NAME_LINE = '해묘(海猫) · 갈매기를 부르는 다른 이름';
 

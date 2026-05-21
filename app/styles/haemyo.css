@@ -116,6 +116,57 @@
     @apply mx-auto mt-9 block h-auto w-[90px] opacity-85;
   }
 
+  /* ── Home hero photo ── */
+  .home-hero-photo__frame {
+    @apply relative rounded-sm border border-border bg-surface p-2 shadow-sm ring-1 ring-border-muted/50 sm:p-2.5;
+  }
+  .home-hero-photo__frame::before,
+  .home-hero-photo__frame::after,
+  .home-hero-photo__corner {
+    @apply pointer-events-none absolute z-[2] size-3.5 border-ink opacity-[0.22];
+  }
+  .home-hero-photo__frame::before,
+  .home-hero-photo__frame::after {
+    content: '';
+    border: 1px solid var(--color-ink);
+  }
+  .home-hero-photo__corner {
+    @apply border;
+  }
+  .home-hero-photo__frame::before {
+    top: 10px;
+    left: 10px;
+    border-right: none;
+    border-bottom: none;
+  }
+  .home-hero-photo__frame::after {
+    right: 10px;
+    bottom: 10px;
+    border-top: none;
+    border-left: none;
+  }
+  .home-hero-photo__corner--tr {
+    top: 10px;
+    right: 10px;
+    border-bottom: none;
+    border-left: none;
+  }
+  .home-hero-photo__corner--bl {
+    bottom: 10px;
+    left: 10px;
+    border-top: none;
+    border-right: none;
+  }
+  .home-hero-photo__media {
+    @apply rounded-[2px];
+  }
+  .home-hero-photo__slide {
+    @apply absolute inset-0;
+  }
+  .home-hero-photo__caption {
+    @apply m-0 border-t border-border-muted/80 px-1 pt-2 pb-1 text-center font-serif-ko text-[0.88rem] font-medium tracking-[0.18em] text-ink-secondary;
+  }
+
   /* ── Card ── */
   .card {
     @apply relative mb-6 rounded-sm border border-border bg-surface p-6 sm:p-10;

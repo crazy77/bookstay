@@ -4,7 +4,10 @@
   "private": true,
   "packageManager": "bun@1.3.10",
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/dev.mjs",
+    "dev:fresh": "rm -rf .next && node scripts/dev.mjs",
+    "dev:webpack": "node scripts/dev.mjs --webpack",
+    "clean": "rm -rf .next",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

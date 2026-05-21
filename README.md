@@ -13,6 +13,20 @@ bun install
 bun dev
 ```
 
+### dev 서버가 500 · `routes-manifest.json` / `124.js` 오류
+
+코드 문제가 아니라 **`.next` 캐시가 HMR 중에 깨진 경우**가 많습니다. (`bun run build`를 dev가 켜진 채 돌리거나, 저장이 겹칠 때)
+
+```bash
+# 보통 이것만으로 충분 (캐시 삭제 후 dev)
+bun run dev:fresh
+
+# 또는
+bun run clean && bun dev
+```
+
+`bun dev`는 시작할 때 깨진 `.next`가 보이면 **자동으로 한 번 지웁니다.** 실행 중에 500이 나면 프로세스를 끄고 `bun dev`(또는 `dev:fresh`)로 다시 켜면 됩니다.
+
 - http://localhost:3000 — 홈
 - http://localhost:3000/guide — 이용 안내
 

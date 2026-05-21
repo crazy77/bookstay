@@ -13,17 +13,19 @@ export function HomeHero() {
   const [hasHeroPhoto, setHasHeroPhoto] = useState(false);
 
   return (
-    <section
-      className={cn(
-        'mx-auto w-full max-w-xl text-center',
-        hasHeroPhoto && '[&_.home-logo]:mb-2',
-      )}
-    >
-      <div className="home-logo mb-3 flex w-full justify-center">
+    <section className="mx-auto w-full max-w-xl text-center">
+      <div
+        className={cn(
+          'home-logo flex w-full justify-center',
+          hasHeroPhoto ? 'mb-2' : 'mb-3',
+        )}
+      >
         <Logo variant="home" />
       </div>
 
-      <div className="mx-auto max-w-md">
+      <HomeHeroPhoto onPhotoReady={setHasHeroPhoto} />
+
+      <div className="mx-auto mt-5 max-w-md">
         <h1 className="font-serif-ko text-lg font-medium leading-relaxed tracking-wide text-ink md:text-xl">
           {SITE_LEAD}
         </h1>
@@ -35,8 +37,6 @@ export function HomeHero() {
       <div className="mx-auto mt-5 w-full max-w-xs">
         <HomeBookCta />
       </div>
-
-      <HomeHeroPhoto onPhotoReady={setHasHeroPhoto} />
 
       <p className="mt-4 font-serif-ko text-sm tracking-widest">
         <Link
