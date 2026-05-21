@@ -15,7 +15,7 @@ export function Button({
   return (
     <a
       className={cn(
-        'inline-flex items-center justify-center rounded-sm font-serif-ko text-[0.95rem] tracking-wide no-underline transition-colors',
+        'inline-flex items-center justify-center gap-2.5 rounded-sm font-serif-ko text-[0.95rem] tracking-wide no-underline transition-colors',
         variant === 'primary' &&
           'border border-ink bg-ink text-surface hover:border-accent hover:bg-accent',
         variant === 'ghost' &&
