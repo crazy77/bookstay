@@ -17,20 +17,32 @@
   .brand-en {
     @apply mt-px font-serif-en text-[0.7rem] italic tracking-[0.18em] text-ink-secondary;
   }
-  .anchor-nav {
-    @apply ml-auto flex gap-2 font-serif-ko text-[0.82rem] sm:gap-4 sm:text-[0.92rem];
-  }
   .anchor-nav a {
-    @apply px-1 py-1.5 tracking-wide text-ink-secondary no-underline transition-colors hover:text-accent;
+    @apply tracking-wide text-ink-secondary no-underline transition-colors hover:text-accent;
+  }
+  .anchor-nav--desktop {
+    @apply ml-auto hidden gap-4 font-serif-ko text-[0.92rem] md:flex;
+  }
+  .anchor-nav--desktop a {
+    @apply px-1 py-1.5;
+  }
+  .topbar-actions {
+    @apply ml-auto flex shrink-0 items-center gap-2 md:ml-0;
+  }
+  .menu-toggle {
+    @apply inline-flex size-10 cursor-pointer items-center justify-center rounded-sm border border-border bg-transparent text-ink transition-colors hover:bg-canvas-muted md:hidden;
+  }
+  .anchor-nav--mobile {
+    @apply flex flex-col border-t border-border-muted bg-canvas px-4 py-2 font-serif-ko text-[0.95rem] md:hidden;
+  }
+  .anchor-nav--mobile a {
+    @apply border-b border-border-muted py-3.5 last:border-b-0;
   }
   .lang-toggle {
     @apply cursor-pointer rounded-sm border border-border bg-transparent px-2.5 py-1.5 font-sans text-[0.78rem] tracking-widest text-ink transition-colors hover:bg-canvas-muted;
   }
 
   @media (max-width: 480px) {
-    .anchor-nav {
-      @apply gap-1.5 text-[0.84rem];
-    }
     .topbar-inner {
       @apply gap-2 px-3 py-2;
     }
@@ -44,9 +56,6 @@
   @media (max-width: 380px) {
     .brand-en {
       @apply hidden;
-    }
-    .anchor-nav {
-      @apply gap-1.5 text-[0.84rem];
     }
   }
 
@@ -385,7 +394,9 @@
   @media print {
     .topbar,
     .lang-toggle,
-    .anchor-nav,
+    .anchor-nav--desktop,
+    .anchor-nav--mobile,
+    .menu-toggle,
     .seagull {
       display: none !important;
     }
