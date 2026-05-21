@@ -257,20 +257,11 @@ export function GuideContent() {
                 </a>
                 으로 알려 주세요.
               </li>
-              <li>
-                대문에는 자동 도어락이 설치되어 있으나, 도어락이 잠길 때까지 손으로
-                잡아주어야 합니다. 자동으로 문이 찰칵하고 닫히지 않으니, 대문을
-                들어오고 나가실 때 <strong>도어락 잠금 장치가 잠길 때까지</strong>{' '}
-                손으로 잡아 주세요.
-              </li>
+              <li>대문 도어락은 자동으로 닫히지 않으니 직접 닫아 주세요.</li>
               <li>
                 <strong>봄가을서가</strong>는 사계절 이용 가능하지만 여름엔 덥고
                 겨울엔 춥습니다. 외부 창고 공간이라 냉난방이 어려운 점 양해
                 부탁드립니다.
-              </li>
-              <li>
-                <strong>2박 이상</strong> 머무시는 손님께서는 욕실의 세탁기·건조기를
-                자유롭게 사용하실 수 있습니다. 사용법은 첨부 안내문을 참조해 주세요.
               </li>
             </ul>
             <ul lang="en" className="bare-list guide-rules">
@@ -304,16 +295,11 @@ export function GuideContent() {
                 if a large one is hard to remove.
               </li>
               <li>
-                The main gate has an auto lock — please <strong>hold the door</strong>{' '}
-                until it locks when entering or leaving.
+                The main gate lock does not close by itself — please shut it manually.
               </li>
               <li>
                 The <strong>Spring–Autumn room</strong> is open year-round but hot in
                 summer and cold in winter (outdoor storage space, no HVAC).
-              </li>
-              <li>
-                Guests staying <strong>2+ nights</strong> may use the washer and dryer
-                in the bathroom — see the attached guide.
               </li>
             </ul>
             <ul lang="zh" className="bare-list guide-rules">
