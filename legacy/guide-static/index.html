@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>해묘서가 · 게스트 안내</title>
+<meta name="description" content="제주 한림항 북스테이 해묘서가 — 체크인, 오시는 길, 객실, 도보맛집 안내">
+<link rel="canonical" href="https://haemyo.vercel.app/guide">
+<link rel="icon" type="image/png" href="/assets/logo.png">
+<link rel="apple-touch-icon" href="/assets/logo.png">
+
+<!-- Open Graph / SNS 공유용 -->
+<meta property="og:title" content="해묘서가 · 게스트 안내">
+<meta property="og:description" content="체크인, 오시는 길, 서가·객실 이용, 도보맛집까지 — 해묘서가 안내">
+<meta property="og:url" content="https://haemyo.vercel.app/guide">
+<meta property="og:image" content="https://haemyo.vercel.app/assets/og-image.png?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="해묘서가">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="해묘서가 · 게스트 안내">
+<meta name="twitter:description" content="해묘서가 이용 안내 — 한림 북스테이">
+<meta name="twitter:image" content="https://haemyo.vercel.app/assets/og-image.png?v=2">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top">
+      <span class="brand-ko">해묘서가</span>
+      <span class="brand-en">BOOKSTAY</span>
+    </a>
+    <nav class="anchor-nav" aria-label="섹션 이동">
+      <a href="#checkin">체크인</a>
+      <a href="#arrival">오시는 길</a>
+      <a href="#library">서가</a>
+      <a href="#room">객실</a>
+      <a href="#food">도보맛집</a>
+    </nav>
+    <button class="lang-toggle" id="langToggle" type="button" aria-label="언어 전환">
+      <span class="lang-opt" data-lang-ko>EN</span>
+      <span class="lang-opt" data-lang-en>한국어</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ─────────────────────── HERO ─────────────────────── -->
+  <section class="hero">
+    <div class="hero-logo">
+      <!-- TODO: assets/logo.png 로 로고 파일 저장 -->
+      <img src="/assets/logo.png" alt="해묘서가 BOOKSTAY" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-fallback',textContent:'해묘서가'}))">
+    </div>
+    <h1 class="hero-title">
+      <em>Welcome</em>
+      <span>해묘서가에 오신 것을 환영합니다</span>
+    </h1>
+    <div class="hero-copy toggle">
+      <p lang="ko">
+        안녕하세요, 해묘서가를 찾아주셔서 진심으로 감사드립니다.<br>
+        비록 오래된 구옥이지만 머무시는 동안 편히 쉬었다 가실 수 있도록 최선을 다하겠습니다.<br>
+        쾌적하고 안전한 휴식을 위해 아래 안내 사항을 꼭 확인해 주세요.
+      </p>
+      <p lang="en">
+        Thank you sincerely for choosing Haemyo.<br>
+        Though it is an old house, we will do our best so you can rest comfortably during your stay.<br>
+        Please read the guidelines below for a pleasant and safe visit.
+      </p>
+    </div>
+    <img class="seagull" src="/assets/symbol.png" alt="" aria-hidden="true">
+  </section>
+
+  <!-- ─────────────────────── 1. CHECK-IN ─────────────────────── -->
+  <section id="checkin" class="card">
+    <header class="card-head">
+      <em>Check-in &amp; Check-out</em>
+      <span>체크인 &amp; 체크아웃</span>
+    </header>
+
+    <div class="block-body toggle">
+      <ul lang="ko" class="bare-list guide-rules">
+        <li>체크인 시간은 <strong>오후 3시</strong>, 체크아웃 시간은 <strong>오전 11시</strong>입니다.</li>
+        <li>정오 이후 트렁크나 짐을 맡기실 수 있습니다. 객실 준비가 일찍 끝날 경우 얼리 체크인이 가능하며 메시지로 안내해 드립니다.</li>
+        <li>대문과 현관 도어락 비밀번호는 입실 당일 발송해 드립니다.</li>
+      </ul>
+      <ul lang="en" class="bare-list guide-rules">
+        <li>Check-in <strong>3:00 PM</strong> · Check-out <strong>11:00 AM</strong>.</li>
+        <li>Luggage drop-off is available after noon. If the room is ready early, we may offer early check-in and will notify you by message.</li>
+        <li>Gate and entrance door-lock codes are sent on the day of arrival.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 2. ARRIVAL ─────────────────────── -->
+  <section id="arrival" class="card">
+    <header class="card-head">
+      <em>Parking &amp; directions</em>
+      <span>주차 및 오시는 길</span>
+    </header>
+
+    <div class="card-block">
+      <h3 class="block-head">
+        <em>Parking</em>
+        <span>주차</span>
+      </h3>
+      <div class="block-body toggle">
+        <p lang="ko">
+          주차는 도보 1분 거리에 있는 공영주차장을 이용할 수 있습니다.
+          도로 양옆에 공간이 있을 경우 그곳에 주차하셔도 됩니다.
+        </p>
+        <p lang="en">
+          Use the public parking lot about a 1-minute walk away,
+          or park along the roadside where space is available.
+        </p>
+      </div>
+    </div>
+
+    <div class="card-block">
+      <h3 class="block-head">
+        <em>By transit</em>
+        <span>대중교통</span>
+      </h3>
+      <ul class="block-list toggle">
+        <li lang="ko"><strong>202번</strong> 제주버스터미널 방면 · 한림천주교회 정류장 하차</li>
+        <li lang="ko"><strong>202번</strong> 서귀포 방면 · 한림매일시장 입구 정류장 하차</li>
+        <li lang="ko"><strong>102번</strong> 급행버스 · 양방향 모두 한림환승정류장 하차</li>
+        <li lang="en"><strong>Bus 202</strong> toward Jeju Bus Terminal · get off at Hallim Catholic Church stop</li>
+        <li lang="en"><strong>Bus 202</strong> toward Seogwipo · get off at Hallim Maeil Market entrance stop</li>
+        <li lang="en"><strong>Bus 102</strong> express · both directions, get off at Hallim transfer stop</li>
+      </ul>
+    </div>
+
+    <div class="address toggle">
+      <p lang="ko"><strong>주소</strong> · 제주특별자치도 제주시 한림읍 대림1길 1-1</p>
+      <p lang="en"><strong>Address</strong> · 1-1 Daerim 1-gil, Hallim-eup, Jeju-si, Jeju-do</p>
+    </div>
+
+    <div class="route-buttons">
+      <a class="route-btn" href="https://kko.to/UpwYBL_n3J" target="_blank" rel="noopener">
+        <span class="route-btn-en">By transit</span>
+        <span class="route-btn-ko">대중교통 길찾기</span>
+        <span class="route-btn-meta">제주공항 → 해묘서가 · KakaoMap</span>
+      </a>
+      <a class="route-btn" href="https://kko.to/BullgJyS7h" target="_blank" rel="noopener">
+        <span class="route-btn-en">By car</span>
+        <span class="route-btn-ko">자동차 길찾기</span>
+        <span class="route-btn-meta">제주공항 → 해묘서가 · KakaoMap</span>
+      </a>
+    </div>
+
+    <figure class="map-figure single-map">
+      <picture>
+        <source media="(max-width: 600px)" srcset="/assets/map-detail-mobile.png">
+        <img src="/assets/map-detail.png" alt="대림1길 골목 진입 상세도" onerror="this.closest('figure').classList.add('map-missing')">
+      </picture>
+      <figcaption class="toggle">
+        <span lang="ko">골목 진입 상세 — 대림1길 1-1</span>
+        <span lang="en">Alley detail · Daerim 1-gil 1-1</span>
+      </figcaption>
+    </figure>
+
+    <div class="callout toggle">
+      <p lang="ko">
+        ※ 대림1길은 좁은 골목입니다. 한림로에서 대림1길 표지판을 보고 진입한 뒤,
+        골목 안쪽 <strong>1-1번지</strong>까지 천천히 들어오시면 해묘서가 대문이 있습니다.
+      </p>
+      <p lang="en">
+        Note · Daerim 1-gil is a narrow alley. Once you turn from Hallim-ro,
+        walk slowly into the alley to <strong>building 1-1</strong> — Haemyo is on your right.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 2. LIBRARY ─────────────────────── -->
+  <section id="library" class="card">
+    <header class="card-head">
+      <em>The library</em>
+      <span>서가 이용 안내</span>
+    </header>
+
+    <div class="block-body toggle">
+      <p lang="ko">
+        책장에 비치된 모든 책은 자유롭게 읽으실 수 있습니다.
+        다음 손님을 위해 읽고 난 뒤 <strong>제자리에 놓아주시면</strong> 감사하겠습니다.
+      </p>
+      <p lang="ko">
+        해묘서가에 비치된 책에는 호스트 부부의 소중한 추억이 깃들어 있습니다.
+        혹시라도 집에 데려가지 말아주세요.
+      </p>
+      <p lang="en">
+        Every book on the shelves is yours to read during your stay.
+        When you are finished, <strong>please return it to its place</strong> for the next guest.
+      </p>
+      <p lang="en">
+        These books hold precious memories for us as hosts.
+        Please do not take any book home with you.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 3. ROOM ─────────────────────── -->
+  <section id="room" class="card">
+    <header class="card-head">
+      <em>Room guide</em>
+      <span>객실 이용 안내</span>
+    </header>
+
+    <div class="card-block">
+      <div class="block-body toggle">
+        <ul lang="ko" class="bare-list guide-rules">
+          <li>해묘서가는 좋은 이웃과 담벼락을 나누고 있습니다. 마당에서 발생하는 소음은 곧바로 담을 넘어 이웃의 귓가로 생생하게 달려가니, <strong>늦은 시간에는 특히 조심</strong>해 주시면 감사하겠습니다.</li>
+          <li>해묘서가는 한림항 바로 옆이라, 밤에 뱃고동이나 무전 소리가 간혹 들릴 수 있습니다. 잠이 가벼우시면 객실에 준비해 둔 <strong>이어플러그</strong>를 사용해 보세요.</li>
+          <li>취사는 <strong>6박 이상</strong> 머무시는 손님에 한해 허용됩니다. 외부 음식 반입은 자유롭습니다. 아래 <a href="#food">도보맛집</a> 리스트를 참고해 방문하시거나 포장해 즐기셔도 좋습니다.</li>
+          <li>서재는 별도 방문 없이 <strong>커튼</strong>으로 나눈 공간입니다. 쉬실 때나 밤에는 커튼을 내려 주시면 시선·소음 모두 조금 더 편하실 거예요.</li>
+          <li>흡연은 평상 옆에 마련된 재떨이를 이용해 주세요.</li>
+          <li>제주에는 돌, 바람, 여자 뿐만 아니라 온갖 벌레들도 많습니다. 주기적인 방역을 통해 최대한 집 안에 들어오지 못하게 막고 있으나, 작은 빈틈을 놓치지 않고 기어코 들어오고야마는 녀석들도 있습니다. 너그러이 양해해 주시되, 큰 벌레가 나타나 퇴치가 어려울 경우엔 <a href="https://ig.me/m/bookstay_haemyo" target="_blank" rel="noopener">인스타그램 DM</a>으로 알려 주세요.</li>
+          <li>대문에는 자동 도어락이 설치되어 있으나, 도어락이 잠길 때까지 손으로 잡아주어야 합니다. 자동으로 문이 찰칵하고 닫히지 않으니, 대문을 들어오고 나가실 때 <strong>도어락 잠금 장치가 잠길 때까지</strong> 손으로 잡아 주세요.</li>
+          <li><strong>봄가을서가</strong>는 사계절 이용 가능하지만 여름엔 덥고 겨울엔 춥습니다. 외부 창고 공간이라 냉난방이 어려운 점 양해 부탁드립니다.</li>
+          <li><strong>2박 이상</strong> 머무시는 손님께서는 욕실의 세탁기·건조기를 자유롭게 사용하실 수 있습니다. 사용법은 첨부 안내문을 참조해 주세요.</li>
+        </ul>
+        <ul lang="en" class="bare-list guide-rules">
+          <li>We share a wall with good neighbors — sound from the yard travels easily. Please be especially <strong>quiet at night</strong>.</li>
+          <li>We're right beside Hallim Port — boat horns or radio chatter may reach you at night. <strong>Earplugs</strong> are in the room if you'd like a quieter sleep.</li>
+          <li>Cooking is allowed for stays of <strong>6 nights or more</strong>. Outside food is welcome — see our <a href="#food">walking-distance food guide</a> or bring takeout.</li>
+          <li>The study has no separate door — a <strong>curtain</strong> divides the space. Please draw it closed when you rest, especially at night, for a bit more privacy and quiet.</li>
+          <li>Please smoke only at the ashtray beside the platform.</li>
+          <li>Jeju has its share of insects despite regular pest control. Please understand; message us on <a href="https://ig.me/m/bookstay_haemyo" target="_blank" rel="noopener">Instagram DM</a> if a large one is hard to remove.</li>
+          <li>The main gate has an auto lock — please <strong>hold the door</strong> until it locks when entering or leaving.</li>
+          <li>The <strong>Spring–Autumn room</strong> is open year-round but hot in summer and cold in winter (outdoor storage space, no HVAC).</li>
+          <li>Guests staying <strong>2+ nights</strong> may use the washer and dryer in the bathroom — see the attached guide.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- WIFI -->
+    <div class="card-block" id="wifi">
+      <h3 class="block-head">
+        <em>WiFi</em>
+        <span>와이파이</span>
+      </h3>
+      <div class="wifi-grid">
+        <div class="wifi-info">
+          <dl>
+            <dt class="toggle">
+              <span lang="ko">네트워크</span><span lang="en">Network</span>
+            </dt>
+            <dd><code>fanta</code></dd>
+            <dt class="toggle">
+              <span lang="ko">비밀번호</span><span lang="en">Password</span>
+            </dt>
+            <dd><code>12121212</code></dd>
+          </dl>
+          <p class="wifi-note toggle">
+            <span lang="ko">QR을 카메라로 스캔하면 자동 연결됩니다.</span>
+            <span lang="en">Scan the QR with your camera to connect automatically.</span>
+          </p>
+          <button type="button" class="copy-btn" data-copy="12121212">
+            <span class="toggle">
+              <span lang="ko">비밀번호 복사</span>
+              <span lang="en">Copy password</span>
+            </span>
+          </button>
+        </div>
+        <div class="wifi-qr">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?data=WIFI%3AT%3AWPA%3BS%3Afanta%3BP%3A12121212%3B%3B&size=300x300&margin=10"
+            alt="WiFi QR"
+            width="180" height="180">
+        </div>
+      </div>
+    </div>
+
+    <!-- SPEAKER -->
+    <div class="card-block" id="speaker">
+      <h3 class="block-head">
+        <em>Room audio · Marshall Acton III</em>
+        <span>스피커 사용법</span>
+      </h3>
+
+      <ol class="block-list numbered toggle">
+        <li lang="ko"><strong>전원</strong> · 상단 우측 토글을 위로 ↑</li>
+        <li lang="ko"><strong>페어링</strong> · SOURCE 버튼을 길게 눌러 BT LED가 빨간색으로 깜박일 때까지</li>
+        <li lang="ko"><strong>연결</strong> · 휴대폰 블루투스에서 <code>ACTON III</code> 선택</li>
+        <li lang="en"><strong>Power</strong> · Flip the right toggle up ↑</li>
+        <li lang="en"><strong>Pair</strong> · Hold SOURCE until the BT LED pulses red</li>
+        <li lang="en"><strong>Connect</strong> · Select <code>ACTON III</code> in your phone's Bluetooth settings</li>
+      </ol>
+
+      <p class="speaker-tip toggle">
+        <span lang="ko">※ 음량은 왼쪽 노브로 조절합니다. BASS·TREBLE의 빨간 점이 12시일 때가 기본 음질입니다.</span>
+        <span lang="en">※ Volume is the leftmost knob. Default tone is when the BASS·TREBLE red dots align at 12 o'clock.</span>
+      </p>
+
+      <div class="callout toggle">
+        <ul lang="ko" class="bare-list">
+          <li>22시 이후에는 음량 5 이하로 부탁드립니다</li>
+          <li>10분 미사용 시 자동 절전 모드</li>
+          <li>사용 후에는 토글을 내려 전원을 꺼주세요</li>
+        </ul>
+        <ul lang="en" class="bare-list">
+          <li>After 10 pm · please keep the volume at 5 or below</li>
+          <li>Auto-standby kicks in after 10 minutes of inactivity</li>
+          <li>Please switch off via the toggle when finished</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 4. FOOD ─────────────────────── -->
+  <section id="food" class="card food-guide">
+    <header class="card-head">
+      <em>Host picks</em>
+      <span>도보맛집</span>
+    </header>
+
+    <p class="food-intro">
+      해묘서가는 읍내 중심가에 가까워 도보로 로컬 맛집 탐방이 가능합니다.
+      해묘서가에 머무시는 동안 이 리스트를 참조해서 맛있는 여행을 떠나 보세요.
+    </p>
+
+    <div class="food-category">
+      <h3 class="food-cat-head">카페 / 베이커리</h3>
+
+      <article class="food-spot" data-place="제주 한림 마이크로 하비타트">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">마이크로 하비타트</h4>
+          <span class="food-walk">도보 2분</span>
+        </header>
+        <p class="food-desc">최근 한림에서 가장 뜨거운 핫플 카페. 커피 맛도 일품이지만 직접 만든 디저트가 아주 맛있어요. 오전 8시에 문을 열기 때문에 아침에 방문해 조식을 드시기에도 좋습니다. 수제 잠봉 포카차 샌드위치에 향기로운 커피를 곁들이면 항구의 아침이 활짝 깨어 날 거예요.</p>
+        <p class="food-addr">제주 제주시 한림읍 한수풀로 11 1층</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림 여러분 제과점">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">여러분 제과점</h4>
+          <span class="food-walk">도보 4분</span>
+        </header>
+        <p class="food-desc">크로플과 크루아상에 아메리카노를 곁들인 모닝 메뉴를 판매하는 아담한 제과점이에요. 각종 스콘과 에그타르트, 옛날식 사라다빵도 있습니다. 작은 시골 제과점의 귀엽고 활기찬 분위기가 참 좋아요.</p>
+        <p class="food-addr">제주 제주시 한림읍 한림로 702 1층</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림 희도 카페">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">희도</h4>
+          <span class="food-walk">도보 7분</span>
+        </header>
+        <p class="food-desc">한림 유일의 차 전문 카페입니다. 아늑하고 고풍스러운 인테리어가 마음을 편안하게 만들어주는 곳이에요. 주인장이 추천해 준 품질 좋은 차를 즐길 수 있고, 커피도 맛있습니다. 안에는 소품과 의류 코너도 있어서 구경하는 재미도 쏠쏠해요.</p>
+        <p class="food-addr">제주 제주시 한림읍 한림로14길 3 초록대문</p>
+      </article>
+    </div>
+
+    <div class="food-category">
+      <h3 class="food-cat-head">음식점</h3>
+
+      <article class="food-spot" data-place="제주 한림 등대 아구찜">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">등대 아구찜</h4>
+          <span class="food-walk">도보 10분</span>
+        </header>
+        <p class="food-desc">제주 최고의(어쩌면 전국 최고의) 아구찜을 파는 곳. 손님이 올 때마다 항상 1순위로 데려가는 집이기도 해요. 등대 아구찜 때문에 제주를 다시 찾는 분들도 많을 만큼 맛 하나는 보장된 집입니다. 최근 매스컴을 타서 식사 시간에 가면 웨이팅하셔야 해요. 식사 시간을 피해서 방문하시길 권합니다.</p>
+        <p class="food-addr">제주 제주시 한림읍 한림해안로 145-2</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림칼국수">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">한림칼국수</h4>
+          <span class="food-walk">도보 10분</span>
+        </header>
+        <p class="food-desc">등대 아구찜 옆에 있는 칼국수 맛집이에요. 보말칼국수가 유명한데 보말전도 아주 맛있어요. 바삭하게 구운 보말전에 싱그러운 제주 막걸리 한잔 걸치고 한림항을 산책하면 여행 온 기분이 물씬 풍길 거예요.</p>
+        <p class="food-addr">제주 제주시 한림읍 한림해안로 141</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림쥐치전문점">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">한림쥐치전문점</h4>
+          <span class="food-walk">도보 5분</span>
+        </header>
+        <p class="food-desc">작지만 단단한 로컬 횟집이에요. 단촐하지만 깔끔한 밑반찬 맛이 좋고 선장님이 직접 잡은 자연산 회만 취급합니다. 이름은 쥐치 전문점이지만 쥐치 철이 아닐 때는 다른 생선을 먹을 수 있어요. 생선뼈를 우려낸 국물로 끓인 어미역 수제비도 꼭 맛보시길.</p>
+        <p class="food-addr">제주 제주시 한림읍 한림로 698</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림 사형제 횟집">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">사형제 횟집</h4>
+          <span class="food-walk">도보 10분</span>
+        </header>
+        <p class="food-desc">회 자체보다 곁들여 나오는 스끼다시 먹는 재미가 더 크신 분께 당당하게 추천드릴 수 있는 집입니다. 정말 다양한 종류의 스끼다시가 폭격처럼 쏟아져서 정신을 차릴 수 없는 곳이에요.</p>
+        <p class="food-addr">제주 제주시 한림읍 한림상로 273</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림 수협">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">한림 수협</h4>
+          <span class="food-walk">도보 10분</span>
+        </header>
+        <p class="food-desc">다른 거 다 필요 없고 싱싱한 회를 가성비 좋게 실컷 먹겠다! 하시는 분께서는 한림 수협을 방문해 보세요. 직접 골라 회를 뜰 수도 있고 여러 종류를 모아 떠놓은 모듬회를 구입할 수도 있습니다. 안에서 먹을 수 있지만 상차림비와 실내 분위기를 생각하면 포장해서 해묘서가에서 즐기시길 권합니다. 수협 안에는 마트도 있어서 이것저것 장보기 편리해요.</p>
+        <p class="food-addr">제주 제주시 한림읍 한림해안로 141-4</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림 보영 중국집">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">보영</h4>
+          <span class="food-walk">도보 5분</span>
+        </header>
+        <p class="food-desc">역사와 전통을 자랑하는 화상 중국집. 제주까지 와서 웬 중국집이야? 하실 수 있지만 아는 맛이 가장 무서운 법이잖아요. 간짬뽕이 특히 유명한데 간짜장과 고추짬뽕도 맛있어요. 요리도 훌륭합니다.</p>
+        <p class="food-addr">제주 제주시 한림읍 한림로 692-1</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림 산지해장국">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">산지해장국</h4>
+          <span class="food-walk">도보 10분</span>
+        </header>
+        <p class="food-desc">제주에는 여러 해장국집이 있지만 산지해장국 특유의 푸짐한 내장탕은 그중에서도 손에 꼽힙니다. 제주의 해장국집은 거의 오후 3시면 문을 닫으니 즐기시려면 그 전에 가셔야 해요. (하지만 제가 제일 좋아하는 해장국집은 대춘해장국이에요. 공항에서 해묘서가 오는 길에 막내딸점이 있으니 렌트하셔서 오시는 분께서는 들러 보시길 권합니다.)</p>
+        <p class="food-addr">제주 제주시 한림읍 한림로3길 8-9 1층</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림 이서순대국밥">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">이서순대국밥</h4>
+          <span class="food-walk">도보 5분</span>
+        </header>
+        <p class="food-desc">직접 만든 피순대를 맛볼 수 있는 곳이에요. 제주의 전통 순대는 찹쌀순대인데 제 개인적으로는 찹쌀순대보다 피순대가 더 부드럽고 풍미가 좋은 것 같아요. (참, 피순대 맛집으로는 애월읍에 있는 <strong>부두식당</strong>도 아주 괜찮습니다. 피순대 좋아하시면 애월 읍내 구경 나가신 김에 드셔 보세요.) 바로 붙어 있는 한림매일시장 안에는 유명한 보람순대국밥과 풍년순대국밥이 있어요. 하지만 위생 상태가 별로 좋지 않아 추천드리지는 못해요.</p>
+        <p class="food-addr">제주 제주시 한림읍 한림해안로 162</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림 보리밥">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">보리밥</h4>
+          <span class="food-walk">도보 4분</span>
+        </header>
+        <p class="food-desc">깔끔하고 정갈한 맛에 인기가 높은 집입니다. 몸과 마음이 모두 건강해지는 맛! 비양도로 가는 배를 탈 수 있는 선착장 바로 앞에 있으니 비양도 가실 분은 이곳에서 식사를 해결해도 좋습니다.</p>
+        <p class="food-addr">제주 제주시 한림읍 한림해안로 204 2층</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림 한라축산정육식당">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">한라축산정육식당</h4>
+          <span class="food-walk food-walk--far">도보 20분 · 택시 권장</span>
+        </header>
+        <p class="food-desc">한림읍에서 가장 질 좋고 신선한 고기를 먹을 수 있는 곳. 해묘서가에서는 도보 20분 거리라서 택시를 타고 다녀오시는 걸 추천드립니다. 정육점에서 고기를 사서 옆에 있는 식당에서 구워 먹는 시스템이에요. 제주산 돼지와 소고기 모두 즐길 수 있습니다.</p>
+        <p class="food-addr">제주 제주시 한림읍 한림상로 84</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림 영림흑돼지가든">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">영림흑돼지가든</h4>
+          <span class="food-walk">도보 5분</span>
+        </header>
+        <p class="food-desc">한림성당 옆에 자리한 로컬 고깃집이에요. 언제나 주민들로 북적이는 정겨운 곳이기도 합니다. 제주에는 마을마다 생갈비 맛집이 하나씩 있는데 한림에서는 영림이 바로 그런 곳이 아닐까 싶어요.</p>
+        <p class="food-addr">제주 제주시 한림읍 한수풀로 30</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림 쌍둥이 국수">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">쌍둥이 국수</h4>
+          <span class="food-walk">도보 3분</span>
+        </header>
+        <p class="food-desc">새로 개업한 깔끔하고 청결한 국수집. 멸고국수가 특히 맛있어요. 가게가 넓고 사장님께서도 매우 친절하셔서 혼밥하기에 좋습니다.</p>
+        <p class="food-addr">제주 제주시 한림읍 한림로19길 4 1층 102호</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림 비타민 국수">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">비타민 국수</h4>
+          <span class="food-walk">도보 10분</span>
+        </header>
+        <p class="food-desc">한림에서 가장 유명한 고기국수집. 예전에는 오후 장사만 했는데 최근엔 오전 장사로 바꿨어요. 3시 이전에 가야 드실 수 있습니다.</p>
+        <p class="food-addr">제주 제주시 한림읍 한림로 661</p>
+      </article>
+    </div>
+
+    <div class="food-category">
+      <h3 class="food-cat-head">치킨 · 호프</h3>
+
+      <article class="food-spot" data-place="제주 한림 오늘도 치킨과 맥주가 좋다">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">오늘도 치킨과 맥주가 좋다</h4>
+          <span class="food-walk">도보 10분</span>
+        </header>
+        <p class="food-desc">치킨에 일가견이 있는 해묘서가 호스트가 감히 제주에서 최고로 꼽는 치킨집이에요. 겉은 바삭하고 속은 촉촉한 크리스피 스타일 치킨을 수제 피클과 곁들여 먹으면 맛이 아주 좋습니다. 여름과 가을엔 야장도 열어서 바깥 바람 맞으며 치맥하는 낭만도 즐길 수 있어요.</p>
+        <p class="food-addr">제주 제주시 한림읍 사가길 22</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림 중독불닭">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">중독불닭</h4>
+          <span class="food-walk">도보 10분</span>
+        </header>
+        <p class="food-desc">한림 주민들의 성지와도 같은 곳. 동네 주민들이 술 먹다 서로 만나 인사하는 곳. 진정한 한림 로컬의 분위기를 느낄 수 있는 곳. 불닭집이지만 후라이드 치킨이 맛있는 곳.</p>
+        <p class="food-addr">제주 제주시 한림읍 한림로 684-1</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림 남문숯불바베큐 치킨">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">남문숯불바베큐&amp;치킨</h4>
+          <span class="food-walk">도보 8분</span>
+        </header>
+        <p class="food-desc">바베큐 치킨의 정석을 보여주는 곳. 소금구이와 양념구이 모두 맛있어요. 후라이드 치킨도 뒤지지 않습니다.</p>
+      </article>
+    </div>
+
+    <div class="food-category food-category--drive">
+      <h3 class="food-cat-head">와인 · 맥주</h3>
+      <p class="food-cat-note">해묘서가에서 걸어갈 수 있는 곳은 아니지만 꼭 추천해 드리고 싶은 곳이 있어요.</p>
+
+      <article class="food-spot" data-place="제주 애월 부아르 와인상점">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">부아르 와인상점</h4>
+          <span class="food-walk food-walk--drive">차량 이동</span>
+        </header>
+        <p class="food-desc">곽지 해수욕장 초입에 위치한 와인 보틀숍입니다. 와인에 조예가 깊은 사장님께 맛있고 저렴한 와인을 추천받을 수 있어요. 부아르는 사막의 오아시스처럼 작은 서점 공간을 품고 있어요. 부아르에서 와인 한 병 사서 해묘서가에서 한잔 즐기시면 어떨까요? 향기로운 술과 함께 해묘서가의 밤도 향기롭게 익어 갈 거예요.</p>
+        <p class="food-addr">제주 제주시 애월읍 일주서로 5939 1층</p>
+      </article>
+
+      <article class="food-spot" data-place="제주 한림 기영상회">
+        <header class="food-spot-head">
+          <h4 class="food-spot-name">기영상회</h4>
+          <span class="food-walk food-walk--drive">차량 이동</span>
+        </header>
+        <p class="food-desc">협재 해수욕장에 위치한 제주 최고의 맥주 보틀숍. 서울에서도 구하기 힘든 다양한 맥주를 갖추고 있어요. 요새 크래프트 맥주 씬 자체가 전반적인 침체여서 예전 같진 않지만, 그래도 맥주를 사랑하는 분께서는 그냥 지나칠 수 없는 곳입니다.</p>
+        <p class="food-addr">제주 제주시 한림읍 한림로 345 기영상회</p>
+      </article>
+    </div>
+
+    <p class="food-note">※ 영업시간·휴무일·메뉴는 변동될 수 있으니 방문 전에 확인해 주세요.</p>
+  </section>
+
+</main>
+
+<!-- ─────────────────────── FOOTER ─────────────────────── -->
+<footer class="site-foot">
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <span class="brand-ko">해묘서가</span>
+      <span class="brand-en">BOOKSTAY · HALLIM, JEJU</span>
+    </div>
+    <div class="foot-meta toggle">
+      <p lang="ko">
+        문의 ·
+        <a class="contact-link" href="https://ig.me/m/bookstay_haemyo" target="_blank" rel="noopener">@bookstay_haemyo DM</a><br>
+        체크아웃 · <em>오전 11시까지</em><br>
+        궁금한 점은 인스타그램 메시지로 보내 주세요.
+      </p>
+      <p lang="en">
+        Contact ·
+        <a class="contact-link" href="https://ig.me/m/bookstay_haemyo" target="_blank" rel="noopener">@bookstay_haemyo DM</a><br>
+        Check-out · <em>11:00 AM</em><br>
+        Please message us on Instagram anytime.
+      </p>
+    </div>
+    <img class="seagull" src="/assets/symbol.png" alt="" aria-hidden="true">
+  </div>
+</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>

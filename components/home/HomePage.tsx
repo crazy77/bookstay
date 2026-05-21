@@ -1,0 +1,40 @@
+import { HomeHero } from '@/components/home/HomeHero';
+import { INSTAGRAM_DM_URL } from '@/lib/site';
+
+export function HomePage() {
+  return (
+    <main className="flex flex-1 items-start justify-center px-5 pt-7 pb-6 md:items-center md:px-6 md:py-12">
+      <HomeHero />
+    </main>
+  );
+}
+
+export function HomeFooter() {
+  return (
+    <footer className="border-t border-border-muted px-6 py-9 pb-12 text-center font-sans">
+      <div className="mx-auto max-w-xl">
+        <div className="mb-4 flex flex-col gap-1">
+          <span className="font-serif-ko text-[1.05rem] font-medium tracking-widest text-ink">
+            해묘서가
+          </span>
+          <span className="font-serif-en text-[0.7rem] italic tracking-[0.2em] text-ink-secondary">
+            BOOKSTAY · HALLIM, JEJU
+          </span>
+        </div>
+        <p className="mb-3 text-[0.78rem] tracking-wide">
+          <a
+            href={INSTAGRAM_DM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-serif-ko text-[0.82rem] tracking-widest text-ink-muted underline decoration-border-muted underline-offset-[3px] transition-colors hover:text-ink-secondary hover:decoration-ink-secondary"
+          >
+            @bookstay_haemyo DM
+          </a>
+        </p>
+        <p className="m-0 text-[0.76rem] leading-loose tracking-wide text-ink-muted">
+          사업자등록번호 506-21-96197
+        </p>
+      </div>
+    </footer>
+  );
+}

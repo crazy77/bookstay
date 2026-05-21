@@ -352,6 +352,19 @@ main {
   color: var(--accent);
   font-weight: 700;
 }
+.guide-rules li {
+  margin-bottom: 0.85rem;
+  line-height: 1.65;
+}
+.guide-rules li:last-child { margin-bottom: 0; }
+.guide-rules a,
+.foot-meta a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.guide-rules a:hover,
+.foot-meta a:hover { opacity: 0.85; }
 
 /* ── Address line ───────────────────────────────────────── */
 .address {
@@ -670,14 +683,94 @@ main {
 .place-link svg { display: block; }
 @media print { .place-link { display: none; } }
 
-.card-grid.restaurants {
-  margin-top: 2.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--rule-soft);
+/* ── Food guide (도보맛집) ───────────────────────────────── */
+.food-intro {
+  margin: 0 0 2.2rem;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
 }
-
-.around-note {
-  margin: 1.8rem 0 0;
+.food-category {
+  margin-bottom: 2.8rem;
+}
+.food-category:last-of-type { margin-bottom: 0; }
+.food-cat-head {
+  margin: 0 0 1.4rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 2px solid var(--accent);
+  font-family: var(--serif-ko);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+.food-cat-note {
+  margin: -0.6rem 0 1.4rem;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+.food-category--drive .food-cat-head {
+  border-bottom-color: var(--rule);
+}
+.food-spot {
+  position: relative;
+  padding: 1.25rem 0 1.35rem;
+  padding-right: 2.6rem;
+  border-bottom: 1px dotted var(--rule-soft);
+}
+.food-spot:last-child { border-bottom: none; }
+.food-spot-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.55rem;
+}
+.food-spot-name {
+  margin: 0;
+  font-family: var(--serif-ko);
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+}
+.food-walk {
+  flex-shrink: 0;
+  font-family: var(--serif-en);
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+.food-walk--far { color: var(--ink-muted); }
+.food-walk--drive { color: var(--ink-soft); }
+.food-desc {
+  margin: 0 0 0.5rem;
+  font-size: 0.94rem;
+  line-height: 1.72;
+  color: var(--ink-soft);
+}
+.food-desc strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.food-addr {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+.food-spot .place-link {
+  position: absolute;
+  top: 1.15rem;
+  right: 0;
+}
+.food-note {
+  margin: 2rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule-soft);
   font-size: 0.85rem;
   color: var(--ink-muted);
   text-align: center;
@@ -712,6 +805,7 @@ main {
 }
 .foot-meta a { color: var(--accent); text-decoration: none; }
 .foot-meta a:hover { text-decoration: underline; }
+.contact-link,
 .phone-link {
   display: inline-flex;
   align-items: center;
@@ -721,12 +815,14 @@ main {
   border-radius: 999px;
   transition: all 0.15s;
 }
+.contact-link:hover,
 .phone-link:hover {
   background: var(--accent);
   color: var(--bg-card) !important;
   border-color: var(--accent);
   text-decoration: none !important;
 }
+.contact-link svg,
 .phone-link svg { display: block; flex-shrink: 0; }
 .site-foot .seagull { margin-top: 1.5rem; opacity: 0.5; }
 
@@ -774,4 +870,148 @@ em { font-style: italic; }
 @page {
   size: A4;
   margin: 1.5cm;
+}
+
+/* ──────────────────────────────────────────────────────────
+   Home page (/) — 명함 1장
+   ────────────────────────────────────────────────────────── */
+body.home-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.home-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+}
+.home-hero {
+  text-align: center;
+  max-width: 36rem;
+  width: 100%;
+}
+.home-intro {
+  margin: 1.5rem auto 0;
+  max-width: 26rem;
+}
+.home-lead {
+  margin: 0;
+  font-family: var(--serif-ko);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+}
+.home-tag {
+  margin: 0.65rem 0 0;
+  font-family: var(--serif-ko);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+.home-hero .cta-row {
+  margin-top: 2rem;
+}
+.home-more {
+  margin: 1.25rem 0 0;
+  font-family: var(--serif-ko);
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+}
+.home-more a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-soft);
+  transition: color 0.15s, border-color 0.15s;
+}
+.home-more a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* CTA buttons */
+.cta-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin: 2.5rem auto 0;
+  max-width: 22rem;
+}
+@media (min-width: 560px) {
+  .cta-row {
+    flex-direction: row;
+    max-width: none;
+    justify-content: center;
+    gap: 1rem;
+  }
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 1.75rem;
+  border-radius: 3px;
+  font-family: var(--serif-ko);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: all 0.15s;
+  min-width: 11rem;
+}
+.cta-primary {
+  background: var(--ink);
+  color: var(--bg-card);
+  border: 1px solid var(--ink);
+}
+.cta-primary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.cta-secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+}
+.cta-secondary:hover {
+  background: var(--ink);
+  color: var(--bg-card);
+}
+/* Home footer */
+.home-foot {
+  border-top: 1px solid var(--rule-soft);
+  padding: 2.2rem 1.5rem 3rem;
+  text-align: center;
+  font-family: var(--sans);
+}
+.home-foot .foot-inner {
+  max-width: 36rem;
+  margin: 0 auto;
+}
+.home-foot .foot-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+.home-foot .foot-brand .brand-ko {
+  font-size: 1.05rem;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
+.home-foot .foot-brand .brand-en {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--ink-soft);
+  font-family: var(--serif-en);
+  font-style: italic;
+}
+.home-foot .legal {
+  font-size: 0.76rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+  line-height: 1.8;
+  margin: 0;
 }

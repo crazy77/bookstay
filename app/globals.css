@@ -1,0 +1,74 @@
+@import 'tailwindcss';
+
+/* ── Design tokens (크림 · 네이비 · 와인) ───────────────── */
+@theme {
+  --color-canvas: #fbf9f2;
+  --color-surface: #ffffff;
+  --color-canvas-muted: #fbf9f2;
+  --color-ink: #172a4d;
+  --color-ink-secondary: #3a4a6c;
+  --color-ink-muted: #6e7891;
+  --color-accent: #a33a3a;
+  --color-border: #d8cdaf;
+  --color-border-muted: #e8dec3;
+
+  --font-serif-ko: var(--font-noto-serif), 'Nanum Myeongjo', serif;
+  --font-serif-en: var(--font-cormorant), 'EB Garamond', Georgia, serif;
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+
+  --radius-sm: 0.25rem;
+  --container-content: 55rem;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: clip;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-base leading-relaxed text-ink antialiased;
+  }
+
+  strong {
+    @apply text-ink;
+  }
+
+  em {
+    @apply italic;
+  }
+
+  code {
+    @apply rounded-sm bg-canvas-muted px-1.5 font-sans text-[0.92em];
+  }
+
+  /* 언어 토글 */
+  html[data-lang='ko'] .toggle [lang='en'] {
+    display: none;
+  }
+  html[data-lang='en'] .toggle [lang='ko'] {
+    display: none;
+  }
+  html[data-lang='ko'] .lang-opt[data-lang-en],
+  html[data-lang='en'] .lang-opt[data-lang-ko] {
+    display: none;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 1.5cm;
+  }
+}
+
+@import './styles/haemyo.css';

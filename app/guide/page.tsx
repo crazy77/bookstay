@@ -1,0 +1,33 @@
+import type { Metadata } from 'next';
+import { GuideContent } from '@/components/guide/GuideContent';
+import { GuideFooter } from '@/components/guide/GuideFooter';
+import { GuideTopbar } from '@/components/guide/GuideTopbar';
+import { SmoothAnchor } from '@/components/guide/SmoothAnchor';
+import { SITE_URL } from '@/lib/site';
+
+export const metadata: Metadata = {
+  title: '게스트 안내',
+  description:
+    '제주 한림항 북스테이 해묘서가 — 체크인, 오시는 길, 객실, 도보맛집 안내',
+  alternates: { canonical: `${SITE_URL}/guide` },
+  openGraph: {
+    title: '해묘서가 · 게스트 안내',
+    description: '체크인, 오시는 길, 서가·객실 이용, 도보맛집까지 — 해묘서가 안내',
+    url: `${SITE_URL}/guide`,
+  },
+  twitter: {
+    title: '해묘서가 · 게스트 안내',
+    description: '해묘서가 이용 안내 — 한림 북스테이',
+  },
+};
+
+export default function GuidePage() {
+  return (
+    <>
+      <GuideTopbar />
+      <SmoothAnchor />
+      <GuideContent />
+      <GuideFooter />
+    </>
+  );
+}

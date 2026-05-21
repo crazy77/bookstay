@@ -1,0 +1,413 @@
+/* 해묘서가 — @layer components (가이드·공통 패턴, @theme 토큰 사용) */
+
+@layer components {
+  /* ── Topbar ── */
+  .topbar {
+    @apply sticky top-0 z-50 border-b border-border-muted bg-canvas/92 backdrop-blur-md;
+  }
+  .topbar-inner {
+    @apply mx-auto flex max-w-content items-center gap-2 px-4 py-2.5 sm:gap-4 sm:px-6 sm:py-3;
+  }
+  .brand {
+    @apply flex shrink-0 flex-col leading-tight text-ink no-underline;
+  }
+  .brand-ko {
+    @apply font-serif-ko text-[1.05rem] font-medium tracking-widest sm:text-[1.05rem];
+  }
+  .brand-en {
+    @apply mt-px font-serif-en text-[0.7rem] italic tracking-[0.18em] text-ink-secondary;
+  }
+  .anchor-nav {
+    @apply ml-auto flex gap-2 font-serif-ko text-[0.82rem] sm:gap-4 sm:text-[0.92rem];
+  }
+  .anchor-nav a {
+    @apply px-1 py-1.5 tracking-wide text-ink-secondary no-underline transition-colors hover:text-accent;
+  }
+  .lang-toggle {
+    @apply cursor-pointer rounded-sm border border-border bg-transparent px-2.5 py-1.5 font-sans text-[0.78rem] tracking-widest text-ink transition-colors hover:bg-canvas-muted;
+  }
+
+  @media (max-width: 480px) {
+    .anchor-nav {
+      @apply gap-1.5 text-[0.84rem];
+    }
+    .topbar-inner {
+      @apply gap-2 px-3 py-2;
+    }
+    .brand-ko {
+      @apply text-[0.95rem] tracking-wide;
+    }
+    .brand-en {
+      @apply text-[0.6rem] tracking-[0.14em];
+    }
+  }
+  @media (max-width: 380px) {
+    .brand-en {
+      @apply hidden;
+    }
+    .anchor-nav {
+      @apply gap-1.5 text-[0.84rem];
+    }
+  }
+
+  /* ── Guide main ── */
+  main#top {
+    @apply mx-auto max-w-content px-4 sm:px-6;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    @apply py-12 text-center sm:py-16;
+  }
+  .hero-logo {
+    @apply mx-auto mb-8 flex size-[120px] items-center justify-center sm:size-[150px] sm:mb-8;
+  }
+  .hero-logo .site-logo {
+    @apply block size-full object-contain;
+  }
+  .logo-fallback {
+    @apply font-serif-ko text-2xl tracking-[0.15em] text-ink;
+  }
+  .hero-title {
+    @apply mb-6 font-normal;
+  }
+  .hero-title em {
+    @apply mb-2 block font-serif-en text-[clamp(2.4rem,6vw,3.4rem)] leading-none text-ink italic;
+  }
+  .hero-title span {
+    @apply block font-serif-ko text-[clamp(0.95rem,2vw,1.05rem)] font-normal tracking-widest text-ink-secondary;
+  }
+  .hero-copy {
+    @apply mx-auto max-w-lg font-serif-ko text-[1.02rem] leading-[1.85] text-ink-secondary;
+  }
+  .hero-copy[lang='en'],
+  .hero-copy p[lang='en'] {
+    @apply font-serif-en italic;
+  }
+  .seagull {
+    @apply mx-auto mt-9 block h-auto w-[90px] opacity-85;
+  }
+
+  /* ── Card ── */
+  .card {
+    @apply relative mb-6 rounded-sm border border-border bg-surface p-6 sm:p-10;
+  }
+  .card::before,
+  .card::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--color-ink);
+    opacity: 0.25;
+  }
+  .card::before {
+    top: 8px;
+    left: 8px;
+    border-right: none;
+    border-bottom: none;
+  }
+  .card::after {
+    bottom: 8px;
+    right: 8px;
+    border-left: none;
+    border-top: none;
+  }
+
+  .card-head {
+    @apply mb-8 border-b border-border pb-5;
+  }
+  .card-head em {
+    @apply mb-1.5 block font-serif-en text-[clamp(1.7rem,3.2vw,2.1rem)] leading-tight font-medium text-ink italic;
+  }
+  .card-head span {
+    @apply font-serif-ko text-sm tracking-widest text-ink-secondary;
+  }
+
+  .card > .card-block + .card-block {
+    @apply mt-10 border-t border-border-muted pt-8;
+  }
+  .card-block.highlight {
+    @apply rounded-sm border border-dashed border-accent bg-canvas-muted p-5;
+  }
+
+  .block-head {
+    @apply mb-3.5 font-normal;
+  }
+  .block-head em {
+    @apply block font-serif-en text-xl leading-tight text-ink italic;
+  }
+  .block-head span {
+    @apply mt-0.5 inline-block font-serif-ko text-[0.78rem] tracking-[0.1em] text-ink-muted;
+  }
+  .block-head .badge {
+    @apply mt-2.5 block rounded-none bg-transparent p-0 font-serif-ko text-base font-medium tracking-wide text-accent;
+  }
+  .block-head .badge::before {
+    content: '★';
+    margin-right: 0.4rem;
+    font-style: italic;
+    font-family: var(--font-serif-en);
+  }
+
+  .block-body p {
+    @apply mb-2.5;
+  }
+  .block-body p.muted {
+    @apply text-sm text-ink-muted;
+  }
+
+  .block-list {
+    @apply mb-0 list-decimal pl-6;
+  }
+  .block-list li {
+    @apply mb-1.5 leading-relaxed;
+  }
+  .block-list.numbered li::marker {
+    @apply font-serif-en text-accent italic;
+  }
+
+  .bare-list {
+    @apply m-0 list-none p-0;
+  }
+  .bare-list li {
+    @apply relative mb-1 pl-4;
+  }
+  .bare-list li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+  .guide-rules li {
+    @apply mb-3 leading-relaxed;
+  }
+  .guide-rules li:last-child {
+    @apply mb-0;
+  }
+  .guide-rules a,
+  .foot-meta a {
+    @apply text-accent underline underline-offset-2 hover:opacity-85;
+  }
+
+  .address {
+    @apply mb-7 rounded-sm border-l-[3px] border-accent bg-canvas-muted px-4 py-3.5 font-serif-ko;
+  }
+  .address p {
+    @apply m-0;
+  }
+  .address strong {
+    @apply mr-1.5 font-serif-en font-medium text-accent italic;
+  }
+
+  .route-buttons {
+    @apply mb-8 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4;
+  }
+  .route-btn {
+    @apply relative flex flex-col gap-0.5 overflow-hidden rounded-sm bg-ink px-5 py-4 text-surface no-underline transition-[background,transform] hover:-translate-y-px hover:bg-accent;
+  }
+  .route-btn-en {
+    @apply font-serif-en text-lg tracking-wide italic;
+  }
+  .route-btn-ko {
+    @apply font-serif-ko text-[0.92rem] tracking-widest;
+  }
+  .route-btn-meta {
+    @apply mt-1 font-sans text-[0.72rem] tracking-wide opacity-70;
+  }
+  .route-btn::after {
+    content: '↗';
+    position: absolute;
+    top: 1rem;
+    right: 1.2rem;
+    font-size: 1.1rem;
+    opacity: 0.55;
+  }
+
+  .map-figure {
+    @apply m-0 overflow-hidden rounded-sm border border-border bg-canvas-muted;
+  }
+  .map-figure img {
+    @apply block h-auto w-full;
+  }
+  .map-figure.single-map {
+    @apply mx-auto max-w-[560px];
+  }
+  .map-figure.single-map img {
+    aspect-ratio: 1157 / 550;
+    object-fit: cover;
+    object-position: top;
+  }
+  @media (max-width: 600px) {
+    .map-figure.single-map img {
+      aspect-ratio: 600 / 610;
+    }
+  }
+  .map-figure figcaption {
+    @apply border-t border-border-muted bg-canvas-muted px-3.5 py-2.5 font-serif-ko text-[0.82rem] text-ink-secondary;
+  }
+
+  .callout {
+    @apply mt-6 rounded-sm border-l-[3px] border-border bg-canvas-muted px-4 py-3.5 text-[0.93rem] text-ink-secondary;
+  }
+  .callout p {
+    @apply m-0;
+  }
+  .callout p + p {
+    @apply mt-2;
+  }
+  .callout ul {
+    @apply m-0;
+  }
+
+  .wifi-grid {
+    @apply grid grid-cols-1 items-center gap-6 sm:grid-cols-[1fr_auto] sm:gap-8;
+  }
+  .wifi-info dl {
+    @apply m-0 grid grid-cols-[max-content_1fr] items-baseline gap-x-4 gap-y-1.5;
+  }
+  .wifi-info dt {
+    @apply m-0 font-serif-ko text-[0.82rem] tracking-wide text-ink-muted;
+  }
+  .wifi-info dd {
+    @apply m-0 text-base;
+  }
+  .wifi-info code {
+    @apply bg-transparent font-sans text-lg font-semibold tracking-wide text-ink;
+  }
+  .wifi-note {
+    @apply mt-3.5 text-sm text-ink-muted;
+  }
+  .wifi-qr {
+    @apply inline-block self-start rounded-sm border border-border bg-white p-1.5;
+  }
+  .wifi-qr img {
+    @apply block;
+  }
+
+  .copy-btn {
+    @apply mt-3 cursor-pointer rounded-sm border border-border bg-transparent px-3.5 py-1.5 font-sans text-[0.8rem] tracking-wide text-ink-secondary transition-colors hover:bg-canvas-muted hover:text-ink;
+  }
+  .copy-btn.copied {
+    @apply border-accent bg-accent text-surface;
+  }
+  .copy-btn.copied::after {
+    content: ' ✓';
+  }
+
+  .speaker-tip {
+    @apply mt-4 rounded-sm border-l-2 border-border bg-canvas-muted px-4 py-2.5 text-[0.88rem] text-ink-secondary;
+  }
+
+  .place-link {
+    @apply inline-flex size-[30px] shrink-0 items-center justify-center rounded-full border border-border-muted bg-transparent text-ink-secondary no-underline transition-colors hover:border-accent hover:bg-accent hover:text-surface;
+  }
+  .place-link svg {
+    @apply block;
+  }
+
+  .food-intro {
+    @apply mb-9 text-[1.02rem] leading-relaxed text-ink-secondary;
+  }
+  .food-category {
+    @apply mb-11 last:mb-0;
+  }
+  .food-cat-head {
+    @apply mb-5 border-b-2 border-accent pb-2 font-serif-ko text-lg font-semibold tracking-wide text-ink;
+  }
+  .food-cat-note {
+    @apply -mt-2 mb-5 text-[0.92rem] leading-relaxed text-ink-secondary;
+  }
+  .food-category--drive .food-cat-head {
+    @apply border-border;
+  }
+  .food-spot {
+    @apply relative border-b border-dotted border-border-muted py-5 pr-10 last:border-b-0;
+  }
+  .food-spot-head {
+    @apply mb-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2;
+  }
+  .food-spot-name {
+    @apply m-0 font-serif-ko text-[1.08rem] font-semibold leading-snug text-ink;
+  }
+  .food-walk {
+    @apply shrink-0 font-serif-en text-[0.78rem] tracking-wide text-accent italic;
+  }
+  .food-walk--far {
+    @apply text-ink-muted;
+  }
+  .food-walk--drive {
+    @apply text-ink-secondary;
+  }
+  .food-desc {
+    @apply mb-2 text-[0.94rem] leading-relaxed text-ink-secondary;
+  }
+  .food-desc strong {
+    @apply font-semibold text-ink;
+  }
+  .food-addr {
+    @apply m-0 text-[0.82rem] leading-normal text-ink-muted;
+  }
+  .food-spot .place-link {
+    @apply absolute top-4 right-0;
+  }
+  .food-note {
+    @apply mt-8 border-t border-border-muted pt-6 text-center text-sm text-ink-muted italic;
+  }
+
+  .site-foot {
+    @apply mt-8 border-t border-border px-4 py-12 pb-16 sm:px-6;
+  }
+  .foot-inner {
+    @apply mx-auto max-w-content text-center;
+  }
+  .foot-brand {
+    @apply mb-5 flex flex-col gap-0.5;
+  }
+  .foot-brand .brand-ko {
+    @apply text-xl tracking-[0.1em];
+  }
+  .foot-brand .brand-en {
+    @apply text-[0.78rem] tracking-[0.2em];
+  }
+  .foot-meta {
+    @apply font-serif-ko text-[0.92rem] leading-loose text-ink-secondary;
+  }
+  .contact-link,
+  .phone-link {
+    @apply inline-flex items-center gap-1 rounded-full border border-border-muted px-2 py-0.5 transition-colors hover:border-accent hover:bg-accent hover:text-surface hover:no-underline;
+  }
+  .site-foot .seagull {
+    @apply mt-6 opacity-50;
+  }
+
+  @media print {
+    .topbar,
+    .lang-toggle,
+    .anchor-nav,
+    .seagull {
+      display: none !important;
+    }
+    main#top {
+      @apply max-w-none p-0;
+    }
+    .card {
+      page-break-inside: avoid;
+      margin-bottom: 1cm;
+      padding: 1cm;
+      border-color: #888;
+    }
+    .card::before,
+    .card::after {
+      display: none;
+    }
+    .hero {
+      padding: 1cm 0 0.5cm;
+      page-break-after: avoid;
+    }
+    .place-link {
+      display: none;
+    }
+  }
+}
