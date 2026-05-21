@@ -15,7 +15,7 @@ export const SITE_OG_DESCRIPTION =
 
 /** OG·카카오 링크 미리보기 — 버전 올리면 캐시 갱신 */
 export const SITE_OG_IMAGE = {
-  url: '/assets/og-image.png?v=5',
+  url: '/assets/og-image.png?v=6',
   width: 1200,
   height: 630,
   alt: '해묘서가 BOOKSTAY',
