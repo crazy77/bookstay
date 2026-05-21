@@ -6,6 +6,7 @@ import { HomeBookCta } from '@/components/home/HomeBookCta';
 import { HomeHeroPhoto } from '@/components/home/HomeHeroPhoto';
 import { Seagull } from '@/components/ui/Seagull';
 import { cn } from '@/lib/cn';
+import { SITE_LEAD, SITE_NAME_LINE } from '@/lib/site';
 import { Logo } from '@/components/ui/Logo';
 
 export function HomeHero() {
@@ -24,10 +25,10 @@ export function HomeHero() {
 
       <div className="mx-auto max-w-md">
         <h1 className="font-serif-ko text-lg font-medium leading-relaxed tracking-wide text-ink md:text-xl">
-          한림항 골목 안, 책과 바다가 맞닿는 북스테이.
+          {SITE_LEAD}
         </h1>
         <p className="mt-2 font-serif-ko text-sm tracking-widest text-ink-muted">
-          해묘(海猫) · 갈매기를 부르는 다른 이름
+          {SITE_NAME_LINE}
         </p>
       </div>
 

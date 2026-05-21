@@ -34,6 +34,16 @@ Vercel · Framework Preset: **Next.js** (Install Command: `bun install`, Bun loc
 
 로고 크기: 홈 `Logo variant="home"` → `w-[6.5rem]` (한 곳만 수정)
 
+### OG / 소셜 공유 이미지
+
+`public/assets/og-image.png` (1200×630) — `logo.png` + **해묘서가 · BOOKSTAY**
+
+```bash
+bun run og:image
+```
+
+생성 후 `app/layout.tsx`의 `og-image.png?v=` 버전을 올리면 캐시 갱신됩니다.
+
 ## 구조
 
 ```

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Cormorant_Garamond, Inter, Noto_Serif_KR } from 'next/font/google';
+import { SITE_DESCRIPTION, SITE_OG_DESCRIPTION } from '@/lib/site';
 import './globals.css';
 
 const cormorant = Cormorant_Garamond({
@@ -32,18 +33,22 @@ export const metadata: Metadata = {
     default: '해묘서가 · 제주 한림항 북스테이',
     template: '%s · 해묘서가',
   },
-  description: '제주 한림항 앞 작은 책방, 해묘서가. 책과 바다와 음악만 남는 밤.',
+  description: SITE_DESCRIPTION,
   icons: {
     icon: '/assets/logo.png',
     apple: '/assets/logo.png',
   },
   openGraph: {
     siteName: '해묘서가',
+    description: SITE_OG_DESCRIPTION,
     locale: 'ko_KR',
     type: 'website',
-    images: [{ url: '/assets/og-image.png?v=2', width: 1200, height: 630 }],
+    images: [{ url: '/assets/og-image.png?v=5', width: 1200, height: 630 }],
   },
-  twitter: { card: 'summary_large_image' },
+  twitter: {
+    card: 'summary_large_image',
+    description: SITE_OG_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({

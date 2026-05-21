@@ -1,6 +1,18 @@
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? 'https://haemyo.vercel.app';
 
+/** 홈 히어로·메타 공통 한 줄 */
+export const SITE_LEAD = '한림항 골목 안, 책과 바다가 맞닿는 북스테이.';
+
+export const SITE_NAME_LINE = '해묘(海猫) · 갈매기를 부르는 다른 이름';
+
+/** 검색·SNS 메타 (책방 X, 북스테이) */
+export const SITE_DESCRIPTION =
+  '제주 한림항 골목, 책과 바다가 맞닿는 북스테이 · 해묘서가.';
+
+export const SITE_OG_DESCRIPTION =
+  '제주 한림 북스테이 해묘서가 — 갈매기를 부르는 다른 이름, 해묘(海猫).';
+
 export const NAVER_BOOK_URL =
   process.env.NEXT_PUBLIC_NAVER_BOOK_URL ??
   'https://booking.naver.com/booking/3/bizes/1573091/items/7340362';
