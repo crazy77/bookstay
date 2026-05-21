@@ -15,12 +15,7 @@ import {
   ROUTE_BTN,
   WIFI_LABELS,
 } from '@/data/guide-i18n';
-import {
-  INSTAGRAM_DM_URL,
-  KAKAO_CAR_URL,
-  KAKAO_TRANSIT_URL,
-  WIFI,
-} from '@/lib/site';
+import { KAKAO_CAR_URL, KAKAO_TRANSIT_URL, WIFI } from '@/lib/site';
 
 export function GuideContent() {
   return (
@@ -126,11 +121,9 @@ export function GuideContent() {
               <strong>Bus 102</strong> express · both directions, get off at Hallim
               transfer stop
             </li>
-            {GUIDE_ZH.transit.map((item) => (
-              <li key={item.key} lang="zh">
-                {item}
-              </li>
-            ))}
+          </ul>
+          <ul lang="zh" className="block-list toggle">
+            {GUIDE_ZH.transit}
           </ul>
         </div>
         <div className="address toggle">
@@ -205,6 +198,10 @@ export function GuideContent() {
             해묘서가에 비치된 책에는 호스트 부부의 소중한 추억이 깃들어 있습니다.
             혹시라도 집에 데려가지 말아주세요.
           </p>
+          <p lang="ko">
+            <strong>봄가을서가</strong>는 사계절 이용 가능하지만 여름엔 덥고 겨울엔
+            춥습니다. 외부 창고 공간이라 냉난방이 어려운 점 양해 부탁드립니다.
+          </p>
           <p lang="en">
             Every book on the shelves is yours to read during your stay. When you are
             finished, <strong>please return it to its place</strong> for the next guest.
@@ -212,6 +209,10 @@ export function GuideContent() {
           <p lang="en">
             These books hold precious memories for us as hosts. Please do not take any
             book home with you.
+          </p>
+          <p lang="en">
+            The <strong>Spring–Autumn room</strong> is open year-round but hot in summer
+            and cold in winter (outdoor storage space, no HVAC).
           </p>
           {GUIDE_ZH.library.map((para, i) => (
             <p key={i} lang="zh">
@@ -251,18 +252,9 @@ export function GuideContent() {
                 제주에는 돌, 바람, 여자 뿐만 아니라 온갖 벌레들도 많습니다. 주기적인
                 방역을 통해 최대한 집 안에 들어오지 못하게 막고 있으나, 작은 빈틈을
                 놓치지 않고 기어코 들어오고야마는 녀석들도 있습니다. 너그러이 양해해
-                주시되, 큰 벌레가 나타나 퇴치가 어려울 경우엔{' '}
-                <a href={INSTAGRAM_DM_URL} target="_blank" rel="noopener noreferrer">
-                  인스타그램 DM
-                </a>
-                으로 알려 주세요.
+                주시되, 큰 벌레가 나타나 퇴치가 어려울 경우엔 연락 주세요.
               </li>
               <li>대문 도어락은 자동으로 닫히지 않으니 직접 닫아 주세요.</li>
-              <li>
-                <strong>봄가을서가</strong>는 사계절 이용 가능하지만 여름엔 덥고
-                겨울엔 춥습니다. 외부 창고 공간이라 냉난방이 어려운 점 양해
-                부탁드립니다.
-              </li>
             </ul>
             <ul lang="en" className="bare-list guide-rules">
               <li>
@@ -288,18 +280,10 @@ export function GuideContent() {
               <li>Please smoke only at the ashtray beside the platform.</li>
               <li>
                 Jeju has its share of insects despite regular pest control. Please
-                understand; message us on{' '}
-                <a href={INSTAGRAM_DM_URL} target="_blank" rel="noopener noreferrer">
-                  Instagram DM
-                </a>{' '}
-                if a large one is hard to remove.
+                understand; contact us if a large bug appears and is hard to remove.
               </li>
               <li>
                 The main gate lock does not close by itself — please shut it manually.
-              </li>
-              <li>
-                The <strong>Spring–Autumn room</strong> is open year-round but hot in
-                summer and cold in winter (outdoor storage space, no HVAC).
               </li>
             </ul>
             <ul lang="zh" className="bare-list guide-rules">
@@ -311,7 +295,7 @@ export function GuideContent() {
         <div className="card-block" id="wifi">
           <BlockHead title={GUIDE_BLOCK.wifi} />
           <div className="wifi-grid">
-            <div className="wifi-info">
+            <div className="wifi-main">
               <dl>
                 <dt className="toggle">
                   <span lang="ko">{WIFI_LABELS.network.ko}</span>
@@ -326,8 +310,9 @@ export function GuideContent() {
                   <span lang="en">{WIFI_LABELS.password.en}</span>
                   <span lang="zh">{WIFI_LABELS.password.zh}</span>
                 </dt>
-                <dd>
+                <dd className="wifi-password">
                   <code>{WIFI.password}</code>
+                  <CopyButton text={WIFI.password} labels={WIFI_LABELS.copy} />
                 </dd>
               </dl>
               <p className="wifi-note toggle">
@@ -335,19 +320,13 @@ export function GuideContent() {
                 <span lang="en">{WIFI_LABELS.note.en}</span>
                 <span lang="zh">{WIFI_LABELS.note.zh}</span>
               </p>
-              <CopyButton
-                text={WIFI.password}
-                labelKo={WIFI_LABELS.copy.ko}
-                labelEn={WIFI_LABELS.copy.en}
-                labelZh={WIFI_LABELS.copy.zh}
-              />
             </div>
             <div className="wifi-qr">
               <Image
                 src={WIFI.qrUrl}
                 alt="WiFi QR"
-                width={180}
-                height={180}
+                width={88}
+                height={88}
                 unoptimized
               />
             </div>
@@ -356,7 +335,7 @@ export function GuideContent() {
 
         <div className="card-block" id="speaker">
           <BlockHead title={GUIDE_BLOCK.speaker} />
-          <ol className="block-list numbered toggle">
+          <ol className="block-list toggle">
             <li lang="ko">
               <strong>전원</strong> · 상단 우측 토글을 위로 ↑
             </li>
@@ -377,33 +356,18 @@ export function GuideContent() {
               <strong>Connect</strong> · Select <code>ACTON III</code> in your
               phone&apos;s Bluetooth settings
             </li>
-            {GUIDE_ZH.speakerSteps.map((item) => (
-              <li key={item.key} lang="zh">
-                {item}
-              </li>
-            ))}
           </ol>
-          <p className="speaker-tip toggle">
-            <span lang="ko">
-              ※ 음량은 왼쪽 노브로 조절합니다. BASS·TREBLE의 빨간 점이 12시일 때가 기본
-              음질입니다.
-            </span>
-            <span lang="en">
-              ※ Volume is the leftmost knob. Default tone is when the BASS·TREBLE red
-              dots align at 12 o&apos;clock.
-            </span>
-            <span lang="zh">{GUIDE_ZH.speakerTip}</span>
-          </p>
-          <div className="callout toggle">
+          <ol lang="zh" className="block-list toggle">
+            {GUIDE_ZH.speakerSteps}
+          </ol>
+          <div className="callout speaker-notes toggle">
             <ul lang="ko" className="bare-list">
               <li>22시 이후에는 음량 5 이하로 부탁드립니다</li>
               <li>10분 미사용 시 자동 절전 모드</li>
-              <li>사용 후에는 토글을 내려 전원을 꺼주세요</li>
             </ul>
             <ul lang="en" className="bare-list">
               <li>After 10 pm · please keep the volume at 5 or below</li>
               <li>Auto-standby kicks in after 10 minutes of inactivity</li>
-              <li>Please switch off via the toggle when finished</li>
             </ul>
             <ul lang="zh" className="bare-list">
               {GUIDE_ZH.speakerCallout}

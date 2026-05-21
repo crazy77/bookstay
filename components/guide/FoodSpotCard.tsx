@@ -1,5 +1,8 @@
+import Image from 'next/image';
 import type { ReactNode } from 'react';
+import { FOOD_SPOT_PHOTOS, type FoodSpotPhotoSlug } from '@/data/food-spot-photos';
 import type { LocaleText } from '@/lib/locale';
+import { foodSpotSlug } from '@/lib/food-spot-slug';
 
 function MapPinLink({ mapQuery }: { mapQuery: string }) {
   return (
@@ -33,6 +36,12 @@ export type FoodSpotData = {
 };
 
 export function FoodSpotCard({ spot }: { spot: FoodSpotData }) {
+  const slug = foodSpotSlug(spot.mapQuery);
+  const photo =
+    slug && slug in FOOD_SPOT_PHOTOS
+      ? FOOD_SPOT_PHOTOS[slug as FoodSpotPhotoSlug]
+      : undefined;
+
   return (
     <article className="food-spot" data-place={spot.mapQuery}>
       <header className="food-spot-head">
@@ -52,18 +61,34 @@ export function FoodSpotCard({ spot }: { spot: FoodSpotData }) {
           <MapPinLink mapQuery={spot.mapQuery} />
         </div>
       </header>
-      <div className="food-desc toggle">
-        <div lang="ko">{spot.desc.ko}</div>
-        <div lang="en">{spot.desc.en}</div>
-        <div lang="zh">{spot.desc.zh}</div>
+      <div className={`food-spot-body${photo ? ' food-spot-body--with-photo' : ''}`}>
+        {photo ? (
+          <figure className="food-spot-photo">
+            <Image
+              src={photo.src}
+              alt={spot.name.ko}
+              width={112}
+              height={112}
+              sizes="112px"
+              className="food-spot-photo__img"
+            />
+          </figure>
+        ) : null}
+        <div className="food-spot-text">
+          <div className="food-desc toggle">
+            <div lang="ko">{spot.desc.ko}</div>
+            <div lang="en">{spot.desc.en}</div>
+            <div lang="zh">{spot.desc.zh}</div>
+          </div>
+          {spot.addr ? (
+            <p className="food-addr toggle">
+              <span lang="ko">{spot.addr.ko}</span>
+              <span lang="en">{spot.addr.en}</span>
+              <span lang="zh">{spot.addr.zh}</span>
+            </p>
+          ) : null}
+        </div>
       </div>
-      {spot.addr ? (
-        <p className="food-addr toggle">
-          <span lang="ko">{spot.addr.ko}</span>
-          <span lang="en">{spot.addr.en}</span>
-          <span lang="zh">{spot.addr.zh}</span>
-        </p>
-      ) : null}
     </article>
   );
 }

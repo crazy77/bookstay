@@ -80,14 +80,31 @@
 
 ---
 
-## 구현 제안 (다음 단계)
+## asset 폴더 (2026-05-21 반영)
 
-가이드 UI에 사진을 넣을 경우:
+| 경로 | 설명 |
+|------|------|
+| `public/assets/food/{slug}.webp` | 실제 이미지 (22 slug, `lib/food-spot-slug.ts`) |
+| `data/food-photo-sources.json` | 상호·네이버 검색어·`downloadUrl`(참고용) |
+| `data/food-spot-photos.ts` | **생성됨** — 존재하는 webp만 manifest (`bun scripts/collect-food-photos.mjs`) |
+| `public/assets/food/README.md` | 호스트 허락본 import 방법 |
 
-1. `FoodSpotData`에 `image?: { src: string; alt: string; credit?: string }` 추가.
-2. `public/assets/food/`에 **허가·직촬영본만** WebP로 저장 (`next/image` 권장).
-3. 우선순위: **사형제·등대 아구찜·마이크로 하비타트·부아르** 등 카피가 긴 곳 4~6곳만 썸네일.
-4. 사진 없는 곳은 현재처럼 텍스트만 유지.
+**2026-05-21 수집:** `bun scripts/download-from-research.mjs` — 조사 문서·`data/food-links-from-research.json` 링크만 사용 (**21/21** `public/assets/food/{slug}.webp`).
+
+| 출처 | slug 예시 |
+|------|-----------|
+| 다이닝코드 rid | `boyoung`, `halla-butcher`, `deungdae-agujjim`, `hallim-kalguksu` |
+| 비짓제주 | `sahyungje`, `hallim-kalguksu` |
+| Fun제주 | `vitamin-guksu` |
+| 블로그(영림) | `yeongrim-pork` |
+| Polle | `micro-habitat` |
+| 네이버 통합검색 place ID + 리뷰 사진 | 그 외 한림 맛집 대부분 |
+
+지도 타일·`map.naver.com` 검색 스크래핑은 사용하지 않음. 호스트 허락본으로 교체 시 같은 파일명으로 덮어쓰면 됨.
+
+```bash
+bun scripts/collect-food-photos.mjs --import ./사진.jpg yeongrim-pork
+```
 
 ---
 

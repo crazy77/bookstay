@@ -1,0 +1,128 @@
+[
+  {
+    "slug": "micro-habitat",
+    "nameKo": "마이크로 하비타트",
+    "pageUrl": "https://polle.com/place/54ZjDi/%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%20%ED%95%98%EB%B9%84%ED%83%80%ED%8A%B8",
+    "naverQuery": "마이크로 하비타트 한수풀로 11"
+  },
+  {
+    "slug": "yeoreobun-bakery",
+    "nameKo": "여러분 제과점",
+    "naverPlaceId": "1905514099",
+    "naverQuery": "여러분 제과점 한림 크로플",
+    "naverImageSkip": 2
+  },
+  {
+    "slug": "heedo",
+    "nameKo": "희도",
+    "naverQuery": "희도 카페 한림로14길 3"
+  },
+  {
+    "slug": "deungdae-agujjim",
+    "nameKo": "등대 아구찜",
+    "naverPlaceId": "1115697217",
+    "diningcodeRid": "C0NRJgSWYJIX",
+    "pageUrl": "https://keriai.com/654",
+    "fallbackDiningcodeRid": "C0NRJgSWYJIX"
+  },
+  {
+    "slug": "hallim-kalguksu",
+    "nameKo": "한림칼국수",
+    "visitJejuId": "CNTS_000000000018374",
+    "diningcodeRid": "Q5b2vRbOoC4I"
+  },
+  {
+    "slug": "hallim-jwichi",
+    "nameKo": "한림쥐치전문점",
+    "naverPlaceId": "1068923648",
+    "naverQuery": "한림쥐치전문점 한림로 698"
+  },
+  {
+    "slug": "sahyungje",
+    "nameKo": "사형제 횟집",
+    "visitJejuId": "CNTS_000000000020819"
+  },
+  {
+    "slug": "hallim-suhyup",
+    "nameKo": "한림 수협",
+    "naverPlaceId": "12914705",
+    "naverQuery": "한림수협 한림해안로 141"
+  },
+  {
+    "slug": "boyoung",
+    "nameKo": "보영",
+    "diningcodeRid": "BDvs7M612bko"
+  },
+  {
+    "slug": "sanji-haejangguk",
+    "nameKo": "산지해장국",
+    "naverPlaceId": "1873022444",
+    "naverQuery": "산지해장국 한림로3길 8"
+  },
+  {
+    "slug": "iseo-sundae",
+    "nameKo": "이서순대국밥",
+    "naverPlaceId": "37470399",
+    "naverQuery": "이서순대국밥 한림해안로 162"
+  },
+  {
+    "slug": "boribap",
+    "nameKo": "보리밥",
+    "naverPlaceId": "1804273257",
+    "naverQuery": "보리밥 한림 비양도",
+    "naverImageSkip": 4
+  },
+  {
+    "slug": "halla-butcher",
+    "nameKo": "한라축산정육식당",
+    "diningcodeRid": "sSg2gs69dlQR"
+  },
+  {
+    "slug": "yeongrim-pork",
+    "nameKo": "영림흑돼지가든",
+    "blogUrl": "https://talentedjejuboy.tistory.com/40"
+  },
+  {
+    "slug": "ssangdungi-guksu",
+    "nameKo": "쌍둥이 국수",
+    "naverPlaceId": "2041328177",
+    "naverQuery": "쌍둥이 국수 한림로19길 4"
+  },
+  {
+    "slug": "vitamin-guksu",
+    "nameKo": "비타민 국수",
+    "naverPlaceId": "16863184",
+    "funjejuUrl": "https://funjeju.com/bbs/board.php?bo_table=food&wr_id=179",
+    "naverQuery": "비타민국수 한림로 661"
+  },
+  {
+    "slug": "chicken-beer-today",
+    "nameKo": "오늘도 치킨과 맥주가 좋다",
+    "naverPlaceId": "1476145197",
+    "naverQuery": "오늘도 치킨과 맥주가 좋다 사가길 22"
+  },
+  {
+    "slug": "jungdok-chicken",
+    "nameKo": "중독불닭",
+    "naverPlaceId": "16859860",
+    "naverQuery": "중독불닭 한림로 684"
+  },
+  {
+    "slug": "nammon-bbq",
+    "nameKo": "남문숯불바베큐&치킨",
+    "naverPlaceId": "38583676",
+    "naverQuery": "남문숯불바베큐 한림"
+  },
+  {
+    "slug": "buar-wine",
+    "nameKo": "부아르 와인상점",
+    "naverPlaceId": "1016575878",
+    "naverQuery": "부아르 와인상점 애월"
+  },
+  {
+    "slug": "giyeong-bottle",
+    "nameKo": "기영상회",
+    "naverPlaceId": "1826552959",
+    "naverQuery": "기영상회 한림로 345"
+  }
+]

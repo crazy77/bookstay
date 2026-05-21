@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useEffect, useId, useState } from 'react';
 import { LangToggle } from '@/components/ui/LangToggle';
-import { ThemePicker } from '@/components/ui/ThemePicker';
 import { GUIDE_NAV } from '@/data/guide-i18n';
 
 function MenuIcon({ open }: { open: boolean }) {
@@ -69,7 +68,6 @@ export function GuideTopbar() {
         </nav>
 
         <div className="topbar-actions">
-          <ThemePicker />
           <LangToggle />
           <button
             type="button"

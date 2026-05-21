@@ -242,10 +242,6 @@
   .block-list li {
     @apply mb-1.5 leading-relaxed;
   }
-  .block-list.numbered li::marker {
-    @apply font-serif-en text-accent italic;
-  }
-
   .bare-list {
     @apply m-0 list-none p-0;
   }
@@ -341,42 +337,46 @@
   }
 
   .wifi-grid {
-    @apply grid grid-cols-1 items-center gap-6 sm:grid-cols-[1fr_auto] sm:gap-8;
+    @apply grid items-start gap-3;
+    grid-template-columns: 1fr auto;
   }
-  .wifi-info dl {
-    @apply m-0 grid grid-cols-[max-content_1fr] items-baseline gap-x-4 gap-y-1.5;
+  .wifi-main {
+    @apply min-w-0;
   }
-  .wifi-info dt {
+  .wifi-main dl {
+    @apply m-0 grid grid-cols-[max-content_1fr] items-baseline gap-x-3 gap-y-1.5;
+  }
+  .wifi-main dt {
     @apply m-0 font-serif-ko text-[0.82rem] tracking-wide text-ink-muted;
   }
-  .wifi-info dd {
+  .wifi-main dd {
     @apply m-0 text-base;
   }
-  .wifi-info code {
-    @apply bg-transparent font-sans text-lg font-semibold tracking-wide text-ink;
+  .wifi-password {
+    @apply flex flex-wrap items-center gap-1;
+  }
+  .wifi-main code {
+    @apply bg-transparent font-sans text-base font-semibold tracking-wide text-ink sm:text-lg;
   }
   .wifi-note {
-    @apply mt-3.5 text-sm text-ink-muted;
+    @apply mt-2.5 text-sm text-ink-muted;
   }
   .wifi-qr {
-    @apply inline-block self-start rounded-sm border border-border bg-white p-1.5;
+    @apply shrink-0 self-start rounded-sm border border-border bg-white p-1;
   }
   .wifi-qr img {
-    @apply block;
+    @apply block h-[88px] w-[88px];
   }
 
-  .copy-btn {
-    @apply mt-3 cursor-pointer rounded-sm border border-border bg-transparent px-3.5 py-1.5 font-sans text-[0.8rem] tracking-wide text-ink-secondary transition-colors hover:bg-canvas-muted hover:text-ink;
+  .copy-btn--icon {
+    @apply inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-sm border border-border-muted bg-transparent text-ink-secondary transition-colors hover:border-accent hover:bg-canvas-muted hover:text-accent;
   }
-  .copy-btn.copied {
+  .copy-btn--icon.copied {
     @apply border-accent bg-accent text-surface;
   }
-  .copy-btn.copied::after {
-    content: ' ✓';
-  }
 
-  .speaker-tip {
-    @apply mt-4 rounded-sm border-l-2 border-border bg-canvas-muted px-4 py-2.5 text-[0.88rem] text-ink-secondary;
+  .speaker-notes ul {
+    @apply m-0;
   }
 
   .place-link {
@@ -405,7 +405,23 @@
     @apply border-b border-dotted border-border-muted py-5 last:border-b-0;
   }
   .food-spot-head {
-    @apply mb-2 flex items-start justify-between gap-3;
+    @apply mb-2.5 flex items-start justify-between gap-3;
+  }
+  .food-spot-body {
+    @apply min-w-0;
+  }
+  .food-spot-body--with-photo {
+    @apply flex items-start gap-3 sm:gap-3.5;
+  }
+  .food-spot-photo {
+    @apply m-0 w-[5.25rem] shrink-0 overflow-hidden rounded-sm border border-border-muted bg-canvas-muted sm:w-[7rem];
+  }
+  .food-spot-photo__img {
+    @apply block h-auto w-full object-cover;
+    aspect-ratio: 1;
+  }
+  .food-spot-text {
+    @apply min-w-0 flex-1;
   }
   .food-spot-meta {
     @apply flex shrink-0 items-center gap-2.5;
@@ -423,7 +439,7 @@
     @apply text-ink-secondary;
   }
   .food-desc {
-    @apply mb-2 text-[0.94rem] leading-relaxed text-ink-secondary;
+    @apply mb-1.5 text-[0.94rem] leading-relaxed text-ink-secondary;
   }
   .food-desc strong {
     @apply font-semibold text-ink;
@@ -453,21 +469,20 @@
   .foot-meta {
     @apply font-serif-ko text-[0.92rem] leading-loose text-ink-secondary;
   }
+  .foot-theme {
+    @apply mt-6 flex justify-center;
+  }
   .contact-link,
   .phone-link {
     @apply inline-flex items-center gap-1 rounded-full border border-border-muted px-2 py-0.5 transition-colors hover:border-accent hover:bg-accent hover:text-surface hover:no-underline;
   }
-  .site-foot .seagull {
-    @apply mt-6 opacity-50;
-  }
-
   @media print {
     .topbar,
     .lang-toggle,
     .anchor-nav--desktop,
     .anchor-nav--mobile,
     .menu-toggle,
-    .seagull {
+    .theme-picker {
       display: none !important;
     }
     main#top {

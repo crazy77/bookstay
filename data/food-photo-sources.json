@@ -1,0 +1,191 @@
+[
+  {
+    "slug": "micro-habitat",
+    "mapQuery": "제주 한림 마이크로 하비타트",
+    "nameKo": "마이크로 하비타트",
+    "naverSearch": "마이크로 하비타트 한림",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "호스트 허락·촬영 → micro-habitat.webp"
+  },
+  {
+    "slug": "yeoreobun-bakery",
+    "mapQuery": "제주 한림 여러분 제과점",
+    "nameKo": "여러분 제과점",
+    "naverSearch": "여러분 제과점 한림",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "호스트 허락·촬영"
+  },
+  {
+    "slug": "heedo",
+    "mapQuery": "제주 한림 희도 카페",
+    "nameKo": "희도",
+    "naverSearch": "희도 카페 한림",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "호스트 허락·촬영"
+  },
+  {
+    "slug": "deungdae-agujjim",
+    "mapQuery": "제주 한림 등대 아구찜",
+    "nameKo": "등대 아구찜",
+    "naverSearch": "등대아구찜 한림",
+    "downloadUrl": "https://d12zq4w4guyljn.cloudfront.net/750_750_20240708213651_photo1_382d7715fd84.webp",
+    "credit": "다이닝코드(참고) — 업체 허락본으로 교체",
+    "note": "rid=C0NRJgSWYJIX"
+  },
+  {
+    "slug": "hallim-kalguksu",
+    "mapQuery": "제주 한림칼국수",
+    "nameKo": "한림칼국수",
+    "naverSearch": "한림칼국수",
+    "downloadUrl": "https://api.cdn.visitjeju.net/photomng/imgpath/202201/10/3db8b2d3-d55d-4ef2-a8c6-dd14a757906b.webp",
+    "credit": "비짓제주(참고) — 허락 확인 후 교체",
+    "note": "CNTS_000000000018374"
+  },
+  {
+    "slug": "hallim-jwichi",
+    "mapQuery": "제주 한림쥐치전문점",
+    "nameKo": "한림쥐치전문점",
+    "naverSearch": "한림쥐치전문점",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "호스트 허락·촬영"
+  },
+  {
+    "slug": "sahyungje",
+    "mapQuery": "제주 한림 사형제 횟집",
+    "nameKo": "사형제 횟집",
+    "naverSearch": "사형제 횟집 한림",
+    "downloadUrl": "https://api.cdn.visitjeju.net/photomng/imgpath/202110/26/5aa15aa5-fffc-4058-a5ad-f16346a17e03.webp",
+    "credit": "비짓제주(참고) — 허락 확인 후 교체",
+    "note": "CNTS_000000000020819"
+  },
+  {
+    "slug": "hallim-suhyup",
+    "mapQuery": "제주 한림 수협",
+    "nameKo": "한림 수협",
+    "naverSearch": "한림수협",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "호스트 허락·촬영"
+  },
+  {
+    "slug": "boyoung",
+    "mapQuery": "제주 한림 보영 중국집",
+    "nameKo": "보영",
+    "naverSearch": "보영 중국집 한림",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "호스트 허락·촬영"
+  },
+  {
+    "slug": "sanji-haejangguk",
+    "mapQuery": "제주 한림 산지해장국",
+    "nameKo": "산지해장국",
+    "naverSearch": "산지해장국 한림",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "호스트 허락·촬영"
+  },
+  {
+    "slug": "iseo-sundae",
+    "mapQuery": "제주 한림 이서순대국밥",
+    "nameKo": "이서순대국밥",
+    "naverSearch": "이서순대국밥 한림",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "호스트 허락·촬영"
+  },
+  {
+    "slug": "boribap",
+    "mapQuery": "제주 한림 보리밥",
+    "nameKo": "보리밥",
+    "naverSearch": "보리밥 한림해안로",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "호스트 허락·촬영"
+  },
+  {
+    "slug": "halla-butcher",
+    "mapQuery": "제주 한림 한라축산정육식당",
+    "nameKo": "한라축산정육식당",
+    "naverSearch": "한라축산정육식당 한림",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "호스트 허락·촬영"
+  },
+  {
+    "slug": "yeongrim-pork",
+    "mapQuery": "제주 한림 영림흑돼지가든",
+    "nameKo": "영림흑돼지가든",
+    "naverSearch": "영림흑돼지가든 한림",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "호스트 허락·촬영"
+  },
+  {
+    "slug": "ssangdungi-guksu",
+    "mapQuery": "제주 한림 쌍둥이 국수",
+    "nameKo": "쌍둥이 국수",
+    "naverSearch": "쌍둥이 국수 한림",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "호스트 허락·촬영"
+  },
+  {
+    "slug": "vitamin-guksu",
+    "mapQuery": "제주 한림 비타민 국수",
+    "nameKo": "비타민 국수",
+    "naverSearch": "비타민국수 한림",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "네이버 place/16863184 — 호스트 허락본"
+  },
+  {
+    "slug": "chicken-beer-today",
+    "mapQuery": "제주 한림 오늘도 치킨과 맥주가 좋다",
+    "nameKo": "오늘도 치킨과 맥주가 좋다",
+    "naverSearch": "오늘도 치킨과 맥주가 좋다 한림",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "호스트 허락·촬영"
+  },
+  {
+    "slug": "jungdok-chicken",
+    "mapQuery": "제주 한림 중독불닭",
+    "nameKo": "중독불닭",
+    "naverSearch": "중독불닭 한림",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "호스트 허락·촬영"
+  },
+  {
+    "slug": "nammon-bbq",
+    "mapQuery": "제주 한림 남문숯불바베큐 치킨",
+    "nameKo": "남문숯불바베큐&치킨",
+    "naverSearch": "남문숯불 한림",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "호스트 허락·촬영"
+  },
+  {
+    "slug": "buar-wine",
+    "mapQuery": "제주 애월 부아르 와인상점",
+    "nameKo": "부아르 와인상점",
+    "naverSearch": "부아르 와인상점",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "voirstore — 대표 허락 후"
+  },
+  {
+    "slug": "giyeong-bottle",
+    "mapQuery": "제주 한림 기영상회",
+    "nameKo": "기영상회",
+    "naverSearch": "기영상회 협재",
+    "downloadUrl": null,
+    "credit": null,
+    "note": "호스트 허락·촬영"
+  }
+]

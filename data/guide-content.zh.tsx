@@ -62,6 +62,10 @@ export const GUIDE_ZH = {
     <>
       书斋里的书承载着房东夫妇珍贵的回忆，请勿带走。
     </>,
+    <>
+      <strong>春秋书斋</strong>{' '}
+      全年开放，但夏季较热、冬季较冷，为室外仓储空间，无法提供冷暖空调，敬请谅解。
+    </>,
   ] satisfies ReactNode[],
 
   room: [
@@ -82,17 +86,9 @@ export const GUIDE_ZH = {
     </li>,
     <li key="5">请在平台旁设置的烟灰缸处吸烟。</li>,
     <li key="6">
-      济州不仅有石头、风和海女，还有各种小虫。我们定期消杀，但难免有漏网之鱼。敬请谅解；若出现大型昆虫且难以驱除，请通过{' '}
-      <a href={INSTAGRAM_DM_URL} target="_blank" rel="noopener noreferrer">
-        Instagram 私信
-      </a>{' '}
-      告知我们。
+      济州不仅有石头、风和海女，还有各种小虫。我们定期消杀，但难免有漏网之鱼。敬请谅解；若出现大型昆虫且难以驱除，请联系我们。
     </li>,
     <li key="7">大门门锁不会自动关严，请自行关上。</li>,
-    <li key="8">
-      <strong>春秋书斋</strong>{' '}
-      全年开放，但夏季较热、冬季较冷，为室外仓储空间，无法提供冷暖空调，敬请谅解。
-    </li>,
   ] satisfies ReactNode[],
 
   wifiNote: '用相机扫描二维码即可自动连接。',
@@ -109,16 +105,9 @@ export const GUIDE_ZH = {
     </li>,
   ] satisfies ReactNode[],
 
-  speakerTip: (
-    <>
-      ※ 左侧旋钮调节音量。BASS·TREBLE 红色刻度点在 12 点方向时为默认音质。
-    </>
-  ),
-
   speakerCallout: [
     <li key="1">晚10点后请将音量调至 5 以下</li>,
     <li key="2">闲置 10 分钟后自动进入待机</li>,
-    <li key="3">使用完毕请将拨钮拨下关闭电源</li>,
   ] satisfies ReactNode[],
 
   footerMeta: (
@@ -133,7 +122,7 @@ export const GUIDE_ZH = {
         @bookstay_haemyo DM
       </a>
       <br />
-      退房 · <em>上午11点前</em>
+      退房 · <em>上午11点</em>
       <br />
       如有疑问，请随时通过 Instagram 私信联系我们。
     </>
@@ -144,8 +133,6 @@ export const GUIDE_ZH_STRINGS = {
   heroTitle: '欢迎光临海猫书斋',
   parking: '步行约1分钟处有公共停车场可供使用。若路边有空位，也可停于路边。',
   wifiNote: '用相机扫描二维码即可自动连接。',
-  speakerTip:
-    '※ 左侧旋钮调节音量。BASS·TREBLE 红色刻度点在 12 点方向时为默认音质。',
   routeCallout:
     '※ 大林1街是狭窄巷弄。从翰林路看到大林1街路牌后进入，沿巷弄慢行至 1-1 号，即可看到海猫书斋大门。',
   address: '济州特别自治道济州市翰林邑大林1街 1-1',
@@ -154,7 +141,7 @@ export const GUIDE_ZH_STRINGS = {
   instagramDm: 'Instagram 私信',
   footerContact: '咨询',
   footerCheckout: '退房',
-  footerCheckoutTime: '上午11点前',
+  footerCheckoutTime: '上午11点',
   footerLine2: '如有疑问，请随时通过 Instagram 私信联系我们。',
   checkin: [
     '入住时间为下午3点，退房时间为上午11点。',
@@ -169,10 +156,10 @@ export const GUIDE_ZH_STRINGS = {
   library: [
     '书架上所有书籍均可自由阅读。阅后请放回原位，方便下一位客人。',
     '书斋里的书承载着房东夫妇珍贵的回忆，请勿带走。',
+    '春秋书斋全年开放，但夏季较热、冬季较冷，为室外仓储空间，无法提供冷暖空调，敬请谅解。',
   ],
   speakerCallout: [
     '晚10点后请将音量调至 5 以下',
     '闲置 10 分钟后自动进入待机',
-    '使用完毕请将拨钮拨下关闭电源',
   ],
 } as const;
