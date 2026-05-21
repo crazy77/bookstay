@@ -26,9 +26,9 @@ export function HomeHero() {
       <HomeHeroPhoto onPhotoReady={setHasHeroPhoto} />
 
       <div className="mx-auto mt-5 max-w-md">
-        <h1 className="font-serif-ko text-lg font-medium leading-relaxed tracking-wide text-ink md:text-xl">
+        {/* <h1 className="font-serif-ko text-lg font-medium leading-relaxed tracking-wide text-ink md:text-xl">
           {SITE_LEAD}
-        </h1>
+        </h1> */}
         <p className="mt-2 font-serif-ko text-sm tracking-widest text-ink-muted">
           {SITE_NAME_LINE}
         </p>
