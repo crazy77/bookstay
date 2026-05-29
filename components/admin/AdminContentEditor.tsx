@@ -5,6 +5,7 @@ import type { Session } from '@supabase/supabase-js';
 import LinkExtension from '@tiptap/extension-link';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import { AdminHeader, AdminMenuButton } from '@/components/admin/AdminHeader';
 import type { ContentInputType } from '@/data/site-content';
 import { getSupabaseBrowser } from '@/lib/supabase';
 
@@ -333,49 +334,27 @@ export function AdminContentEditor() {
 
   return (
     <AdminShell message={message}>
-      <header className="sticky top-0 z-20 border-b border-[#d8d0c1] bg-[#f7f3ea]/95 px-5 py-3 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3">
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p className="text-xs uppercase tracking-[0.18em] text-[#746c60]">
-              bookstay admin
-            </p>
-            <h1 className="mt-1 text-xl font-semibold">콘텐츠 관리</h1>
-            <p className="mt-1 text-xs text-[#746c60]">
-              변경 {dirtyEntries.length}개 · {session.user.email}
-            </p>
-          </div>
-          <div className="flex flex-wrap items-center gap-2">
+      <AdminHeader
+        title="콘텐츠 관리"
+        status={`변경 ${dirtyEntries.length}개 · ${session.user.email}`}
+        active="content"
+        primaryLabel={`저장 ${dirtyEntries.length}`}
+        primaryDisabled={isSaving || dirtyEntries.length === 0}
+        onPrimary={() => saveEntries(dirtyEntries)}
+        menuItems={
+          <>
             <a
-              className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm"
-              href="/admin/food"
-            >
-              맛집 관리
-            </a>
-            <a
-              className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm"
+              className="rounded px-3 py-2 text-sm hover:bg-[#f1eadf]"
               href="/guide"
               target="_blank"
               rel="noreferrer"
             >
               사이트 보기
             </a>
-            <details className="relative">
-              <summary className="list-none rounded-md border border-[#bdb3a2] px-3 py-2 text-sm marker:hidden">
-                더보기
-              </summary>
-              <div className="absolute right-0 mt-2 flex min-w-40 flex-col gap-1 rounded-md border border-[#d8d0c1] bg-white p-2 shadow-lg">
-            <button
-                  className="rounded px-3 py-2 text-left text-sm hover:bg-[#f1eadf] disabled:opacity-50"
-              type="button"
-              onClick={seedDefaults}
-              disabled={isSaving}
-            >
+            <AdminMenuButton onClick={seedDefaults} disabled={isSaving}>
               기본값 저장
-            </button>
-            <button
-                  className="rounded px-3 py-2 text-left text-sm hover:bg-[#f1eadf] disabled:opacity-50"
-              type="button"
+            </AdminMenuButton>
+            <AdminMenuButton
               onClick={() => {
                 setDrafts(originals);
                 setMessage('변경 사항을 취소했습니다.');
@@ -383,78 +362,52 @@ export function AdminContentEditor() {
               disabled={isSaving || dirtyEntries.length === 0}
             >
               변경 취소
-            </button>
-            <button
-                  className="rounded px-3 py-2 text-left text-sm hover:bg-[#f1eadf]"
-              type="button"
-              onClick={signOut}
-            >
-              로그아웃
-            </button>
-              </div>
-            </details>
-            <button
-              className="rounded-md bg-[#2f4f46] px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
-              type="button"
-              onClick={() => saveEntries(dirtyEntries)}
-              disabled={isSaving || dirtyEntries.length === 0}
-            >
-              변경 {dirtyEntries.length}개 저장
-            </button>
-          </div>
-        </div>
-
-          <div className="grid gap-3 rounded-lg border border-[#d8d0c1] bg-white p-3 lg:grid-cols-[minmax(14rem,20rem)_1fr_auto] lg:items-center">
-            <label className="block text-sm font-medium">
-              검색
+            </AdminMenuButton>
+            <AdminMenuButton onClick={signOut}>로그아웃</AdminMenuButton>
+          </>
+        }
+      >
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-2 md:grid-cols-[minmax(12rem,18rem)_1fr_auto] md:items-center">
+          <label className="block min-w-0">
+            <span className="sr-only">검색</span>
               <input
-                className="mt-1 w-full rounded-md border border-[#d8d0c1] px-3 py-2 text-sm outline-none focus:border-[#2f4f46]"
+              className="h-9 w-full rounded-md border border-[#d8d0c1] px-3 text-sm outline-none focus:border-[#2f4f46]"
                 value={query}
-                placeholder="문구명 또는 key"
+              placeholder="검색"
                 onChange={(event) => setQuery(event.target.value)}
               />
             </label>
 
-            <div>
-              <p className="mb-1 text-sm font-medium">섹션</p>
-              <div className="flex flex-wrap gap-1">
-                {categories.map((category) => (
-                  <button
-                    key={category}
-                    className={`rounded-md px-3 py-2 text-sm ${
-                      activeCategory === category
-                        ? 'bg-[#2f4f46] text-white'
-                        : 'text-[#4b443b] hover:bg-[#f1eadf]'
-                    }`}
-                    type="button"
-                    onClick={() => setActiveCategory(category)}
-                  >
-                    {category === 'all' ? '전체' : CATEGORY_LABELS[category] ?? category}
-                  </button>
-                ))}
-              </div>
-            </div>
+          <select
+            className="h-9 min-w-24 rounded-md border border-[#d8d0c1] bg-white px-2 text-sm outline-none focus:border-[#2f4f46] md:min-w-36"
+            value={activeCategory}
+            onChange={(event) => setActiveCategory(event.target.value)}
+          >
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category === 'all' ? '전체' : CATEGORY_LABELS[category] ?? category}
+              </option>
+            ))}
+          </select>
 
-            <div>
-              <p className="mb-1 text-sm font-medium">편집 언어</p>
-              <div className="flex rounded-md border border-[#bdb3a2] bg-[#f7f3ea] p-1">
-                {LOCALES.map(({ key, label }) => (
+          <div className="col-span-2 flex rounded-md border border-[#bdb3a2] bg-[#f7f3ea] p-0.5 md:col-span-1">
+            {LOCALES.map(({ key, label }) => (
                   <button
                     key={key}
-                    className={`rounded px-3 py-1.5 text-sm ${
+                aria-label={label}
+                title={label}
+                className={`h-8 flex-1 rounded px-2 text-sm md:flex-none ${
                       activeLocale === key ? 'bg-white shadow-sm' : 'text-[#746c60]'
                     }`}
                     type="button"
                     onClick={() => setActiveLocale(key)}
                   >
-                    {label}
+                {key === 'ko' ? '한' : key === 'en' ? 'E' : '中'}
                   </button>
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-      </header>
+      </AdminHeader>
 
       <main className="mx-auto max-w-7xl px-5 py-6">
           <div className="space-y-4">
