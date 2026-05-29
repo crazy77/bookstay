@@ -1,16 +1,16 @@
 import { Button } from '@/components/ui/button';
 import { NaverBookLabel } from '@/components/ui/NaverBookLabel';
-import { NAVER_BOOK_URL } from '@/lib/site';
 
 type HomeBookCtaProps = {
+  href: string;
   className?: string;
   fullWidth?: boolean;
 };
 
-export function HomeBookCta({ className, fullWidth = true }: HomeBookCtaProps) {
+export function HomeBookCta({ href, className, fullWidth = true }: HomeBookCtaProps) {
   return (
     <Button
-      href={NAVER_BOOK_URL}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       fullWidth={fullWidth}

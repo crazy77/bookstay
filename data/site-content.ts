@@ -46,6 +46,17 @@ export const DEFAULT_CONTENT_ENTRIES = [
     localeValues: { ko: '이용 안내', en: 'Guest guide', zh: '入住指南' },
   },
   {
+    key: 'home.naverBookUrl',
+    category: 'home',
+    label: '홈 · 네이버 예약 URL',
+    inputType: 'text',
+    localeValues: {
+      ko: 'https://booking.naver.com/booking/3/bizes/1573091/items/7340362',
+      en: 'https://booking.naver.com/booking/3/bizes/1573091/items/7340362',
+      zh: 'https://booking.naver.com/booking/3/bizes/1573091/items/7340362',
+    },
+  },
+  {
     key: 'home.footerBusinessNumber',
     category: 'home',
     label: '홈 · 사업자등록번호',

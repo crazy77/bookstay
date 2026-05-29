@@ -11,9 +11,11 @@ import type { LocaleText } from '@/lib/locale';
 export function HomeHero({
   siteNameLine,
   guideLink,
+  naverBookUrl,
 }: {
   siteNameLine: LocaleText;
   guideLink: string;
+  naverBookUrl: string;
 }) {
   const [hasHeroPhoto, setHasHeroPhoto] = useState(false);
 
@@ -40,7 +42,7 @@ export function HomeHero({
       </div>
 
       <div className="mx-auto mt-5 w-full max-w-xs">
-        <HomeBookCta />
+        <HomeBookCta href={naverBookUrl} />
       </div>
 
       <p className="mt-4 font-serif-ko text-sm tracking-widest">

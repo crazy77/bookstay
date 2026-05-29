@@ -5,10 +5,15 @@ import { INSTAGRAM_DM_URL } from '@/lib/site';
 export function HomePage({ content }: { content: ContentMap }) {
   const siteNameLine = contentValue<string>(content, 'home.siteNameLine');
   const guideLink = contentValue<string>(content, 'home.guideLink');
+  const naverBookUrl = contentValue<string>(content, 'home.naverBookUrl');
 
   return (
     <main className="flex flex-1 items-start justify-center px-5 pt-7 pb-6 md:items-center md:px-6 md:py-12">
-      <HomeHero siteNameLine={siteNameLine} guideLink={guideLink.ko} />
+      <HomeHero
+        siteNameLine={siteNameLine}
+        guideLink={guideLink.ko}
+        naverBookUrl={naverBookUrl.ko}
+      />
     </main>
   );
 }

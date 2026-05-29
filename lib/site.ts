@@ -21,10 +21,6 @@ export const SITE_OG_IMAGE = {
   alt: '해묘서가 BOOKSTAY',
 } as const;
 
-export const NAVER_BOOK_URL =
-  process.env.NEXT_PUBLIC_NAVER_BOOK_URL ??
-  'https://booking.naver.com/booking/3/bizes/1573091/items/7340362';
-
 export const INSTAGRAM_URL = 'https://www.instagram.com/bookstay_haemyo';
 export const INSTAGRAM_DM_URL = 'https://ig.me/m/bookstay_haemyo';
 
