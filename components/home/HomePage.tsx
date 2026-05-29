@@ -1,11 +1,13 @@
 import { HomeHero } from '@/components/home/HomeHero';
 import { contentValue, type ContentMap } from '@/data/site-content';
+import type { HomeHeroSlide } from '@/data/home';
 import { INSTAGRAM_DM_URL } from '@/lib/site';
 
 export function HomePage({ content }: { content: ContentMap }) {
   const siteNameLine = contentValue<string>(content, 'home.siteNameLine');
   const guideLink = contentValue<string>(content, 'home.guideLink');
   const naverBookUrl = contentValue<string>(content, 'home.naverBookUrl');
+  const heroSlides = getHomeHeroSlides(content);
 
   return (
     <main className="flex flex-1 items-start justify-center px-5 pt-7 pb-6 md:items-center md:px-6 md:py-12">
@@ -13,9 +15,24 @@ export function HomePage({ content }: { content: ContentMap }) {
         siteNameLine={siteNameLine}
         guideLink={guideLink.ko}
         naverBookUrl={naverBookUrl.ko}
+        heroSlides={heroSlides}
       />
     </main>
   );
+}
+
+function getHomeHeroSlides(content: ContentMap): HomeHeroSlide[] {
+  return [1, 2]
+    .map((index) => ({
+      src: contentValue<string>(content, `home.heroSlide${index}.src`).ko.trim(),
+      caption: contentValue<string>(content, `home.heroSlide${index}.caption`).ko,
+      alt: contentValue<string>(content, `home.heroSlide${index}.alt`).ko,
+      objectPosition: contentValue<string>(
+        content,
+        `home.heroSlide${index}.objectPosition`,
+      ).ko,
+    }))
+    .filter((slide) => slide.src);
 }
 
 export function HomeFooter({ content }: { content: ContentMap }) {

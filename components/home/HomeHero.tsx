@@ -6,16 +6,19 @@ import { HomeBookCta } from '@/components/home/HomeBookCta';
 import { HomeHeroPhoto } from '@/components/home/HomeHeroPhoto';
 import { cn } from '@/lib/cn';
 import { Logo } from '@/components/ui/Logo';
+import type { HomeHeroSlide } from '@/data/home';
 import type { LocaleText } from '@/lib/locale';
 
 export function HomeHero({
   siteNameLine,
   guideLink,
   naverBookUrl,
+  heroSlides,
 }: {
   siteNameLine: LocaleText;
   guideLink: string;
   naverBookUrl: string;
+  heroSlides: HomeHeroSlide[];
 }) {
   const [hasHeroPhoto, setHasHeroPhoto] = useState(false);
 
@@ -30,7 +33,7 @@ export function HomeHero({
         <Logo variant="home" />
       </div>
 
-      <HomeHeroPhoto onPhotoReady={setHasHeroPhoto} />
+      <HomeHeroPhoto slides={heroSlides} onPhotoReady={setHasHeroPhoto} />
 
       <div className="mx-auto mt-5 max-w-md">
         {/* <h1 className="font-serif-ko text-lg font-medium leading-relaxed tracking-wide text-ink md:text-xl">

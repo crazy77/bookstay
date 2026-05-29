@@ -540,6 +540,16 @@ function ValueEditor({
     );
   }
 
+  if (type === 'image') {
+    return (
+      <ImageValueEditor
+        value={typeof value === 'string' ? value : ''}
+        saveControl={saveControl}
+        onChange={onChange}
+      />
+    );
+  }
+
   if (type === 'list') {
     return (
       <ListEditor
@@ -556,6 +566,75 @@ function ValueEditor({
       saveControl={saveControl}
       onChange={onChange}
     />
+  );
+}
+
+function ImageValueEditor({
+  value,
+  saveControl,
+  onChange,
+}: {
+  value: string;
+  saveControl: React.ReactNode;
+  onChange: (value: string) => void;
+}) {
+  const [uploading, setUploading] = useState(false);
+
+  async function upload(file: File) {
+    const { data } = await getSupabaseBrowser().auth.getSession();
+    const token = data.session?.access_token;
+    if (!token) return;
+
+    setUploading(true);
+    const form = new FormData();
+    form.set('file', file);
+    form.set('folder', 'home');
+    const res = await fetch('/api/admin/images', {
+      method: 'POST',
+      headers: { authorization: `Bearer ${token}` },
+      body: form,
+    });
+    const json = await res.json();
+    setUploading(false);
+    if (!res.ok) {
+      window.alert(json.error ?? '업로드 실패');
+      return;
+    }
+    onChange(json.url);
+  }
+
+  return (
+    <div className="grid gap-2 sm:grid-cols-[6rem_minmax(0,1fr)_auto]">
+      {value ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={value}
+          alt=""
+          className="h-24 w-full rounded-md border border-[#d8d0c1] object-cover sm:w-24"
+        />
+      ) : (
+        <div className="hidden h-24 rounded-md border border-dashed border-[#d8d0c1] sm:block" />
+      )}
+      <div className="min-w-0 space-y-2">
+        <input
+          className="h-10 w-full rounded-md border border-[#d8d0c1] bg-[#fffdf8] px-3 text-sm outline-none focus:border-[#2f4f46]"
+          value={value}
+          placeholder="/assets/hero.png 또는 업로드 URL"
+          onChange={(event) => onChange(event.target.value)}
+        />
+        <input
+          accept="image/*"
+          className="w-full text-xs"
+          type="file"
+          onChange={(event) => {
+            const file = event.target.files?.[0];
+            if (file) void upload(file);
+          }}
+        />
+        {uploading ? <p className="text-xs text-[#746c60]">업로드 중...</p> : null}
+      </div>
+      <div className="flex justify-end sm:block">{saveControl}</div>
+    </div>
   );
 }
 

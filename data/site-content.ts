@@ -14,7 +14,7 @@ export type RichSegment =
 
 export type RichLine = RichSegment[];
 export type LocaleContentValue = string | string[] | RichLine[];
-export type ContentInputType = 'text' | 'textarea' | 'list' | 'rich_list';
+export type ContentInputType = 'text' | 'textarea' | 'list' | 'rich_list' | 'image';
 
 export type ContentEntryDefinition = {
   key: string;
@@ -55,6 +55,70 @@ export const DEFAULT_CONTENT_ENTRIES = [
       en: 'https://booking.naver.com/booking/3/bizes/1573091/items/7340362',
       zh: 'https://booking.naver.com/booking/3/bizes/1573091/items/7340362',
     },
+  },
+  {
+    key: 'home.heroSlide1.src',
+    category: 'home',
+    label: '홈 · 대표 사진 1 이미지',
+    inputType: 'image',
+    localeValues: { ko: '/assets/hero.png', en: '/assets/hero.png', zh: '/assets/hero.png' },
+  },
+  {
+    key: 'home.heroSlide1.caption',
+    category: 'home',
+    label: '홈 · 대표 사진 1 캡션',
+    inputType: 'text',
+    localeValues: { ko: '해묘서가 침실', en: 'Haemyo bedroom', zh: '海猫书斋卧室' },
+  },
+  {
+    key: 'home.heroSlide1.alt',
+    category: 'home',
+    label: '홈 · 대표 사진 1 대체텍스트',
+    inputType: 'text',
+    localeValues: {
+      ko: '해묘서가 침실 서재',
+      en: 'Haemyo bedroom and library',
+      zh: '海猫书斋卧室与书房',
+    },
+  },
+  {
+    key: 'home.heroSlide1.objectPosition',
+    category: 'home',
+    label: '홈 · 대표 사진 1 위치',
+    inputType: 'text',
+    localeValues: { ko: '42% 36%', en: '42% 36%', zh: '42% 36%' },
+  },
+  {
+    key: 'home.heroSlide2.src',
+    category: 'home',
+    label: '홈 · 대표 사진 2 이미지',
+    inputType: 'image',
+    localeValues: { ko: '/assets/hero2.png', en: '/assets/hero2.png', zh: '/assets/hero2.png' },
+  },
+  {
+    key: 'home.heroSlide2.caption',
+    category: 'home',
+    label: '홈 · 대표 사진 2 캡션',
+    inputType: 'text',
+    localeValues: { ko: '해묘서가 창문 정원', en: 'Haemyo window garden', zh: '海猫书斋窗边庭院' },
+  },
+  {
+    key: 'home.heroSlide2.alt',
+    category: 'home',
+    label: '홈 · 대표 사진 2 대체텍스트',
+    inputType: 'text',
+    localeValues: {
+      ko: '해묘서가 창문과 정원',
+      en: 'Haemyo window and garden',
+      zh: '海猫书斋窗户与庭院',
+    },
+  },
+  {
+    key: 'home.heroSlide2.objectPosition',
+    category: 'home',
+    label: '홈 · 대표 사진 2 위치',
+    inputType: 'text',
+    localeValues: { ko: '50% 45%', en: '50% 45%', zh: '50% 45%' },
   },
   {
     key: 'home.footerBusinessNumber',

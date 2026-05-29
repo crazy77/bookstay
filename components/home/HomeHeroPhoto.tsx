@@ -2,20 +2,21 @@
 
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
-import { HOME_HERO_SLIDES } from '@/data/home';
+import type { HomeHeroSlide } from '@/data/home';
 import { cn } from '@/lib/cn';
 
 const ROTATE_MS = 5000;
 
 type HomeHeroPhotoProps = {
+  slides: HomeHeroSlide[];
   onPhotoReady?: (ready: boolean) => void;
 };
 
-export function HomeHeroPhoto({ onPhotoReady }: HomeHeroPhotoProps) {
+export function HomeHeroPhoto({ slides, onPhotoReady }: HomeHeroPhotoProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [loaded, setLoaded] = useState<Set<number>>(() => new Set());
   const hasImage = loaded.size > 0;
-  const slideCount = HOME_HERO_SLIDES.length;
+  const slideCount = slides.length;
 
   const notifyReady = useCallback(
     (ready: boolean) => {
@@ -59,7 +60,7 @@ export function HomeHeroPhoto({ onPhotoReady }: HomeHeroPhotoProps) {
     });
   };
 
-  const active = HOME_HERO_SLIDES[activeIndex];
+  const active = slides[activeIndex];
 
   return (
     <figure
@@ -86,7 +87,7 @@ export function HomeHeroPhoto({ onPhotoReady }: HomeHeroPhotoProps) {
             </div>
           )}
 
-          {HOME_HERO_SLIDES.map((slide, index) => (
+          {slides.map((slide, index) => (
             <Image
               key={slide.src}
               src={slide.src}
@@ -111,7 +112,7 @@ export function HomeHeroPhoto({ onPhotoReady }: HomeHeroPhotoProps) {
             aria-live="polite"
             aria-atomic="true"
           >
-            {active.caption}
+            {active?.caption}
           </figcaption>
         ) : null}
       </div>
