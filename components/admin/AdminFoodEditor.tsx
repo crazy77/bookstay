@@ -200,93 +200,135 @@ export function AdminFoodEditor() {
 
   return (
     <AdminShell message={message}>
-      <header className="sticky top-0 z-20 border-b border-[#d8d0c1] bg-[#f7f3ea]/95 px-5 py-4 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p className="text-xs uppercase tracking-[0.18em] text-[#746c60]">
-              bookstay admin
-            </p>
-            <h1 className="mt-1 text-xl font-semibold">맛집 관리</h1>
+      <header className="sticky top-0 z-20 border-b border-[#d8d0c1] bg-[#f7f3ea]/95 px-5 py-3 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-[0.18em] text-[#746c60]">
+                bookstay admin
+              </p>
+              <h1 className="mt-1 text-xl font-semibold">맛집 관리</h1>
+              <p className="mt-1 text-xs text-[#746c60]">
+                {dirty ? '저장되지 않은 변경이 있습니다.' : '모든 변경이 저장됐습니다.'} ·{' '}
+                {session.user.email}
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <a
+                className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm"
+                href="/admin/content"
+              >
+                문구 관리
+              </a>
+              <a
+                className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm"
+                href="/guide"
+                target="_blank"
+                rel="noreferrer"
+              >
+                사이트 보기
+              </a>
+              <details className="relative">
+                <summary className="list-none rounded-md border border-[#bdb3a2] px-3 py-2 text-sm marker:hidden">
+                  더보기
+                </summary>
+                <div className="absolute right-0 mt-2 flex min-w-40 flex-col gap-1 rounded-md border border-[#d8d0c1] bg-white p-2 shadow-lg">
+                  <button
+                    className="rounded px-3 py-2 text-left text-sm hover:bg-[#f1eadf] disabled:opacity-50"
+                    type="button"
+                    onClick={() => save(true)}
+                    disabled={saving}
+                  >
+                    기본값 저장
+                  </button>
+                  <button
+                    className="rounded px-3 py-2 text-left text-sm hover:bg-[#f1eadf] disabled:opacity-50"
+                    type="button"
+                    onClick={() => {
+                      setCatalog(original);
+                      setMessage('변경 사항을 취소했습니다.');
+                    }}
+                    disabled={saving || !dirty}
+                  >
+                    변경 취소
+                  </button>
+                  <button
+                    className="rounded px-3 py-2 text-left text-sm hover:bg-[#f1eadf]"
+                    type="button"
+                    onClick={signOut}
+                  >
+                    로그아웃
+                  </button>
+                </div>
+              </details>
+              <button
+                className="rounded-md bg-[#2f4f46] px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+                type="button"
+                onClick={() => save()}
+                disabled={saving || !dirty}
+              >
+                {saving ? '저장 중' : '변경 저장'}
+              </button>
+            </div>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <a className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm" href="/admin/content">
-              문구 관리
-            </a>
-            <a className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm" href="/guide" target="_blank" rel="noreferrer">
-              사이트 보기
-            </a>
-            <button className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm" type="button" onClick={() => save(true)} disabled={saving}>
-              기본값 저장
-            </button>
+
+          <div className="grid gap-3 rounded-lg border border-[#d8d0c1] bg-white p-3 lg:grid-cols-[auto_1fr_auto] lg:items-center">
+            <div>
+              <p className="mb-1 text-sm font-medium">편집 언어</p>
+              <div className="flex rounded-md border border-[#bdb3a2] bg-[#f7f3ea] p-1">
+                {LOCALES.map(({ key, label }) => (
+                  <button
+                    key={key}
+                    className={`rounded px-3 py-1.5 text-sm ${
+                      activeLocale === key ? 'bg-white shadow-sm' : 'text-[#746c60]'
+                    }`}
+                    type="button"
+                    onClick={() => setActiveLocale(key)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="mb-1 text-sm font-medium">카테고리</p>
+              <div className="flex flex-wrap gap-1">
+                {catalog.categories.map((item, index) => (
+                  <button
+                    key={item.id}
+                    className={`rounded-md px-3 py-2 text-sm ${
+                      activeCategory === index
+                        ? 'bg-[#2f4f46] text-white'
+                        : 'hover:bg-[#f1eadf]'
+                    }`}
+                    type="button"
+                    onClick={() => setActiveCategory(index)}
+                  >
+                    {item.title.ko || item.id}
+                    {!item.published ? ' (숨김)' : ''}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <button
-              className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm disabled:opacity-50"
+              className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm"
               type="button"
               onClick={() => {
-                setCatalog(original);
-                setMessage('변경 사항을 취소했습니다.');
+                updateCatalog({
+                  categories: [...catalog.categories, newCategory()],
+                });
+                setActiveCategory(catalog.categories.length);
               }}
-              disabled={saving || !dirty}
             >
-              변경 취소
-            </button>
-            <button className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm" type="button" onClick={signOut}>
-              로그아웃
-            </button>
-            <button className="rounded-md bg-[#2f4f46] px-4 py-2 text-sm font-medium text-white disabled:opacity-50" type="button" onClick={() => save()} disabled={saving || !dirty}>
-              {saving ? '저장 중' : '변경 저장'}
+              카테고리 추가
             </button>
           </div>
         </div>
       </header>
 
-      <main className="mx-auto grid max-w-7xl gap-5 px-5 py-6 lg:grid-cols-[18rem_1fr]">
-        <aside className="space-y-4">
-          <section className="rounded-lg border border-[#d8d0c1] bg-white p-4">
-            <p className="mb-2 text-sm font-medium">언어</p>
-            <p className="mb-3 text-xs text-[#746c60]">
-              {dirty ? '저장되지 않은 변경이 있습니다.' : '모든 변경이 저장됐습니다.'}
-            </p>
-            <div className="flex rounded-md border border-[#bdb3a2] bg-[#f7f3ea] p-1">
-              {LOCALES.map(({ key, label }) => (
-                <button
-                  key={key}
-                  className={`rounded px-3 py-1.5 text-sm ${activeLocale === key ? 'bg-white shadow-sm' : 'text-[#746c60]'}`}
-                  type="button"
-                  onClick={() => setActiveLocale(key)}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          </section>
-
-          <section className="rounded-lg border border-[#d8d0c1] bg-white p-4">
-            <div className="mb-3 flex items-center justify-between">
-              <p className="text-sm font-medium">카테고리</p>
-              <button className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs" type="button" onClick={() => {
-                updateCatalog({
-                  categories: [...catalog.categories, newCategory()],
-                });
-                setActiveCategory(catalog.categories.length);
-              }}>
-                추가
-              </button>
-            </div>
-            <div className="space-y-1">
-              {catalog.categories.map((item, index) => (
-                <button
-                  key={item.id}
-                  className={`w-full rounded-md px-3 py-2 text-left text-sm ${activeCategory === index ? 'bg-[#2f4f46] text-white' : 'hover:bg-[#f1eadf]'}`}
-                  type="button"
-                  onClick={() => setActiveCategory(index)}
-                >
-                  {item.title.ko || item.id}
-                  {!item.published ? ' (숨김)' : ''}
-                </button>
-              ))}
-            </div>
-          </section>
-        </aside>
+      <main className="mx-auto max-w-7xl px-5 py-6">
 
         {category ? (
           <CategoryEditor

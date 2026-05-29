@@ -333,13 +333,17 @@ export function AdminContentEditor() {
 
   return (
     <AdminShell message={message}>
-      <header className="sticky top-0 z-20 border-b border-[#d8d0c1] bg-[#f7f3ea]/95 px-5 py-4 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <header className="sticky top-0 z-20 border-b border-[#d8d0c1] bg-[#f7f3ea]/95 px-5 py-3 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.18em] text-[#746c60]">
               bookstay admin
             </p>
             <h1 className="mt-1 text-xl font-semibold">콘텐츠 관리</h1>
+            <p className="mt-1 text-xs text-[#746c60]">
+              변경 {dirtyEntries.length}개 · {session.user.email}
+            </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <a
@@ -356,8 +360,13 @@ export function AdminContentEditor() {
             >
               사이트 보기
             </a>
+            <details className="relative">
+              <summary className="list-none rounded-md border border-[#bdb3a2] px-3 py-2 text-sm marker:hidden">
+                더보기
+              </summary>
+              <div className="absolute right-0 mt-2 flex min-w-40 flex-col gap-1 rounded-md border border-[#d8d0c1] bg-white p-2 shadow-lg">
             <button
-              className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm disabled:opacity-50"
+                  className="rounded px-3 py-2 text-left text-sm hover:bg-[#f1eadf] disabled:opacity-50"
               type="button"
               onClick={seedDefaults}
               disabled={isSaving}
@@ -365,7 +374,7 @@ export function AdminContentEditor() {
               기본값 저장
             </button>
             <button
-              className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm"
+                  className="rounded px-3 py-2 text-left text-sm hover:bg-[#f1eadf] disabled:opacity-50"
               type="button"
               onClick={() => {
                 setDrafts(originals);
@@ -376,12 +385,14 @@ export function AdminContentEditor() {
               변경 취소
             </button>
             <button
-              className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm"
+                  className="rounded px-3 py-2 text-left text-sm hover:bg-[#f1eadf]"
               type="button"
               onClick={signOut}
             >
               로그아웃
             </button>
+              </div>
+            </details>
             <button
               className="rounded-md bg-[#2f4f46] px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
               type="button"
@@ -392,72 +403,60 @@ export function AdminContentEditor() {
             </button>
           </div>
         </div>
-      </header>
 
-      <main className="mx-auto grid max-w-7xl gap-5 px-5 py-6 lg:grid-cols-[16rem_1fr]">
-        <aside className="space-y-4">
-          <section className="rounded-lg border border-[#d8d0c1] bg-white p-4">
-            <p className="text-xs text-[#746c60]">관리자</p>
-            <p className="mt-1 truncate text-sm font-medium">{session.user.email}</p>
-          </section>
-
-          <section className="rounded-lg border border-[#d8d0c1] bg-white p-4">
+          <div className="grid gap-3 rounded-lg border border-[#d8d0c1] bg-white p-3 lg:grid-cols-[minmax(14rem,20rem)_1fr_auto] lg:items-center">
             <label className="block text-sm font-medium">
               검색
               <input
-                className="mt-2 w-full rounded-md border border-[#d8d0c1] px-3 py-2 text-sm outline-none focus:border-[#2f4f46]"
+                className="mt-1 w-full rounded-md border border-[#d8d0c1] px-3 py-2 text-sm outline-none focus:border-[#2f4f46]"
                 value={query}
                 placeholder="문구명 또는 key"
                 onChange={(event) => setQuery(event.target.value)}
               />
             </label>
-          </section>
 
-          <section className="rounded-lg border border-[#d8d0c1] bg-white p-4">
-            <p className="mb-2 text-sm font-medium">섹션</p>
-            <div className="flex flex-col gap-1">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  className={`rounded-md px-3 py-2 text-left text-sm ${
-                    activeCategory === category
-                      ? 'bg-[#2f4f46] text-white'
-                      : 'text-[#4b443b] hover:bg-[#f1eadf]'
-                  }`}
-                  type="button"
-                  onClick={() => setActiveCategory(category)}
-                >
-                  {category === 'all' ? '전체' : CATEGORY_LABELS[category] ?? category}
-                </button>
-              ))}
+            <div>
+              <p className="mb-1 text-sm font-medium">섹션</p>
+              <div className="flex flex-wrap gap-1">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    className={`rounded-md px-3 py-2 text-sm ${
+                      activeCategory === category
+                        ? 'bg-[#2f4f46] text-white'
+                        : 'text-[#4b443b] hover:bg-[#f1eadf]'
+                    }`}
+                    type="button"
+                    onClick={() => setActiveCategory(category)}
+                  >
+                    {category === 'all' ? '전체' : CATEGORY_LABELS[category] ?? category}
+                  </button>
+                ))}
+              </div>
             </div>
-          </section>
-        </aside>
 
-        <section>
-          <div className="mb-4 flex flex-col gap-3 rounded-lg border border-[#d8d0c1] bg-white p-4 md:flex-row md:items-center md:justify-between">
-          <div>
-              <p className="text-sm font-medium">편집 언어</p>
-              <p className="mt-1 text-xs text-[#746c60]">
-                변경 {dirtyEntries.length}개 · 저장 전까지 공개 페이지에 반영되지 않습니다.
-              </p>
-            </div>
-            <div className="flex rounded-md border border-[#bdb3a2] bg-[#f7f3ea] p-1">
-              {LOCALES.map(({ key, label }) => (
-                <button
-                  key={key}
-                  className={`rounded px-3 py-1.5 text-sm ${
-                    activeLocale === key ? 'bg-white shadow-sm' : 'text-[#746c60]'
-                  }`}
-                  type="button"
-                  onClick={() => setActiveLocale(key)}
-                >
-                  {label}
-                </button>
-              ))}
+            <div>
+              <p className="mb-1 text-sm font-medium">편집 언어</p>
+              <div className="flex rounded-md border border-[#bdb3a2] bg-[#f7f3ea] p-1">
+                {LOCALES.map(({ key, label }) => (
+                  <button
+                    key={key}
+                    className={`rounded px-3 py-1.5 text-sm ${
+                      activeLocale === key ? 'bg-white shadow-sm' : 'text-[#746c60]'
+                    }`}
+                    type="button"
+                    onClick={() => setActiveLocale(key)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
+        </div>
+      </header>
 
+      <main className="mx-auto max-w-7xl px-5 py-6">
           <div className="space-y-4">
             {filteredEntries.map((entry) => (
               <EntryEditor
@@ -472,7 +471,6 @@ export function AdminContentEditor() {
               />
             ))}
           </div>
-        </section>
       </main>
     </AdminShell>
   );
