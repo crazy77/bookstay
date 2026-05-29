@@ -367,7 +367,7 @@ export function AdminContentEditor() {
           </>
         }
       >
-        <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-2 md:grid-cols-[minmax(12rem,18rem)_1fr_auto] md:items-center">
+        <div className="grid grid-cols-[minmax(0,1fr)_5.8rem_6.8rem] gap-2 md:grid-cols-[minmax(12rem,18rem)_1fr_auto] md:items-center">
           <label className="block min-w-0">
             <span className="sr-only">검색</span>
               <input
@@ -390,13 +390,13 @@ export function AdminContentEditor() {
             ))}
           </select>
 
-          <div className="col-span-2 flex rounded-md border border-[#bdb3a2] bg-[#f7f3ea] p-0.5 md:col-span-1">
+          <div className="flex min-w-0 rounded-md border border-[#bdb3a2] bg-[#f7f3ea] p-0.5">
             {LOCALES.map(({ key, label }) => (
                   <button
                     key={key}
                 aria-label={label}
                 title={label}
-                className={`h-8 flex-1 rounded px-2 text-sm md:flex-none ${
+                className={`h-8 min-w-0 flex-1 rounded px-1 text-sm md:px-2 ${
                       activeLocale === key ? 'bg-white shadow-sm' : 'text-[#746c60]'
                     }`}
                     type="button"
