@@ -42,18 +42,17 @@ function normalizeDraft(type: ContentInputType, value: unknown): DraftValue {
   return String(value ?? '');
 }
 
-function normalizeImageList(value: unknown): ImageListItem[] {
+function normalizeImageList(value: unknown, keepEmpty = false): ImageListItem[] {
   if (!Array.isArray(value)) return [];
-  return value
-    .map((item) => {
-      if (!item || typeof item !== 'object') return { src: '', caption: '' };
-      const data = item as Partial<ImageListItem>;
-      return {
-        src: String(data.src ?? ''),
-        caption: String(data.caption ?? ''),
-      };
-    })
-    .filter((item) => item.src || item.caption);
+  const items = value.map((item) => {
+    if (!item || typeof item !== 'object') return { src: '', caption: '' };
+    const data = item as Partial<ImageListItem>;
+    return {
+      src: String(data.src ?? ''),
+      caption: String(data.caption ?? ''),
+    };
+  });
+  return keepEmpty ? items : items.filter((item) => item.src || item.caption);
 }
 
 function normalizeRichHtmlLines(value: unknown): string[] {
@@ -583,7 +582,7 @@ function ValueEditor({
   if (type === 'image_list') {
     return (
       <ImageListEditor
-        value={Array.isArray(value) ? normalizeImageList(value) : []}
+        value={Array.isArray(value) ? normalizeImageList(value, true) : []}
         saveControl={saveControl}
         onChange={onChange}
       />
