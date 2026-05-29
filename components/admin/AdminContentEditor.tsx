@@ -622,15 +622,24 @@ function ImageValueEditor({
           placeholder="/assets/hero.png 또는 업로드 URL"
           onChange={(event) => onChange(event.target.value)}
         />
-        <input
-          accept="image/*"
-          className="w-full text-xs"
-          type="file"
-          onChange={(event) => {
-            const file = event.target.files?.[0];
-            if (file) void upload(file);
-          }}
-        />
+        <label
+          className={`inline-flex h-9 w-fit cursor-pointer items-center rounded-md border border-[#bdb3a2] bg-white px-3 text-xs font-medium ${
+            uploading ? 'pointer-events-none opacity-60' : ''
+          }`}
+        >
+          {uploading ? '업로드 중' : '이미지 업로드'}
+          <input
+            accept="image/*"
+            className="sr-only"
+            disabled={uploading}
+            type="file"
+            onChange={(event) => {
+              const file = event.target.files?.[0];
+              if (file) void upload(file);
+              event.currentTarget.value = '';
+            }}
+          />
+        </label>
         {uploading ? <p className="text-xs text-[#746c60]">업로드 중...</p> : null}
       </div>
       <div className="flex justify-end sm:block">{saveControl}</div>
