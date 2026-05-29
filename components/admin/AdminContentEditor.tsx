@@ -153,6 +153,16 @@ export function AdminContentEditor() {
   const dirtyEntries = entries.filter((entry) => isDirty(entry, drafts, originals));
   const isSaving = savingKeys.size > 0;
 
+  useEffect(() => {
+    if (dirtyEntries.length === 0) return;
+    const onBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = '';
+    };
+    window.addEventListener('beforeunload', onBeforeUnload);
+    return () => window.removeEventListener('beforeunload', onBeforeUnload);
+  }, [dirtyEntries.length]);
+
   async function loadEntries(token: string) {
     setLoading(true);
     setMessage('');
@@ -334,6 +344,12 @@ export function AdminContentEditor() {
           <div className="flex flex-wrap items-center gap-2">
             <a
               className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm"
+              href="/admin/food"
+            >
+              맛집 관리
+            </a>
+            <a
+              className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm"
               href="/guide"
               target="_blank"
               rel="noreferrer"
@@ -347,6 +363,17 @@ export function AdminContentEditor() {
               disabled={isSaving}
             >
               기본값 저장
+            </button>
+            <button
+              className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm"
+              type="button"
+              onClick={() => {
+                setDrafts(originals);
+                setMessage('변경 사항을 취소했습니다.');
+              }}
+              disabled={isSaving || dirtyEntries.length === 0}
+            >
+              변경 취소
             </button>
             <button
               className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm"
@@ -409,10 +436,10 @@ export function AdminContentEditor() {
 
         <section>
           <div className="mb-4 flex flex-col gap-3 rounded-lg border border-[#d8d0c1] bg-white p-4 md:flex-row md:items-center md:justify-between">
-            <div>
+          <div>
               <p className="text-sm font-medium">편집 언어</p>
               <p className="mt-1 text-xs text-[#746c60]">
-                변경 사항은 저장 전까지 공개 페이지에 반영되지 않습니다.
+                변경 {dirtyEntries.length}개 · 저장 전까지 공개 페이지에 반영되지 않습니다.
               </p>
             </div>
             <div className="flex rounded-md border border-[#bdb3a2] bg-[#f7f3ea] p-1">
@@ -484,6 +511,11 @@ function EntryEditor({
           </div>
           <h2 className="mt-1 font-semibold">{entry.label}</h2>
           <p className="mt-1 font-mono text-xs text-[#746c60]">{entry.key}</p>
+          {entry.updated_at ? (
+            <p className="mt-1 text-xs text-[#746c60]">
+              마지막 저장 {new Date(entry.updated_at).toLocaleString('ko-KR')}
+            </p>
+          ) : null}
         </div>
         <button
           className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm disabled:opacity-50"

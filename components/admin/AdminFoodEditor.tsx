@@ -68,6 +68,16 @@ export function AdminFoodEditor() {
   const dirty = JSON.stringify(catalog) !== JSON.stringify(original);
   const category = catalog.categories[activeCategory];
 
+  useEffect(() => {
+    if (!dirty) return;
+    const onBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = '';
+    };
+    window.addEventListener('beforeunload', onBeforeUnload);
+    return () => window.removeEventListener('beforeunload', onBeforeUnload);
+  }, [dirty]);
+
   async function loadCatalog(token: string) {
     setLoading(true);
     setMessage('');
@@ -208,6 +218,17 @@ export function AdminFoodEditor() {
             <button className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm" type="button" onClick={() => save(true)} disabled={saving}>
               기본값 저장
             </button>
+            <button
+              className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm disabled:opacity-50"
+              type="button"
+              onClick={() => {
+                setCatalog(original);
+                setMessage('변경 사항을 취소했습니다.');
+              }}
+              disabled={saving || !dirty}
+            >
+              변경 취소
+            </button>
             <button className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm" type="button" onClick={signOut}>
               로그아웃
             </button>
@@ -222,6 +243,9 @@ export function AdminFoodEditor() {
         <aside className="space-y-4">
           <section className="rounded-lg border border-[#d8d0c1] bg-white p-4">
             <p className="mb-2 text-sm font-medium">언어</p>
+            <p className="mb-3 text-xs text-[#746c60]">
+              {dirty ? '저장되지 않은 변경이 있습니다.' : '모든 변경이 저장됐습니다.'}
+            </p>
             <div className="flex rounded-md border border-[#bdb3a2] bg-[#f7f3ea] p-1">
               {LOCALES.map(({ key, label }) => (
                 <button
