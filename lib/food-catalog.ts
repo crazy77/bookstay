@@ -1,4 +1,4 @@
-import { renderToStaticMarkup } from 'react-dom/server';
+import { isValidElement } from 'react';
 import { FOOD_CATEGORIES } from '@/data/food-spots';
 import { FOOD_SPOT_PHOTOS } from '@/data/food-spot-photos';
 import type { FoodCatalog, FoodCatalogCategory } from '@/data/food-catalog';
@@ -88,7 +88,17 @@ export function visibleFoodCategories(catalog: FoodCatalog): FoodCatalogCategory
     }));
 }
 
-function toHtml(value: React.ReactNode) {
+function toHtml(value: React.ReactNode): string {
   if (typeof value === 'string') return value;
-  return sanitizeRichHtml(renderToStaticMarkup(<>{value}</>));
+  if (typeof value === 'number' || typeof value === 'bigint') return String(value);
+  if (Array.isArray(value)) return sanitizeRichHtml(value.map(toHtml).join(''));
+  if (!isValidElement(value)) return '';
+
+  const props = value.props as { children?: React.ReactNode };
+  const children = toHtml(props.children);
+  if (value.type === 'strong') return `<strong>${children}</strong>`;
+  if (value.type === 'em') return `<em>${children}</em>`;
+  if (value.type === 'code') return `<code>${children}</code>`;
+  if (value.type === 'br') return '<br />';
+  return sanitizeRichHtml(children);
 }
