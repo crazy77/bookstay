@@ -15,7 +15,7 @@ import { FoodCatalogSpotCard } from '@/components/guide/FoodSpotCard';
 import { MapFigure } from '@/components/guide/MapFigure';
 import type { FoodCatalogCategory } from '@/data/food-catalog';
 import { contentValue, type ContentMap, type RichLine } from '@/data/site-content';
-import { KAKAO_CAR_URL, KAKAO_TRANSIT_URL, WIFI } from '@/lib/site';
+import { KAKAO_CAR_URL, KAKAO_TRANSIT_URL } from '@/lib/site';
 
 export function GuideContent({
   content,
@@ -49,9 +49,12 @@ export function GuideContent({
   const roomRules = contentValue<RichLine[] | string[]>(content, 'guide.roomRules');
   const wifiTitle = contentValue<string>(content, 'guide.block.wifi');
   const wifiNetworkLabel = contentValue<string>(content, 'guide.wifi.networkLabel');
+  const wifiSsid = contentValue<string>(content, 'guide.wifi.ssid').ko;
   const wifiPasswordLabel = contentValue<string>(content, 'guide.wifi.passwordLabel');
+  const wifiPassword = contentValue<string>(content, 'guide.wifi.password').ko;
   const wifiCopyLabel = contentValue<string>(content, 'guide.wifi.copyLabel');
   const wifiNote = contentValue<string>(content, 'guide.wifi.note');
+  const wifiQrUrl = makeWifiQrUrl(wifiSsid, wifiPassword);
   const speakerTitle = contentValue<string>(content, 'guide.block.speaker');
   const speakerSteps = contentValue<RichLine[] | string[]>(content, 'guide.speakerSteps');
   const speakerNotes = contentValue<string[]>(content, 'guide.speakerNotes');
@@ -172,7 +175,7 @@ export function GuideContent({
                   <span lang="zh">{wifiNetworkLabel.zh}</span>
                 </dt>
                 <dd>
-                  <code>{WIFI.ssid}</code>
+                  <code>{wifiSsid}</code>
                 </dd>
                 <dt className="toggle">
                   <span lang="ko">{wifiPasswordLabel.ko}</span>
@@ -180,8 +183,8 @@ export function GuideContent({
                   <span lang="zh">{wifiPasswordLabel.zh}</span>
                 </dt>
                 <dd className="wifi-password">
-                  <code>{WIFI.password}</code>
-                  <CopyButton text={WIFI.password} labels={wifiCopyLabel} />
+                  <code>{wifiPassword}</code>
+                  <CopyButton text={wifiPassword} labels={wifiCopyLabel} />
                 </dd>
               </dl>
               <p className="wifi-note toggle">
@@ -192,7 +195,7 @@ export function GuideContent({
             </div>
             <div className="wifi-qr">
               <Image
-                src={WIFI.qrUrl}
+                src={wifiQrUrl}
                 alt="WiFi QR"
                 width={88}
                 height={88}
@@ -248,4 +251,9 @@ export function GuideContent({
       </section>
     </main>
   );
+}
+
+function makeWifiQrUrl(ssid: string, password: string) {
+  const data = encodeURIComponent(`WIFI:T:WPA;S:${ssid};P:${password};;`);
+  return `https://api.qrserver.com/v1/create-qr-code/?data=${data}&size=300x300&margin=10`;
 }

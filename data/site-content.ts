@@ -446,11 +446,25 @@ export const DEFAULT_CONTENT_ENTRIES = [
     localeValues: { ko: '네트워크', en: 'Network', zh: '网络名称' },
   },
   {
+    key: 'guide.wifi.ssid',
+    category: 'guide',
+    label: '가이드 · 와이파이 네트워크',
+    inputType: 'text',
+    localeValues: { ko: 'fanta', en: 'fanta', zh: 'fanta' },
+  },
+  {
     key: 'guide.wifi.passwordLabel',
     category: 'guide',
     label: '가이드 · 와이파이 비밀번호 라벨',
     inputType: 'text',
     localeValues: { ko: '비밀번호', en: 'Password', zh: '密码' },
+  },
+  {
+    key: 'guide.wifi.password',
+    category: 'guide',
+    label: '가이드 · 와이파이 비밀번호',
+    inputType: 'text',
+    localeValues: { ko: '12121212', en: '12121212', zh: '12121212' },
   },
   {
     key: 'guide.wifi.copyLabel',
