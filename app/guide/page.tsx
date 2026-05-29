@@ -3,6 +3,7 @@ import { GuideContent } from '@/components/guide/GuideContent';
 import { GuideFooter } from '@/components/guide/GuideFooter';
 import { GuideTopbar } from '@/components/guide/GuideTopbar';
 import { SmoothAnchor } from '@/components/guide/SmoothAnchor';
+import { getSiteContent } from '@/lib/content';
 import { SITE_OG_IMAGE, SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
@@ -24,13 +25,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function GuidePage() {
+export default async function GuidePage() {
+  const content = await getSiteContent();
+
   return (
     <>
-      <GuideTopbar />
+      <GuideTopbar content={content} />
       <SmoothAnchor />
-      <GuideContent />
-      <GuideFooter />
+      <GuideContent content={content} />
+      <GuideFooter content={content} />
     </>
   );
 }

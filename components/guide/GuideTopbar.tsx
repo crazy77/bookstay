@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useId, useState } from 'react';
 import { LangToggle } from '@/components/ui/LangToggle';
-import { GUIDE_NAV } from '@/data/guide-i18n';
+import { contentValue, type ContentMap } from '@/data/site-content';
 
 function MenuIcon({ open }: { open: boolean }) {
   return (
@@ -33,9 +33,21 @@ function MenuIcon({ open }: { open: boolean }) {
   );
 }
 
-export function GuideTopbar() {
+const NAV_ITEMS = [
+  { href: '#checkin', key: 'guide.nav.checkin' },
+  { href: '#arrival', key: 'guide.nav.arrival' },
+  { href: '#library', key: 'guide.nav.library' },
+  { href: '#room', key: 'guide.nav.room' },
+  { href: '#food', key: 'guide.nav.food' },
+] as const;
+
+export function GuideTopbar({ content }: { content: ContentMap }) {
   const [open, setOpen] = useState(false);
   const menuId = useId();
+  const navItems = NAV_ITEMS.map((item) => ({
+    ...item,
+    label: contentValue<string>(content, item.key),
+  }));
 
   useEffect(() => {
     if (!open) return;
@@ -58,7 +70,7 @@ export function GuideTopbar() {
           className="anchor-nav anchor-nav--desktop"
           aria-label="섹션 이동"
         >
-          {GUIDE_NAV.map(({ href, label }) => (
+          {navItems.map(({ href, label }) => (
             <a key={href} href={href} className="toggle">
               <span lang="ko">{label.ko}</span>
               <span lang="en">{label.en}</span>
@@ -88,7 +100,7 @@ export function GuideTopbar() {
         aria-label="섹션 이동"
         hidden={!open}
       >
-        {GUIDE_NAV.map(({ href, label }) => (
+        {navItems.map(({ href, label }) => (
           <a key={href} href={href} className="toggle" onClick={() => setOpen(false)}>
             <span lang="ko">{label.ko}</span>
             <span lang="en">{label.en}</span>

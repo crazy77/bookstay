@@ -5,10 +5,16 @@ import { useState } from 'react';
 import { HomeBookCta } from '@/components/home/HomeBookCta';
 import { HomeHeroPhoto } from '@/components/home/HomeHeroPhoto';
 import { cn } from '@/lib/cn';
-import { SITE_LEAD, SITE_NAME_LINE } from '@/lib/site';
 import { Logo } from '@/components/ui/Logo';
+import type { LocaleText } from '@/lib/locale';
 
-export function HomeHero() {
+export function HomeHero({
+  siteNameLine,
+  guideLink,
+}: {
+  siteNameLine: LocaleText;
+  guideLink: string;
+}) {
   const [hasHeroPhoto, setHasHeroPhoto] = useState(false);
 
   return (
@@ -29,7 +35,7 @@ export function HomeHero() {
           {SITE_LEAD}
         </h1> */}
         <p className="mt-2 font-serif-ko text-sm tracking-widest text-ink-muted">
-          {SITE_NAME_LINE}
+          {siteNameLine.ko}
         </p>
       </div>
 
@@ -42,7 +48,7 @@ export function HomeHero() {
           href="/guide"
           className="text-ink-secondary no-underline decoration-border-muted underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
         >
-          이용 안내
+          {guideLink}
         </Link>
       </p>
     </section>

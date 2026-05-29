@@ -1,13 +1,19 @@
 'use client';
 
-import { FOOTER_META } from '@/data/guide-i18n';
+import { contentValue, type ContentMap } from '@/data/site-content';
 import { INSTAGRAM_DM_URL } from '@/lib/site';
 import { ThemePicker } from '@/components/ui/ThemePicker';
 
-function FootMetaBlock({ lang }: { lang: 'ko' | 'en' | 'zh' }) {
+function FootMetaBlock({ lang, content }: { lang: 'ko' | 'en' | 'zh'; content: ContentMap }) {
+  const dmPrompt = contentValue<string>(content, 'guide.footerDmPrompt');
+  const checkinLabel = contentValue<string>(content, 'guide.footerCheckinLabel');
+  const checkin = contentValue<string>(content, 'guide.footerCheckin');
+  const checkoutLabel = contentValue<string>(content, 'guide.footerCheckoutLabel');
+  const checkout = contentValue<string>(content, 'guide.footerCheckout');
+
   return (
     <p lang={lang}>
-      {FOOTER_META.dmPrompt[lang]}
+      {dmPrompt[lang]}
       <br />
       <a
         className="contact-link"
@@ -18,14 +24,14 @@ function FootMetaBlock({ lang }: { lang: 'ko' | 'en' | 'zh' }) {
         @bookstay_haemyo DM
       </a>
       <br />
-      {FOOTER_META.checkinLabel[lang]} · <em>{FOOTER_META.checkin[lang]}</em>
+      {checkinLabel[lang]} · <em>{checkin[lang]}</em>
       {' · '}
-      {FOOTER_META.checkoutLabel[lang]} · <em>{FOOTER_META.checkout[lang]}</em>
+      {checkoutLabel[lang]} · <em>{checkout[lang]}</em>
     </p>
   );
 }
 
-export function GuideFooter() {
+export function GuideFooter({ content }: { content: ContentMap }) {
   return (
     <footer className="site-foot">
       <div className="foot-inner">
@@ -34,9 +40,9 @@ export function GuideFooter() {
           <span className="brand-en">BOOKSTAY · HALLIM, JEJU</span>
         </div>
         <div className="foot-meta toggle">
-          <FootMetaBlock lang="ko" />
-          <FootMetaBlock lang="en" />
-          <FootMetaBlock lang="zh" />
+          <FootMetaBlock lang="ko" content={content} />
+          <FootMetaBlock lang="en" content={content} />
+          <FootMetaBlock lang="zh" content={content} />
         </div>
         <div className="foot-theme">
           <ThemePicker />

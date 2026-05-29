@@ -15,7 +15,7 @@ export const GUIDE_ZH = {
 
   checkin: [
     <li key="1">
-      入住时间为 <strong>下午3点</strong>，退房时间为 <strong>上午11点</strong>。
+      入住时间为 <strong>下午4点</strong>，退房时间为 <strong>上午11点</strong>。
     </li>,
     <li key="2">
       中午以后可寄存行李。若客房提前准备好，可安排提前入住，我们会发消息通知您。
@@ -77,7 +77,7 @@ export const GUIDE_ZH = {
       海猫书斋正对着翰林港。偶尔夜晚听到的，是满载而归之梦驱使船只驶离时，在夜海上鸣响的汽笛。不必惊慌。
     </li>,
     <li key="3">
-      仅允许入住 <strong>6晚及以上</strong> 的客人做饭。外食可自由带入。可参考下方{' '}
+      禁止做饭。外食可自由带入。可参考下方{' '}
       <Link href="/guide#food">步行美食</Link> 列表，到店用餐或打包带回。
     </li>,
     <li key="4">
@@ -144,7 +144,7 @@ export const GUIDE_ZH_STRINGS = {
   footerCheckoutTime: '上午11点',
   footerLine2: '如有疑问，请随时通过 Instagram 私信联系我们。',
   checkin: [
-    '入住时间为下午3点，退房时间为上午11点。',
+    '入住时间为下午4点，退房时间为上午11点。',
     '中午以后可寄存行李。若客房提前准备好，可安排提前入住，我们会发消息通知您。',
     '大门和入户门密码将在入住当天发送给您。',
   ],

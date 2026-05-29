@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { HomeFooter, HomePage } from '@/components/home/HomePage';
 import { HomeTopbar } from '@/components/home/HomeTopbar';
+import { getSiteContent } from '@/lib/content';
 import {
   SITE_DESCRIPTION,
   SITE_OG_DESCRIPTION,
@@ -26,12 +27,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() {
+export default async function Page() {
+  const content = await getSiteContent();
+
   return (
     <div className="flex min-h-screen flex-col">
       <HomeTopbar />
-      <HomePage />
-      <HomeFooter />
+      <HomePage content={content} />
+      <HomeFooter content={content} />
     </div>
   );
 }

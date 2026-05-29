@@ -5,6 +5,7 @@ import {
   SITE_OG_DESCRIPTION,
   SITE_OG_IMAGE,
 } from '@/lib/site';
+import { VisitTracker } from '@/components/VisitTracker';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import './globals.css';
 
@@ -78,7 +79,10 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <VisitTracker />
+        </ThemeProvider>
       </body>
     </html>
   );

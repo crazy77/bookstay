@@ -1,9 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { MAP_CAPTION } from '@/data/guide-i18n';
+import type { LocaleText } from '@/lib/locale';
 
-export function MapFigure() {
+export function MapFigure({
+  alt,
+  caption,
+}: {
+  alt: LocaleText;
+  caption: LocaleText;
+}) {
   const [missing, setMissing] = useState(false);
 
   return (
@@ -16,14 +22,14 @@ export function MapFigure() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/assets/map-detail.png"
-          alt="대림1길 골목 진입 상세도"
+          alt={alt.ko}
           onError={() => setMissing(true)}
         />
       </picture>
       <figcaption className="toggle">
-        <span lang="ko">{MAP_CAPTION.ko}</span>
-        <span lang="en">{MAP_CAPTION.en}</span>
-        <span lang="zh">{MAP_CAPTION.zh}</span>
+        <span lang="ko">{caption.ko}</span>
+        <span lang="en">{caption.en}</span>
+        <span lang="zh">{caption.zh}</span>
       </figcaption>
     </figure>
   );

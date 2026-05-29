@@ -1,15 +1,21 @@
 import { HomeHero } from '@/components/home/HomeHero';
+import { contentValue, type ContentMap } from '@/data/site-content';
 import { INSTAGRAM_DM_URL } from '@/lib/site';
 
-export function HomePage() {
+export function HomePage({ content }: { content: ContentMap }) {
+  const siteNameLine = contentValue<string>(content, 'home.siteNameLine');
+  const guideLink = contentValue<string>(content, 'home.guideLink');
+
   return (
     <main className="flex flex-1 items-start justify-center px-5 pt-7 pb-6 md:items-center md:px-6 md:py-12">
-      <HomeHero />
+      <HomeHero siteNameLine={siteNameLine} guideLink={guideLink.ko} />
     </main>
   );
 }
 
-export function HomeFooter() {
+export function HomeFooter({ content }: { content: ContentMap }) {
+  const businessNumber = contentValue<string>(content, 'home.footerBusinessNumber');
+
   return (
     <footer className="border-t border-border-muted px-6 py-9 pb-12 text-center font-sans">
       <div className="mx-auto max-w-xl">
@@ -32,7 +38,7 @@ export function HomeFooter() {
           </a>
         </p>
         <p className="m-0 text-[0.76rem] leading-loose tracking-wide text-ink-muted">
-          사업자등록번호 506-21-96197
+          {businessNumber.ko}
         </p>
       </div>
     </footer>

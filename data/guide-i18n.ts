@@ -93,7 +93,7 @@ export const FOOTER_META = {
     zh: '如有疑问，请私信联系我们。',
   },
   checkinLabel: { ko: '체크인', en: 'Check-in', zh: '入住' },
-  checkin: { ko: '오후 3시', en: '3:00 PM', zh: '下午3点' },
+  checkin: { ko: '오후 4시', en: '4:00 PM', zh: '下午4点' },
   checkoutLabel: { ko: '체크아웃', en: 'Check-out', zh: '退房' },
   checkout: { ko: '오전 11시', en: '11:00 AM', zh: '上午11点' },
 } satisfies Record<string, LocaleText>;
