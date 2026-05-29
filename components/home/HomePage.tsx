@@ -26,11 +26,6 @@ function getHomeHeroSlides(content: ContentMap): HomeHeroSlide[] {
     .map((index) => ({
       src: contentValue<string>(content, `home.heroSlide${index}.src`).ko.trim(),
       caption: contentValue<string>(content, `home.heroSlide${index}.caption`).ko,
-      alt: contentValue<string>(content, `home.heroSlide${index}.alt`).ko,
-      objectPosition: contentValue<string>(
-        content,
-        `home.heroSlide${index}.objectPosition`,
-      ).ko,
     }))
     .filter((slide) => slide.src);
 }

@@ -91,14 +91,14 @@ export function HomeHeroPhoto({ slides, onPhotoReady }: HomeHeroPhotoProps) {
             <Image
               key={slide.src}
               src={slide.src}
-              alt={slide.alt}
+              alt={slide.caption}
               fill
               sizes="(max-width: 640px) 100vw, 32rem"
               className={cn(
                 'home-hero-photo__slide object-cover transition-opacity duration-700 ease-in-out',
                 index === activeIndex && hasImage ? 'opacity-100' : 'opacity-0',
               )}
-              style={{ objectPosition: slide.objectPosition }}
+              style={{ objectPosition: '50% 50%' }}
               onLoad={() => markLoaded(index)}
               onError={() => markFailed(index)}
               priority={index === 0}
