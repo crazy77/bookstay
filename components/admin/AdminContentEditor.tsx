@@ -443,6 +443,7 @@ function EntryEditor({
   onChange: (value: DraftValue) => void;
   onSave: () => void;
 }) {
+  const updatedAt = entry.updated_at ? formatCompactDate(entry.updated_at) : '';
   const saveButton = (
     <button
       className="h-10 shrink-0 rounded-md border border-[#bdb3a2] px-3 text-xs disabled:opacity-50"
@@ -456,7 +457,7 @@ function EntryEditor({
 
   return (
     <section className="rounded-lg border border-[#d8d0c1] bg-white p-3 shadow-sm">
-      <div className="mb-2 min-w-0">
+      <div className="mb-2 min-w-0" title={entry.key}>
         <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
           <h2 className="truncate font-semibold">{entry.label}</h2>
           <span className="rounded bg-[#f1eadf] px-1.5 py-0.5 text-[0.68rem] uppercase text-[#746c60]">
@@ -467,12 +468,11 @@ function EntryEditor({
               변경됨
             </span>
           ) : null}
-          <span className="min-w-0 truncate font-mono text-[0.7rem] text-[#746c60]">
-            {entry.key}
-            {entry.updated_at
-              ? ` · ${new Date(entry.updated_at).toLocaleString('ko-KR')}`
-              : ''}
-          </span>
+          {updatedAt ? (
+            <span className="min-w-0 truncate font-mono text-[0.7rem] text-[#746c60]">
+              {updatedAt}
+            </span>
+          ) : null}
         </div>
       </div>
 
@@ -485,6 +485,18 @@ function EntryEditor({
       />
     </section>
   );
+}
+
+function formatCompactDate(value: string) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '';
+  const yy = String(date.getFullYear()).slice(-2);
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const seconds = String(date.getSeconds()).padStart(2, '0');
+  return `${yy}.${month}.${day} ${hours}:${minutes}:${seconds}`;
 }
 
 function ValueEditor({
