@@ -4,6 +4,7 @@ import { GuideFooter } from '@/components/guide/GuideFooter';
 import { GuideTopbar } from '@/components/guide/GuideTopbar';
 import { SmoothAnchor } from '@/components/guide/SmoothAnchor';
 import { getSiteContent } from '@/lib/content';
+import { getFoodCatalog, visibleFoodCategories } from '@/lib/food-catalog';
 import { SITE_OG_IMAGE, SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
@@ -27,12 +28,16 @@ export const metadata: Metadata = {
 
 export default async function GuidePage() {
   const content = await getSiteContent();
+  const foodCatalog = await getFoodCatalog();
 
   return (
     <>
       <GuideTopbar content={content} />
       <SmoothAnchor />
-      <GuideContent content={content} />
+      <GuideContent
+        content={content}
+        foodCategories={visibleFoodCategories(foodCatalog)}
+      />
       <GuideFooter content={content} />
     </>
   );

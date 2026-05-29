@@ -1,0 +1,463 @@
+'use client';
+
+import { useEffect, useMemo, useState } from 'react';
+import type { Session } from '@supabase/supabase-js';
+import type {
+  FoodCatalog,
+  FoodCatalogCategory,
+  FoodCatalogSpot,
+} from '@/data/food-catalog';
+import { getSupabaseBrowser } from '@/lib/supabase';
+
+type Locale = 'ko' | 'en' | 'zh';
+
+const LOCALES: Array<{ key: Locale; label: string }> = [
+  { key: 'ko', label: '한국어' },
+  { key: 'en', label: 'English' },
+  { key: 'zh', label: '中文' },
+];
+
+const emptyText = { ko: '', en: '', zh: '' };
+
+export function AdminFoodEditor() {
+  const [session, setSession] = useState<Session | null>(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [catalog, setCatalog] = useState<FoodCatalog>({ categories: [] });
+  const [original, setOriginal] = useState<FoodCatalog>({ categories: [] });
+  const [activeLocale, setActiveLocale] = useState<Locale>('ko');
+  const [activeCategory, setActiveCategory] = useState(0);
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+
+  const supabase = useMemo(() => {
+    try {
+      return getSupabaseBrowser();
+    } catch {
+      return null;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!supabase) {
+      setLoading(false);
+      setMessage('Supabase 환경 변수가 아직 설정되지 않았습니다.');
+      return;
+    }
+
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session);
+      setLoading(false);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+      setSession(nextSession);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [supabase]);
+
+  useEffect(() => {
+    if (!session) return;
+    void loadCatalog(session.access_token);
+  }, [session]);
+
+  const dirty = JSON.stringify(catalog) !== JSON.stringify(original);
+  const category = catalog.categories[activeCategory];
+
+  async function loadCatalog(token: string) {
+    setLoading(true);
+    setMessage('');
+    const res = await fetch('/api/admin/food', {
+      headers: { authorization: `Bearer ${token}` },
+    });
+    const json = await res.json();
+    setLoading(false);
+
+    if (!res.ok) {
+      setMessage(`불러오기 실패: ${json.error ?? res.statusText}`);
+      return;
+    }
+
+    setCatalog(json.catalog);
+    setOriginal(json.catalog);
+    setActiveCategory(0);
+  }
+
+  async function signIn() {
+    if (!supabase) return;
+    setMessage('');
+    setLoading(true);
+    const result = password
+      ? await supabase.auth.signInWithPassword({ email, password })
+      : await supabase.auth.signInWithOtp({
+          email,
+          options: { emailRedirectTo: `${window.location.origin}/admin/food` },
+        });
+    setLoading(false);
+    if (result.error) setMessage(result.error.message);
+  }
+
+  async function signOut() {
+    if (!supabase) return;
+    await supabase.auth.signOut();
+    setSession(null);
+  }
+
+  async function save(seedDefaults = false) {
+    if (!session) return;
+    setSaving(true);
+    setMessage('');
+    const res = await fetch('/api/admin/food', {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${session.access_token}`,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(seedDefaults ? { seedDefaults: true } : { catalog }),
+    });
+    const json = await res.json();
+    setSaving(false);
+
+    if (!res.ok) {
+      setMessage(`저장 실패: ${json.error ?? res.statusText}`);
+      return;
+    }
+    setMessage(seedDefaults ? '기본 맛집 데이터를 저장했습니다.' : '맛집 데이터를 저장했습니다.');
+    await loadCatalog(session.access_token);
+  }
+
+  function updateCatalog(next: FoodCatalog) {
+    setCatalog(next);
+    if (activeCategory >= next.categories.length) {
+      setActiveCategory(Math.max(0, next.categories.length - 1));
+    }
+  }
+
+  function updateCategory(index: number, nextCategory: FoodCatalogCategory) {
+    updateCatalog({
+      categories: catalog.categories.map((item, i) => (i === index ? nextCategory : item)),
+    });
+  }
+
+  if (loading) return <AdminShell message="불러오는 중입니다." />;
+  if (!supabase) return <AdminShell message={message} />;
+
+  if (!session) {
+    return (
+      <AdminShell message={message}>
+        <div className="flex min-h-screen items-center justify-center px-5 py-10">
+          <div className="w-full max-w-sm rounded-lg border border-[#d8d0c1] bg-white p-6 shadow-sm">
+            <p className="mb-1 text-xs uppercase tracking-[0.18em] text-[#746c60]">
+              Haemyo
+            </p>
+            <h1 className="mb-6 text-xl font-semibold">맛집 관리자</h1>
+            <label className="mb-3 block text-sm">
+              이메일
+              <input
+                className="mt-1 w-full rounded-md border border-[#d8d0c1] px-3 py-2 outline-none focus:border-[#2f4f46]"
+                value={email}
+                type="email"
+                onChange={(event) => setEmail(event.target.value)}
+              />
+            </label>
+            <label className="mb-5 block text-sm">
+              비밀번호
+              <input
+                className="mt-1 w-full rounded-md border border-[#d8d0c1] px-3 py-2 outline-none focus:border-[#2f4f46]"
+                value={password}
+                type="password"
+                placeholder="비워두면 매직링크 전송"
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </label>
+            <button
+              className="w-full rounded-md bg-[#2f4f46] px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+              type="button"
+              onClick={signIn}
+              disabled={!email}
+            >
+              로그인
+            </button>
+          </div>
+        </div>
+      </AdminShell>
+    );
+  }
+
+  return (
+    <AdminShell message={message}>
+      <header className="sticky top-0 z-20 border-b border-[#d8d0c1] bg-[#f7f3ea]/95 px-5 py-4 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.18em] text-[#746c60]">
+              bookstay admin
+            </p>
+            <h1 className="mt-1 text-xl font-semibold">맛집 관리</h1>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <a className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm" href="/admin/content">
+              문구 관리
+            </a>
+            <a className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm" href="/guide" target="_blank" rel="noreferrer">
+              사이트 보기
+            </a>
+            <button className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm" type="button" onClick={() => save(true)} disabled={saving}>
+              기본값 저장
+            </button>
+            <button className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm" type="button" onClick={signOut}>
+              로그아웃
+            </button>
+            <button className="rounded-md bg-[#2f4f46] px-4 py-2 text-sm font-medium text-white disabled:opacity-50" type="button" onClick={() => save()} disabled={saving || !dirty}>
+              {saving ? '저장 중' : '변경 저장'}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main className="mx-auto grid max-w-7xl gap-5 px-5 py-6 lg:grid-cols-[18rem_1fr]">
+        <aside className="space-y-4">
+          <section className="rounded-lg border border-[#d8d0c1] bg-white p-4">
+            <p className="mb-2 text-sm font-medium">언어</p>
+            <div className="flex rounded-md border border-[#bdb3a2] bg-[#f7f3ea] p-1">
+              {LOCALES.map(({ key, label }) => (
+                <button
+                  key={key}
+                  className={`rounded px-3 py-1.5 text-sm ${activeLocale === key ? 'bg-white shadow-sm' : 'text-[#746c60]'}`}
+                  type="button"
+                  onClick={() => setActiveLocale(key)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </section>
+
+          <section className="rounded-lg border border-[#d8d0c1] bg-white p-4">
+            <div className="mb-3 flex items-center justify-between">
+              <p className="text-sm font-medium">카테고리</p>
+              <button className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs" type="button" onClick={() => {
+                updateCatalog({
+                  categories: [...catalog.categories, newCategory()],
+                });
+                setActiveCategory(catalog.categories.length);
+              }}>
+                추가
+              </button>
+            </div>
+            <div className="space-y-1">
+              {catalog.categories.map((item, index) => (
+                <button
+                  key={item.id}
+                  className={`w-full rounded-md px-3 py-2 text-left text-sm ${activeCategory === index ? 'bg-[#2f4f46] text-white' : 'hover:bg-[#f1eadf]'}`}
+                  type="button"
+                  onClick={() => setActiveCategory(index)}
+                >
+                  {item.title.ko || item.id}
+                  {!item.published ? ' (숨김)' : ''}
+                </button>
+              ))}
+            </div>
+          </section>
+        </aside>
+
+        {category ? (
+          <CategoryEditor
+            category={category}
+            locale={activeLocale}
+            onChange={(next) => updateCategory(activeCategory, next)}
+            onMove={(direction) => {
+              const to = activeCategory + direction;
+              if (to < 0 || to >= catalog.categories.length) return;
+              updateCatalog({ categories: moveItem(catalog.categories, activeCategory, to) });
+              setActiveCategory(to);
+            }}
+            onDelete={() => updateCatalog({ categories: catalog.categories.filter((_, i) => i !== activeCategory) })}
+          />
+        ) : (
+          <section className="rounded-lg border border-[#d8d0c1] bg-white p-6">
+            <p className="text-sm text-[#746c60]">카테고리를 추가해 주세요.</p>
+          </section>
+        )}
+      </main>
+    </AdminShell>
+  );
+}
+
+function CategoryEditor({
+  category,
+  locale,
+  onChange,
+  onMove,
+  onDelete,
+}: {
+  category: FoodCatalogCategory;
+  locale: Locale;
+  onChange: (category: FoodCatalogCategory) => void;
+  onMove: (direction: -1 | 1) => void;
+  onDelete: () => void;
+}) {
+  return (
+    <section className="space-y-4">
+      <div className="rounded-lg border border-[#d8d0c1] bg-white p-4">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+          <h2 className="font-semibold">카테고리</h2>
+          <div className="flex gap-2">
+            <button className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs" type="button" onClick={() => onMove(-1)}>위</button>
+            <button className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs" type="button" onClick={() => onMove(1)}>아래</button>
+            <button className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs" type="button" onClick={onDelete}>삭제</button>
+          </div>
+        </div>
+        <div className="grid gap-3 md:grid-cols-2">
+          <TextField label="제목" value={category.title[locale]} onChange={(value) => onChange({ ...category, title: { ...category.title, [locale]: value } })} />
+          <TextField label="카테고리 ID" value={category.id} onChange={(value) => onChange({ ...category, id: slugify(value) })} />
+        </div>
+        <TextArea label="카테고리 메모" value={category.note?.[locale] ?? ''} onChange={(value) => onChange({ ...category, note: { ...(category.note ?? emptyText), [locale]: value } })} />
+        <div className="mt-3 flex gap-4 text-sm">
+          <label className="flex items-center gap-2">
+            <input checked={category.published} type="checkbox" onChange={(event) => onChange({ ...category, published: event.target.checked })} />
+            노출
+          </label>
+          <label className="flex items-center gap-2">
+            <input checked={Boolean(category.drive)} type="checkbox" onChange={(event) => onChange({ ...category, drive: event.target.checked || undefined })} />
+            차량 이동 섹션
+          </label>
+        </div>
+      </div>
+
+      <div className="rounded-lg border border-[#d8d0c1] bg-white p-4">
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="font-semibold">맛집</h2>
+          <button className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm" type="button" onClick={() => onChange({ ...category, spots: [...category.spots, newSpot()] })}>
+            맛집 추가
+          </button>
+        </div>
+        <div className="space-y-4">
+          {category.spots.map((spot, index) => (
+            <SpotEditor
+              key={spot.id}
+              spot={spot}
+              locale={locale}
+              onChange={(next) => onChange({ ...category, spots: category.spots.map((item, i) => (i === index ? next : item)) })}
+              onMove={(direction) => {
+                const to = index + direction;
+                if (to < 0 || to >= category.spots.length) return;
+                onChange({ ...category, spots: moveItem(category.spots, index, to) });
+              }}
+              onDelete={() => onChange({ ...category, spots: category.spots.filter((_, i) => i !== index) })}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SpotEditor({
+  spot,
+  locale,
+  onChange,
+  onMove,
+  onDelete,
+}: {
+  spot: FoodCatalogSpot;
+  locale: Locale;
+  onChange: (spot: FoodCatalogSpot) => void;
+  onMove: (direction: -1 | 1) => void;
+  onDelete: () => void;
+}) {
+  return (
+    <article className="rounded-lg border border-[#e2d9ca] bg-[#fffdf8] p-4">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <h3 className="font-medium">{spot.name.ko || spot.id}</h3>
+        <div className="flex gap-2">
+          <button className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs" type="button" onClick={() => onMove(-1)}>위</button>
+          <button className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs" type="button" onClick={() => onMove(1)}>아래</button>
+          <button className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs" type="button" onClick={onDelete}>삭제</button>
+        </div>
+      </div>
+      <div className="grid gap-3 md:grid-cols-2">
+        <TextField label="이름" value={spot.name[locale]} onChange={(value) => onChange({ ...spot, name: { ...spot.name, [locale]: value } })} />
+        <TextField label="거리 라벨" value={spot.walk[locale]} onChange={(value) => onChange({ ...spot, walk: { ...spot.walk, [locale]: value } })} />
+        <TextField label="지도 검색어" value={spot.mapQuery} onChange={(value) => onChange({ ...spot, mapQuery: value, id: spot.id || slugify(value) })} />
+        <TextField label="사진 경로" value={spot.photoSrc ?? ''} onChange={(value) => onChange({ ...spot, photoSrc: value || undefined })} />
+        <TextField label="주소" value={spot.addr?.[locale] ?? ''} onChange={(value) => onChange({ ...spot, addr: { ...(spot.addr ?? emptyText), [locale]: value } })} />
+        <TextField label="walk CSS class" value={spot.walkClass ?? ''} onChange={(value) => onChange({ ...spot, walkClass: value || undefined })} />
+      </div>
+      <TextArea label="설명 HTML" value={spot.descHtml[locale]} onChange={(value) => onChange({ ...spot, descHtml: { ...spot.descHtml, [locale]: value } })} />
+      <label className="mt-3 flex items-center gap-2 text-sm">
+        <input checked={spot.published} type="checkbox" onChange={(event) => onChange({ ...spot, published: event.target.checked })} />
+        노출
+      </label>
+    </article>
+  );
+}
+
+function TextField({ label, value, onChange }: { label: string; value: string; onChange: (value: string) => void }) {
+  return (
+    <label className="block text-sm">
+      <span className="mb-1 block font-medium">{label}</span>
+      <input className="w-full rounded-md border border-[#d8d0c1] bg-white px-3 py-2 outline-none focus:border-[#2f4f46]" value={value} onChange={(event) => onChange(event.target.value)} />
+    </label>
+  );
+}
+
+function TextArea({ label, value, onChange }: { label: string; value: string; onChange: (value: string) => void }) {
+  return (
+    <label className="mt-3 block text-sm">
+      <span className="mb-1 block font-medium">{label}</span>
+      <textarea className="min-h-24 w-full resize-y rounded-md border border-[#d8d0c1] bg-white px-3 py-2 leading-relaxed outline-none focus:border-[#2f4f46]" value={value} onChange={(event) => onChange(event.target.value)} />
+    </label>
+  );
+}
+
+function newCategory(): FoodCatalogCategory {
+  const id = `category-${Date.now()}`;
+  return { id, title: { ...emptyText }, published: true, spots: [] };
+}
+
+function newSpot(): FoodCatalogSpot {
+  const id = `spot-${Date.now()}`;
+  return {
+    id,
+    mapQuery: '',
+    name: { ...emptyText },
+    walk: { ko: '도보 분', en: 'min walk', zh: '步行 分钟' },
+    descHtml: { ...emptyText },
+    published: true,
+  };
+}
+
+function moveItem<T>(items: T[], from: number, to: number) {
+  const next = [...items];
+  const [item] = next.splice(from, 1);
+  if (item === undefined) return items;
+  next.splice(to, 0, item);
+  return next;
+}
+
+function slugify(value: string) {
+  return (
+    value
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9가-힣]+/g, '-')
+      .replace(/^-+|-+$/g, '') || `item-${Date.now()}`
+  );
+}
+
+function AdminShell({ children, message }: { children?: React.ReactNode; message?: string }) {
+  return (
+    <div className="min-h-screen bg-[#f7f3ea] font-sans text-[#29251f]">
+      {children}
+      {message ? (
+        <div className="fixed bottom-4 left-1/2 z-50 max-w-[calc(100vw-2rem)] -translate-x-1/2 rounded-full border border-[#d8d0c1] bg-white px-4 py-2 text-sm shadow-lg">
+          {message}
+        </div>
+      ) : null}
+    </div>
+  );
+}

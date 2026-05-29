@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import type { ReactNode } from 'react';
 import { FOOD_SPOT_PHOTOS, type FoodSpotPhotoSlug } from '@/data/food-spot-photos';
+import type { FoodCatalogSpot } from '@/data/food-catalog';
 import type { LocaleText } from '@/lib/locale';
 import { foodSpotSlug } from '@/lib/food-spot-slug';
+import { sanitizeRichHtml } from '@/lib/rich-content';
 
 function MapPinLink({ mapQuery }: { mapQuery: string }) {
   return (
@@ -79,6 +81,74 @@ export function FoodSpotCard({ spot }: { spot: FoodSpotData }) {
             <div lang="ko">{spot.desc.ko}</div>
             <div lang="en">{spot.desc.en}</div>
             <div lang="zh">{spot.desc.zh}</div>
+          </div>
+          {spot.addr ? (
+            <p className="food-addr toggle">
+              <span lang="ko">{spot.addr.ko}</span>
+              <span lang="en">{spot.addr.en}</span>
+              <span lang="zh">{spot.addr.zh}</span>
+            </p>
+          ) : null}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export function FoodCatalogSpotCard({ spot }: { spot: FoodCatalogSpot }) {
+  const slug = foodSpotSlug(spot.mapQuery);
+  const fallbackPhoto =
+    slug && slug in FOOD_SPOT_PHOTOS
+      ? FOOD_SPOT_PHOTOS[slug as FoodSpotPhotoSlug].src
+      : undefined;
+  const photoSrc = spot.photoSrc || fallbackPhoto;
+
+  return (
+    <article className="food-spot" data-place={spot.mapQuery}>
+      <header className="food-spot-head">
+        <h4 className="food-spot-name toggle">
+          <span lang="ko">{spot.name.ko}</span>
+          <span lang="en">{spot.name.en}</span>
+          <span lang="zh">{spot.name.zh}</span>
+        </h4>
+        <div className="food-spot-meta">
+          <span
+            className={`food-walk toggle${spot.walkClass ? ` ${spot.walkClass}` : ''}`}
+          >
+            <span lang="ko">{spot.walk.ko}</span>
+            <span lang="en">{spot.walk.en}</span>
+            <span lang="zh">{spot.walk.zh}</span>
+          </span>
+          <MapPinLink mapQuery={spot.mapQuery} />
+        </div>
+      </header>
+      <div className={`food-spot-body${photoSrc ? ' food-spot-body--with-photo' : ''}`}>
+        {photoSrc ? (
+          <figure className="food-spot-photo">
+            <Image
+              src={photoSrc}
+              alt={spot.name.ko}
+              width={112}
+              height={112}
+              sizes="112px"
+              className="food-spot-photo__img"
+            />
+          </figure>
+        ) : null}
+        <div className="food-spot-text">
+          <div className="food-desc toggle">
+            <div
+              lang="ko"
+              dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(spot.descHtml.ko) }}
+            />
+            <div
+              lang="en"
+              dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(spot.descHtml.en) }}
+            />
+            <div
+              lang="zh"
+              dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(spot.descHtml.zh) }}
+            />
           </div>
           {spot.addr ? (
             <p className="food-addr toggle">

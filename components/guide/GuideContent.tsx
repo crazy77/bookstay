@@ -11,13 +11,19 @@ import {
 import { CopyButton } from '@/components/ui/CopyButton';
 import { Logo } from '@/components/ui/Logo';
 import { Seagull } from '@/components/ui/Seagull';
-import { FoodSpotCard } from '@/components/guide/FoodSpotCard';
+import { FoodCatalogSpotCard } from '@/components/guide/FoodSpotCard';
 import { MapFigure } from '@/components/guide/MapFigure';
-import { FOOD_CATEGORIES } from '@/data/food-spots';
+import type { FoodCatalogCategory } from '@/data/food-catalog';
 import { contentValue, type ContentMap, type RichLine } from '@/data/site-content';
 import { KAKAO_CAR_URL, KAKAO_TRANSIT_URL, WIFI } from '@/lib/site';
 
-export function GuideContent({ content }: { content: ContentMap }) {
+export function GuideContent({
+  content,
+  foodCategories,
+}: {
+  content: ContentMap;
+  foodCategories: FoodCatalogCategory[];
+}) {
   const heroTitle = contentValue<string>(content, 'guide.title.hero');
   const heroCopy = contentValue<string[]>(content, 'guide.heroCopy');
   const checkinTitle = contentValue<string>(content, 'guide.title.checkin');
@@ -212,7 +218,7 @@ export function GuideContent({ content }: { content: ContentMap }) {
           <span lang="en">{foodIntro.en}</span>
           <span lang="zh">{foodIntro.zh}</span>
         </p>
-        {FOOD_CATEGORIES.map((cat) => (
+        {foodCategories.map((cat) => (
           <div
             key={cat.title.ko}
             className={`food-category${cat.drive ? ' food-category--drive' : ''}`}
@@ -230,7 +236,7 @@ export function GuideContent({ content }: { content: ContentMap }) {
               </p>
             ) : null}
             {cat.spots.map((spot) => (
-              <FoodSpotCard key={spot.name.ko} spot={spot} />
+              <FoodCatalogSpotCard key={spot.id} spot={spot} />
             ))}
           </div>
         ))}
