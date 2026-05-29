@@ -488,30 +488,32 @@ function ImageField({
           <div className="hidden h-20 w-20 rounded-md border border-dashed border-[#d8d0c1] sm:block" />
         )}
         <div className="min-w-0 space-y-2">
-          <input
-            className="h-9 w-full rounded-md border border-[#d8d0c1] bg-white px-3 text-sm outline-none focus:border-[#2f4f46]"
-            value={value}
-            placeholder="/assets/food/... 또는 업로드 URL"
-            onChange={(event) => onChange(event.target.value)}
-          />
-          <label
-            className={`inline-flex h-9 w-fit cursor-pointer items-center rounded-md border border-[#bdb3a2] bg-white px-3 text-xs font-medium ${
-              uploading ? 'pointer-events-none opacity-60' : ''
-            }`}
-          >
-            {uploading ? '업로드 중' : '이미지 업로드'}
+          <div className="flex gap-2">
+            <label
+              className={`inline-flex h-9 w-fit shrink-0 cursor-pointer items-center rounded-md border border-[#bdb3a2] bg-white px-3 text-xs font-medium ${
+                uploading ? 'pointer-events-none opacity-60' : ''
+              }`}
+            >
+              {uploading ? '업로드 중' : '이미지 업로드'}
+              <input
+                accept="image/*"
+                className="sr-only"
+                disabled={uploading}
+                type="file"
+                onChange={(event) => {
+                  const file = event.target.files?.[0];
+                  if (file) void upload(file);
+                  event.currentTarget.value = '';
+                }}
+              />
+            </label>
             <input
-              accept="image/*"
-              className="sr-only"
-              disabled={uploading}
-              type="file"
-              onChange={(event) => {
-                const file = event.target.files?.[0];
-                if (file) void upload(file);
-                event.currentTarget.value = '';
-              }}
+              className="h-9 min-w-0 flex-1 rounded-md border border-[#d8d0c1] bg-white px-3 text-sm outline-none focus:border-[#2f4f46]"
+              value={value}
+              placeholder="/assets/food/... 또는 업로드 URL"
+              onChange={(event) => onChange(event.target.value)}
             />
-          </label>
+          </div>
           {uploading ? <p className="text-xs text-[#746c60]">업로드 중...</p> : null}
         </div>
       </div>
