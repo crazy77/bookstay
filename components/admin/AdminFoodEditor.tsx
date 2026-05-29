@@ -234,14 +234,14 @@ export function AdminFoodEditor() {
           </>
         }
       >
-        <div className="grid grid-cols-[6.8rem_minmax(0,1fr)_6.8rem] gap-2 md:grid-cols-[auto_1fr_auto] md:items-center">
+        <div className="grid grid-cols-[5.6rem_minmax(0,1fr)_6.8rem] gap-2 md:grid-cols-[5.6rem_1fr_auto] md:items-center">
           <div className="flex min-w-0 rounded-md border border-[#bdb3a2] bg-[#f7f3ea] p-0.5">
             {LOCALES.map(({ key, label }) => (
                   <button
                     key={key}
                 aria-label={label}
                 title={label}
-                className={`h-8 min-w-0 flex-1 rounded px-1 text-sm md:px-2 ${
+                className={`h-8 min-w-0 flex-1 rounded px-1 text-sm ${
                       activeLocale === key ? 'bg-white shadow-sm' : 'text-[#746c60]'
                     }`}
                     type="button"
