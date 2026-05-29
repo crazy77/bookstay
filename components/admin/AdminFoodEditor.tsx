@@ -383,7 +383,12 @@ function SpotEditor({
         <TextField label="이름" value={spot.name[locale]} onChange={(value) => onChange({ ...spot, name: { ...spot.name, [locale]: value } })} />
         <TextField label="거리 라벨" value={spot.walk[locale]} onChange={(value) => onChange({ ...spot, walk: { ...spot.walk, [locale]: value } })} />
         <TextField label="지도 검색어" value={spot.mapQuery} onChange={(value) => onChange({ ...spot, mapQuery: value, id: spot.id || slugify(value) })} />
-        <TextField label="사진 경로" value={spot.photoSrc ?? ''} onChange={(value) => onChange({ ...spot, photoSrc: value || undefined })} />
+        <ImageField
+          label="사진"
+          value={spot.photoSrc ?? ''}
+          folder="food"
+          onChange={(value) => onChange({ ...spot, photoSrc: value || undefined })}
+        />
         <TextField label="주소" value={spot.addr?.[locale] ?? ''} onChange={(value) => onChange({ ...spot, addr: { ...(spot.addr ?? emptyText), [locale]: value } })} />
         <TextField label="walk CSS class" value={spot.walkClass ?? ''} onChange={(value) => onChange({ ...spot, walkClass: value || undefined })} />
       </div>
@@ -401,6 +406,75 @@ function TextField({ label, value, onChange }: { label: string; value: string; o
     <label className="block text-sm">
       <span className="mb-1 block font-medium">{label}</span>
       <input className="w-full rounded-md border border-[#d8d0c1] bg-white px-3 py-2 outline-none focus:border-[#2f4f46]" value={value} onChange={(event) => onChange(event.target.value)} />
+    </label>
+  );
+}
+
+function ImageField({
+  label,
+  value,
+  folder,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  folder: string;
+  onChange: (value: string) => void;
+}) {
+  const [uploading, setUploading] = useState(false);
+
+  async function upload(file: File) {
+    const { data } = await getSupabaseBrowser().auth.getSession();
+    const token = data.session?.access_token;
+    if (!token) return;
+
+    setUploading(true);
+    const form = new FormData();
+    form.set('file', file);
+    form.set('folder', folder);
+    const res = await fetch('/api/admin/images', {
+      method: 'POST',
+      headers: { authorization: `Bearer ${token}` },
+      body: form,
+    });
+    const json = await res.json();
+    setUploading(false);
+    if (!res.ok) {
+      window.alert(json.error ?? '업로드 실패');
+      return;
+    }
+    onChange(json.url);
+  }
+
+  return (
+    <label className="block text-sm">
+      <span className="mb-1 block font-medium">{label}</span>
+      <div className="space-y-2">
+        {value ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={value}
+            alt=""
+            className="h-24 w-24 rounded-md border border-[#d8d0c1] object-cover"
+          />
+        ) : null}
+        <input
+          className="w-full rounded-md border border-[#d8d0c1] bg-white px-3 py-2 outline-none focus:border-[#2f4f46]"
+          value={value}
+          placeholder="/assets/food/... 또는 업로드 URL"
+          onChange={(event) => onChange(event.target.value)}
+        />
+        <input
+          accept="image/*"
+          className="w-full text-xs"
+          type="file"
+          onChange={(event) => {
+            const file = event.target.files?.[0];
+            if (file) void upload(file);
+          }}
+        />
+        {uploading ? <p className="text-xs text-[#746c60]">업로드 중...</p> : null}
+      </div>
     </label>
   );
 }
