@@ -46,7 +46,6 @@ Vercel · Framework Preset: **Next.js** (Install Command: `bun install`, Bun loc
 
 - `/admin/content` — 홈·가이드 운영 문구 수정
 - Supabase Auth에서 관리자 계정을 만든 뒤 `ADMIN_EMAILS`에 같은 이메일을 등록
-- 첫 로그인 후 **기본값 저장**을 눌러 코드 기본 문구를 DB에 초기 저장
 - 공개 페이지는 DB 문구를 우선 사용하고, DB가 없으면 코드 기본값으로 표시
 - `/api/visits` — 방문 카운터와 Supabase pause 방지용 health endpoint
 

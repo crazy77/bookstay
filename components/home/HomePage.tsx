@@ -22,8 +22,11 @@ export function HomePage({ content }: { content: ContentMap }) {
 }
 
 function getHomeHeroSlides(content: ContentMap): HomeHeroSlide[] {
-  return contentValue<ImageListItem[]>(content, 'home.heroSlides')
-    .ko.map((slide) => ({
+  const slides = contentValue<ImageListItem[]>(content, 'home.heroSlides').ko;
+  if (!Array.isArray(slides)) return [];
+
+  return slides
+    .map((slide) => ({
       src: String(slide.src ?? '').trim(),
       caption: String(slide.caption ?? ''),
     }))
