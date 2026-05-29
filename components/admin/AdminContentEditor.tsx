@@ -813,21 +813,9 @@ function ImageListItemEditor({
           <div className="hidden h-24 rounded-md border border-dashed border-[#d8d0c1] sm:block" />
         )}
         <div className="min-w-0 space-y-2">
-          <input
-            className="h-10 w-full rounded-md border border-[#d8d0c1] bg-white px-3 text-sm outline-none focus:border-[#2f4f46]"
-            value={slide.src}
-            placeholder="/assets/hero.png 또는 업로드 URL"
-            onChange={(event) => onChange({ src: event.target.value })}
-          />
-          <div className="flex flex-wrap gap-2">
-            <input
-              className="h-9 min-w-0 flex-1 rounded-md border border-[#d8d0c1] bg-white px-3 text-sm outline-none focus:border-[#2f4f46]"
-              value={slide.caption}
-              placeholder="캡션"
-              onChange={(event) => onChange({ caption: event.target.value })}
-            />
+          <div className="flex gap-2">
             <label
-              className={`inline-flex h-9 w-fit cursor-pointer items-center rounded-md border border-[#bdb3a2] bg-white px-3 text-xs font-medium ${
+              className={`inline-flex h-10 w-fit shrink-0 cursor-pointer items-center rounded-md border border-[#bdb3a2] bg-white px-3 text-xs font-medium ${
                 uploading ? 'pointer-events-none opacity-60' : ''
               }`}
             >
@@ -844,7 +832,19 @@ function ImageListItemEditor({
                 }}
               />
             </label>
+            <input
+              className="h-10 min-w-0 flex-1 rounded-md border border-[#d8d0c1] bg-white px-3 text-sm outline-none focus:border-[#2f4f46]"
+              value={slide.src}
+              placeholder="/assets/hero.png 또는 업로드 URL"
+              onChange={(event) => onChange({ src: event.target.value })}
+            />
           </div>
+          <input
+            className="h-9 w-full rounded-md border border-[#d8d0c1] bg-white px-3 text-sm outline-none focus:border-[#2f4f46]"
+            value={slide.caption}
+            placeholder="캡션"
+            onChange={(event) => onChange({ caption: event.target.value })}
+          />
         </div>
       </div>
     </div>
