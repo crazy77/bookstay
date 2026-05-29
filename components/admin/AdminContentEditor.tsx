@@ -351,9 +351,6 @@ export function AdminContentEditor() {
             >
               사이트 보기
             </a>
-            <AdminMenuButton onClick={seedDefaults} disabled={isSaving}>
-              기본값 저장
-            </AdminMenuButton>
             <AdminMenuButton
               onClick={() => {
                 setDrafts(originals);

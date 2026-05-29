@@ -218,9 +218,6 @@ export function AdminFoodEditor() {
               >
                 사이트 보기
               </a>
-            <AdminMenuButton onClick={() => save(true)} disabled={saving}>
-                    기본값 저장
-            </AdminMenuButton>
             <AdminMenuButton
               onClick={() => {
                 setCatalog(original);
