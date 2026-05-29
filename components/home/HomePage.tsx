@@ -1,5 +1,5 @@
 import { HomeHero } from '@/components/home/HomeHero';
-import { contentValue, type ContentMap } from '@/data/site-content';
+import { contentValue, type ContentMap, type ImageListItem } from '@/data/site-content';
 import type { HomeHeroSlide } from '@/data/home';
 import { INSTAGRAM_DM_URL } from '@/lib/site';
 
@@ -22,10 +22,10 @@ export function HomePage({ content }: { content: ContentMap }) {
 }
 
 function getHomeHeroSlides(content: ContentMap): HomeHeroSlide[] {
-  return [1, 2]
-    .map((index) => ({
-      src: contentValue<string>(content, `home.heroSlide${index}.src`).ko.trim(),
-      caption: contentValue<string>(content, `home.heroSlide${index}.caption`).ko,
+  return contentValue<ImageListItem[]>(content, 'home.heroSlides')
+    .ko.map((slide) => ({
+      src: String(slide.src ?? '').trim(),
+      caption: String(slide.caption ?? ''),
     }))
     .filter((slide) => slide.src);
 }

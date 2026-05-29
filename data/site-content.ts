@@ -13,8 +13,18 @@ export type RichSegment =
     };
 
 export type RichLine = RichSegment[];
-export type LocaleContentValue = string | string[] | RichLine[];
-export type ContentInputType = 'text' | 'textarea' | 'list' | 'rich_list' | 'image';
+export type ImageListItem = {
+  src: string;
+  caption: string;
+};
+export type LocaleContentValue = string | string[] | RichLine[] | ImageListItem[];
+export type ContentInputType =
+  | 'text'
+  | 'textarea'
+  | 'list'
+  | 'rich_list'
+  | 'image'
+  | 'image_list';
 
 export type ContentEntryDefinition = {
   key: string;
@@ -57,32 +67,24 @@ export const DEFAULT_CONTENT_ENTRIES = [
     },
   },
   {
-    key: 'home.heroSlide1.src',
+    key: 'home.heroSlides',
     category: 'home',
-    label: '홈 · 대표 사진 1 이미지',
-    inputType: 'image',
-    localeValues: { ko: '/assets/hero.png', en: '/assets/hero.png', zh: '/assets/hero.png' },
-  },
-  {
-    key: 'home.heroSlide1.caption',
-    category: 'home',
-    label: '홈 · 대표 사진 1 캡션',
-    inputType: 'text',
-    localeValues: { ko: '해묘서가 침실', en: 'Haemyo bedroom', zh: '海猫书斋卧室' },
-  },
-  {
-    key: 'home.heroSlide2.src',
-    category: 'home',
-    label: '홈 · 대표 사진 2 이미지',
-    inputType: 'image',
-    localeValues: { ko: '/assets/hero2.png', en: '/assets/hero2.png', zh: '/assets/hero2.png' },
-  },
-  {
-    key: 'home.heroSlide2.caption',
-    category: 'home',
-    label: '홈 · 대표 사진 2 캡션',
-    inputType: 'text',
-    localeValues: { ko: '해묘서가 창문 정원', en: 'Haemyo window garden', zh: '海猫书斋窗边庭院' },
+    label: '홈 · 대표 사진',
+    inputType: 'image_list',
+    localeValues: {
+      ko: [
+        { src: '/assets/hero.png', caption: '해묘서가 침실' },
+        { src: '/assets/hero2.png', caption: '해묘서가 창문 정원' },
+      ],
+      en: [
+        { src: '/assets/hero.png', caption: 'Haemyo bedroom' },
+        { src: '/assets/hero2.png', caption: 'Haemyo window garden' },
+      ],
+      zh: [
+        { src: '/assets/hero.png', caption: '海猫书斋卧室' },
+        { src: '/assets/hero2.png', caption: '海猫书斋窗边庭院' },
+      ],
+    },
   },
   {
     key: 'home.footerBusinessNumber',

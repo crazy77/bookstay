@@ -6,11 +6,11 @@ import LinkExtension from '@tiptap/extension-link';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { AdminHeader, AdminMenuButton } from '@/components/admin/AdminHeader';
-import type { ContentInputType } from '@/data/site-content';
+import type { ContentInputType, ImageListItem } from '@/data/site-content';
 import { getSupabaseBrowser } from '@/lib/supabase';
 
 type Locale = 'ko' | 'en' | 'zh';
-type DraftValue = string | string[];
+type DraftValue = string | string[] | ImageListItem[];
 type Drafts = Record<string, Record<Locale, DraftValue>>;
 
 type EntryRow = {
@@ -34,11 +34,26 @@ const CATEGORY_LABELS: Record<string, string> = {
 };
 
 function normalizeDraft(type: ContentInputType, value: unknown): DraftValue {
+  if (type === 'image_list') return normalizeImageList(value);
   if (type === 'list') {
     return Array.isArray(value) ? value.map((line) => String(line ?? '')) : [];
   }
   if (type === 'rich_list') return normalizeRichHtmlLines(value);
   return String(value ?? '');
+}
+
+function normalizeImageList(value: unknown): ImageListItem[] {
+  if (!Array.isArray(value)) return [];
+  return value
+    .map((item) => {
+      if (!item || typeof item !== 'object') return { src: '', caption: '' };
+      const data = item as Partial<ImageListItem>;
+      return {
+        src: String(data.src ?? ''),
+        caption: String(data.caption ?? ''),
+      };
+    })
+    .filter((item) => item.src || item.caption);
 }
 
 function normalizeRichHtmlLines(value: unknown): string[] {
@@ -51,6 +66,21 @@ function normalizeRichHtmlLines(value: unknown): string[] {
 }
 
 function cleanValue(type: ContentInputType, value: DraftValue) {
+  if (type === 'image_list') {
+    return Array.isArray(value)
+      ? value
+          .map((item) => {
+            if (!item || typeof item !== 'object' || Array.isArray(item)) {
+              return { src: '', caption: '' };
+            }
+            return {
+              src: String((item as ImageListItem).src ?? '').trim(),
+              caption: String((item as ImageListItem).caption ?? '').trim(),
+            };
+          })
+          .filter((item) => item.src)
+      : [];
+  }
   if (type === 'list') {
     return Array.isArray(value)
       ? value.map((line) => String(line).trim()).filter(Boolean)
@@ -550,6 +580,16 @@ function ValueEditor({
     );
   }
 
+  if (type === 'image_list') {
+    return (
+      <ImageListEditor
+        value={Array.isArray(value) ? normalizeImageList(value) : []}
+        saveControl={saveControl}
+        onChange={onChange}
+      />
+    );
+  }
+
   if (type === 'list') {
     return (
       <ListEditor
@@ -569,6 +609,24 @@ function ValueEditor({
   );
 }
 
+async function uploadAdminImage(file: File, folder: string) {
+  const { data } = await getSupabaseBrowser().auth.getSession();
+  const token = data.session?.access_token;
+  if (!token) return '';
+
+  const form = new FormData();
+  form.set('file', file);
+  form.set('folder', folder);
+  const res = await fetch('/api/admin/images', {
+    method: 'POST',
+    headers: { authorization: `Bearer ${token}` },
+    body: form,
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.error ?? '업로드 실패');
+  return String(json.url ?? '');
+}
+
 function ImageValueEditor({
   value,
   saveControl,
@@ -581,26 +639,15 @@ function ImageValueEditor({
   const [uploading, setUploading] = useState(false);
 
   async function upload(file: File) {
-    const { data } = await getSupabaseBrowser().auth.getSession();
-    const token = data.session?.access_token;
-    if (!token) return;
-
     setUploading(true);
-    const form = new FormData();
-    form.set('file', file);
-    form.set('folder', 'home');
-    const res = await fetch('/api/admin/images', {
-      method: 'POST',
-      headers: { authorization: `Bearer ${token}` },
-      body: form,
-    });
-    const json = await res.json();
-    setUploading(false);
-    if (!res.ok) {
-      window.alert(json.error ?? '업로드 실패');
-      return;
+    try {
+      const url = await uploadAdminImage(file, 'home');
+      if (url) onChange(url);
+    } catch (error) {
+      window.alert(error instanceof Error ? error.message : '업로드 실패');
+    } finally {
+      setUploading(false);
     }
-    onChange(json.url);
   }
 
   return (
@@ -643,6 +690,164 @@ function ImageValueEditor({
         {uploading ? <p className="text-xs text-[#746c60]">업로드 중...</p> : null}
       </div>
       <div className="flex justify-end sm:block">{saveControl}</div>
+    </div>
+  );
+}
+
+function ImageListEditor({
+  value,
+  saveControl,
+  onChange,
+}: {
+  value: ImageListItem[];
+  saveControl: React.ReactNode;
+  onChange: (value: ImageListItem[]) => void;
+}) {
+  const slides = value.length ? value : [{ src: '', caption: '' }];
+
+  function updateSlide(index: number, patch: Partial<ImageListItem>) {
+    onChange(slides.map((slide, i) => (i === index ? { ...slide, ...patch } : slide)));
+  }
+
+  return (
+    <div className="space-y-2">
+      {slides.map((slide, index) => (
+        <ImageListItemEditor
+          key={index}
+          index={index}
+          slide={slide}
+          canDelete={slides.length > 1}
+          canMoveUp={index > 0}
+          canMoveDown={index < slides.length - 1}
+          onChange={(patch) => updateSlide(index, patch)}
+          onMove={(to) => onChange(moveItem(slides, index, to))}
+          onDelete={() => onChange(slides.filter((_, i) => i !== index))}
+        />
+      ))}
+      <div className="flex items-center justify-between gap-2">
+        <button
+          className="h-10 rounded-md border border-[#bdb3a2] px-3 text-xs"
+          type="button"
+          onClick={() => onChange([...slides, { src: '', caption: '' }])}
+        >
+          사진 추가
+        </button>
+        {saveControl}
+      </div>
+    </div>
+  );
+}
+
+function ImageListItemEditor({
+  index,
+  slide,
+  canDelete,
+  canMoveUp,
+  canMoveDown,
+  onChange,
+  onMove,
+  onDelete,
+}: {
+  index: number;
+  slide: ImageListItem;
+  canDelete: boolean;
+  canMoveUp: boolean;
+  canMoveDown: boolean;
+  onChange: (patch: Partial<ImageListItem>) => void;
+  onMove: (to: number) => void;
+  onDelete: () => void;
+}) {
+  const [uploading, setUploading] = useState(false);
+
+  async function upload(file: File) {
+    setUploading(true);
+    try {
+      const url = await uploadAdminImage(file, 'home');
+      if (url) onChange({ src: url });
+    } catch (error) {
+      window.alert(error instanceof Error ? error.message : '업로드 실패');
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  return (
+    <div className="rounded-md border border-[#e2d9ca] bg-[#fffdf8] p-2">
+      <div className="mb-2 flex items-center justify-between gap-2">
+        <p className="text-xs font-medium text-[#746c60]">사진 {index + 1}</p>
+        <div className="flex gap-1">
+          <button
+            className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs disabled:opacity-40"
+            type="button"
+            disabled={!canMoveUp}
+            onClick={() => onMove(index - 1)}
+          >
+            위
+          </button>
+          <button
+            className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs disabled:opacity-40"
+            type="button"
+            disabled={!canMoveDown}
+            onClick={() => onMove(index + 1)}
+          >
+            아래
+          </button>
+          <button
+            className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs disabled:opacity-40"
+            type="button"
+            disabled={!canDelete}
+            onClick={onDelete}
+          >
+            삭제
+          </button>
+        </div>
+      </div>
+      <div className="grid gap-2 sm:grid-cols-[6rem_minmax(0,1fr)]">
+        {slide.src ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={slide.src}
+            alt=""
+            className="h-24 w-full rounded-md border border-[#d8d0c1] object-cover sm:w-24"
+          />
+        ) : (
+          <div className="hidden h-24 rounded-md border border-dashed border-[#d8d0c1] sm:block" />
+        )}
+        <div className="min-w-0 space-y-2">
+          <input
+            className="h-10 w-full rounded-md border border-[#d8d0c1] bg-white px-3 text-sm outline-none focus:border-[#2f4f46]"
+            value={slide.src}
+            placeholder="/assets/hero.png 또는 업로드 URL"
+            onChange={(event) => onChange({ src: event.target.value })}
+          />
+          <div className="flex flex-wrap gap-2">
+            <input
+              className="h-9 min-w-0 flex-1 rounded-md border border-[#d8d0c1] bg-white px-3 text-sm outline-none focus:border-[#2f4f46]"
+              value={slide.caption}
+              placeholder="캡션"
+              onChange={(event) => onChange({ caption: event.target.value })}
+            />
+            <label
+              className={`inline-flex h-9 w-fit cursor-pointer items-center rounded-md border border-[#bdb3a2] bg-white px-3 text-xs font-medium ${
+                uploading ? 'pointer-events-none opacity-60' : ''
+              }`}
+            >
+              {uploading ? '업로드 중' : '이미지 업로드'}
+              <input
+                accept="image/*"
+                className="sr-only"
+                disabled={uploading}
+                type="file"
+                onChange={(event) => {
+                  const file = event.target.files?.[0];
+                  if (file) void upload(file);
+                  event.currentTarget.value = '';
+                }}
+              />
+            </label>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
