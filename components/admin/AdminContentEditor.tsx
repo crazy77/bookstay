@@ -443,39 +443,46 @@ function EntryEditor({
   onChange: (value: DraftValue) => void;
   onSave: () => void;
 }) {
+  const saveButton = (
+    <button
+      className="h-10 shrink-0 rounded-md border border-[#bdb3a2] px-3 text-xs disabled:opacity-50"
+      type="button"
+      onClick={onSave}
+      disabled={!dirty || saving}
+    >
+      {saving ? '저장 중' : '저장'}
+    </button>
+  );
+
   return (
-    <section className="rounded-lg border border-[#d8d0c1] bg-white p-4 shadow-sm">
-      <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-        <div>
-          <div className="flex flex-wrap items-center gap-2">
-            <p className="text-xs uppercase tracking-wide text-[#746c60]">
-              {CATEGORY_LABELS[entry.category] ?? entry.category} · {entry.input_type}
-            </p>
-            {dirty ? (
-              <span className="rounded-full bg-[#e9d7a8] px-2 py-0.5 text-[0.7rem] text-[#4f3e12]">
-                변경됨
-              </span>
-            ) : null}
-          </div>
-          <h2 className="mt-1 font-semibold">{entry.label}</h2>
-          <p className="mt-1 font-mono text-xs text-[#746c60]">{entry.key}</p>
-          {entry.updated_at ? (
-            <p className="mt-1 text-xs text-[#746c60]">
-              마지막 저장 {new Date(entry.updated_at).toLocaleString('ko-KR')}
-            </p>
+    <section className="rounded-lg border border-[#d8d0c1] bg-white p-3 shadow-sm">
+      <div className="mb-2 min-w-0">
+        <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
+          <h2 className="truncate font-semibold">{entry.label}</h2>
+          <span className="rounded bg-[#f1eadf] px-1.5 py-0.5 text-[0.68rem] uppercase text-[#746c60]">
+            {CATEGORY_LABELS[entry.category] ?? entry.category} · {entry.input_type}
+          </span>
+          {dirty ? (
+            <span className="rounded bg-[#e9d7a8] px-1.5 py-0.5 text-[0.68rem] text-[#4f3e12]">
+              변경됨
+            </span>
           ) : null}
+          <span className="min-w-0 truncate font-mono text-[0.7rem] text-[#746c60]">
+            {entry.key}
+            {entry.updated_at
+              ? ` · ${new Date(entry.updated_at).toLocaleString('ko-KR')}`
+              : ''}
+          </span>
         </div>
-        <button
-          className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm disabled:opacity-50"
-          type="button"
-          onClick={onSave}
-          disabled={!dirty || saving}
-        >
-          {saving ? '저장 중' : '이 항목 저장'}
-        </button>
       </div>
 
-      <ValueEditor type={entry.input_type} locale={locale} value={value} onChange={onChange} />
+      <ValueEditor
+        type={entry.input_type}
+        locale={locale}
+        value={value}
+        saveControl={saveButton}
+        onChange={onChange}
+      />
     </section>
   );
 }
@@ -484,32 +491,40 @@ function ValueEditor({
   type,
   locale,
   value,
+  saveControl,
   onChange,
 }: {
   type: ContentInputType;
   locale: Locale;
   value: DraftValue;
+  saveControl: React.ReactNode;
   onChange: (value: DraftValue) => void;
 }) {
   if (type === 'text') {
     return (
-      <input
-        className="w-full rounded-md border border-[#d8d0c1] bg-[#fffdf8] px-3 py-2 text-sm outline-none focus:border-[#2f4f46]"
-        lang={locale}
-        value={typeof value === 'string' ? value : ''}
-        onChange={(event) => onChange(event.target.value)}
-      />
+      <div className="flex gap-2">
+        <input
+          className="h-10 min-w-0 flex-1 rounded-md border border-[#d8d0c1] bg-[#fffdf8] px-3 text-sm outline-none focus:border-[#2f4f46]"
+          lang={locale}
+          value={typeof value === 'string' ? value : ''}
+          onChange={(event) => onChange(event.target.value)}
+        />
+        {saveControl}
+      </div>
     );
   }
 
   if (type === 'textarea') {
     return (
-      <textarea
-        className="min-h-28 w-full resize-y rounded-md border border-[#d8d0c1] bg-[#fffdf8] px-3 py-2 text-sm leading-relaxed outline-none focus:border-[#2f4f46]"
-        lang={locale}
-        value={typeof value === 'string' ? value : ''}
-        onChange={(event) => onChange(event.target.value)}
-      />
+      <div className="space-y-2">
+        <textarea
+          className="min-h-20 w-full resize-y rounded-md border border-[#d8d0c1] bg-[#fffdf8] px-3 py-2 text-sm leading-relaxed outline-none focus:border-[#2f4f46]"
+          lang={locale}
+          value={typeof value === 'string' ? value : ''}
+          onChange={(event) => onChange(event.target.value)}
+        />
+        <div className="flex justify-end">{saveControl}</div>
+      </div>
     );
   }
 
@@ -517,6 +532,7 @@ function ValueEditor({
     return (
       <ListEditor
         value={Array.isArray(value) ? (value as string[]) : []}
+        saveControl={saveControl}
         onChange={onChange}
       />
     );
@@ -525,6 +541,7 @@ function ValueEditor({
   return (
     <RichListEditor
       value={Array.isArray(value) ? (value as string[]) : []}
+      saveControl={saveControl}
       onChange={onChange}
     />
   );
@@ -532,9 +549,11 @@ function ValueEditor({
 
 function ListEditor({
   value,
+  saveControl,
   onChange,
 }: {
   value: string[];
+  saveControl: React.ReactNode;
   onChange: (value: string[]) => void;
 }) {
   const lines = value.length ? value : [''];
@@ -544,16 +563,16 @@ function ListEditor({
   }
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-1.5">
       {lines.map((line, index) => (
         <div key={index} className="flex gap-2">
           <input
-            className="min-w-0 flex-1 rounded-md border border-[#d8d0c1] bg-[#fffdf8] px-3 py-2 text-sm outline-none focus:border-[#2f4f46]"
+            className="h-10 min-w-0 flex-1 rounded-md border border-[#d8d0c1] bg-[#fffdf8] px-3 text-sm outline-none focus:border-[#2f4f46]"
             value={line}
             onChange={(event) => updateLine(index, event.target.value)}
           />
           <button
-            className="rounded-md border border-[#bdb3a2] px-3 text-sm disabled:opacity-40"
+            className="rounded-md border border-[#bdb3a2] px-2 text-xs disabled:opacity-40"
             type="button"
             disabled={lines.length === 1}
             onClick={() => onChange(lines.filter((_, i) => i !== index))}
@@ -562,22 +581,27 @@ function ListEditor({
           </button>
         </div>
       ))}
-      <button
-        className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm"
-        type="button"
-        onClick={() => onChange([...lines, ''])}
-      >
-        줄 추가
-      </button>
+      <div className="flex items-center justify-between gap-2">
+        <button
+          className="h-10 rounded-md border border-[#bdb3a2] px-3 text-xs"
+          type="button"
+          onClick={() => onChange([...lines, ''])}
+        >
+          줄 추가
+        </button>
+        {saveControl}
+      </div>
     </div>
   );
 }
 
 function RichListEditor({
   value,
+  saveControl,
   onChange,
 }: {
   value: string[];
+  saveControl: React.ReactNode;
   onChange: (value: string[]) => void;
 }) {
   const lines = value.length ? value : [''];
@@ -587,12 +611,12 @@ function RichListEditor({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
       {lines.map((line, lineIndex) => (
-        <div key={lineIndex} className="rounded-md border border-[#e2d9ca] bg-[#fffdf8] p-3">
-          <div className="mb-3 flex items-center justify-between gap-3">
-            <p className="text-sm font-medium">문장 {lineIndex + 1}</p>
-            <div className="flex gap-2">
+        <div key={lineIndex} className="rounded-md border border-[#e2d9ca] bg-[#fffdf8] p-2.5">
+          <div className="mb-2 flex items-center justify-between gap-3">
+            <p className="text-xs font-medium text-[#746c60]">문장 {lineIndex + 1}</p>
+            <div className="flex gap-1">
               <button
                 className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs disabled:opacity-40"
                 type="button"
@@ -624,13 +648,16 @@ function RichListEditor({
         </div>
       ))}
 
-      <button
-        className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm"
-        type="button"
-        onClick={() => onChange([...lines, ''])}
-      >
-        문장 추가
-      </button>
+      <div className="flex items-center justify-between gap-2">
+        <button
+          className="h-10 rounded-md border border-[#bdb3a2] px-3 text-xs"
+          type="button"
+          onClick={() => onChange([...lines, ''])}
+        >
+          문장 추가
+        </button>
+        {saveControl}
+      </div>
     </div>
   );
 }

@@ -316,11 +316,17 @@ function CategoryEditor({
   onDelete: () => void;
 }) {
   return (
-    <section className="space-y-4">
-      <div className="rounded-lg border border-[#d8d0c1] bg-white p-4">
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-          <h2 className="font-semibold">카테고리</h2>
-          <div className="flex gap-2">
+    <section className="space-y-3">
+      <div className="rounded-lg border border-[#d8d0c1] bg-white p-3">
+        <div className="mb-3 flex min-w-0 flex-wrap items-center justify-between gap-2">
+          <div className="flex min-w-0 items-center gap-2">
+            <h2 className="truncate font-semibold">{category.title.ko || '카테고리'}</h2>
+            <span className="rounded bg-[#f1eadf] px-1.5 py-0.5 text-[0.68rem] text-[#746c60]">
+              {category.id}
+              {!category.published ? ' · 숨김' : ''}
+            </span>
+          </div>
+          <div className="flex shrink-0 gap-1">
             <button className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs" type="button" onClick={() => onMove(-1)}>위</button>
             <button className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs" type="button" onClick={() => onMove(1)}>아래</button>
             <button className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs" type="button" onClick={onDelete}>삭제</button>
@@ -343,14 +349,14 @@ function CategoryEditor({
         </div>
       </div>
 
-      <div className="rounded-lg border border-[#d8d0c1] bg-white p-4">
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="font-semibold">맛집</h2>
-          <button className="rounded-md border border-[#bdb3a2] px-3 py-2 text-sm" type="button" onClick={() => onChange({ ...category, spots: [...category.spots, newSpot()] })}>
+      <div className="rounded-lg border border-[#d8d0c1] bg-white p-3">
+        <div className="mb-3 flex items-center justify-between gap-2">
+          <h2 className="font-semibold">맛집 {category.spots.length}개</h2>
+          <button className="h-9 rounded-md border border-[#bdb3a2] px-3 text-xs" type="button" onClick={() => onChange({ ...category, spots: [...category.spots, newSpot()] })}>
             맛집 추가
           </button>
         </div>
-        <div className="space-y-4">
+        <div className="space-y-3">
           {category.spots.map((spot, index) => (
             <SpotEditor
               key={spot.id}
@@ -385,10 +391,16 @@ function SpotEditor({
   onDelete: () => void;
 }) {
   return (
-    <article className="rounded-lg border border-[#e2d9ca] bg-[#fffdf8] p-4">
-      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-        <h3 className="font-medium">{spot.name.ko || spot.id}</h3>
-        <div className="flex gap-2">
+    <article className="rounded-lg border border-[#e2d9ca] bg-[#fffdf8] p-3">
+      <div className="mb-3 flex min-w-0 flex-wrap items-center justify-between gap-2">
+        <div className="flex min-w-0 items-center gap-2">
+          <h3 className="truncate font-medium">{spot.name.ko || spot.id}</h3>
+          <span className="rounded bg-white px-1.5 py-0.5 text-[0.68rem] text-[#746c60]">
+            {spot.id}
+            {!spot.published ? ' · 숨김' : ''}
+          </span>
+        </div>
+        <div className="flex shrink-0 gap-1">
           <button className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs" type="button" onClick={() => onMove(-1)}>위</button>
           <button className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs" type="button" onClick={() => onMove(1)}>아래</button>
           <button className="rounded-md border border-[#bdb3a2] px-2 py-1 text-xs" type="button" onClick={onDelete}>삭제</button>
@@ -419,8 +431,8 @@ function SpotEditor({
 function TextField({ label, value, onChange }: { label: string; value: string; onChange: (value: string) => void }) {
   return (
     <label className="block text-sm">
-      <span className="mb-1 block font-medium">{label}</span>
-      <input className="w-full rounded-md border border-[#d8d0c1] bg-white px-3 py-2 outline-none focus:border-[#2f4f46]" value={value} onChange={(event) => onChange(event.target.value)} />
+      <span className="mb-1 block text-xs font-medium text-[#746c60]">{label}</span>
+      <input className="h-9 w-full rounded-md border border-[#d8d0c1] bg-white px-3 text-sm outline-none focus:border-[#2f4f46]" value={value} onChange={(event) => onChange(event.target.value)} />
     </label>
   );
 }
@@ -463,32 +475,36 @@ function ImageField({
 
   return (
     <label className="block text-sm">
-      <span className="mb-1 block font-medium">{label}</span>
-      <div className="space-y-2">
+      <span className="mb-1 block text-xs font-medium text-[#746c60]">{label}</span>
+      <div className="grid gap-2 sm:grid-cols-[5rem_minmax(0,1fr)]">
         {value ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={value}
             alt=""
-            className="h-24 w-24 rounded-md border border-[#d8d0c1] object-cover"
+            className="h-20 w-20 rounded-md border border-[#d8d0c1] object-cover"
           />
-        ) : null}
-        <input
-          className="w-full rounded-md border border-[#d8d0c1] bg-white px-3 py-2 outline-none focus:border-[#2f4f46]"
-          value={value}
-          placeholder="/assets/food/... 또는 업로드 URL"
-          onChange={(event) => onChange(event.target.value)}
-        />
-        <input
-          accept="image/*"
-          className="w-full text-xs"
-          type="file"
-          onChange={(event) => {
-            const file = event.target.files?.[0];
-            if (file) void upload(file);
-          }}
-        />
-        {uploading ? <p className="text-xs text-[#746c60]">업로드 중...</p> : null}
+        ) : (
+          <div className="hidden h-20 w-20 rounded-md border border-dashed border-[#d8d0c1] sm:block" />
+        )}
+        <div className="min-w-0 space-y-2">
+          <input
+            className="h-9 w-full rounded-md border border-[#d8d0c1] bg-white px-3 text-sm outline-none focus:border-[#2f4f46]"
+            value={value}
+            placeholder="/assets/food/... 또는 업로드 URL"
+            onChange={(event) => onChange(event.target.value)}
+          />
+          <input
+            accept="image/*"
+            className="w-full text-xs"
+            type="file"
+            onChange={(event) => {
+              const file = event.target.files?.[0];
+              if (file) void upload(file);
+            }}
+          />
+          {uploading ? <p className="text-xs text-[#746c60]">업로드 중...</p> : null}
+        </div>
       </div>
     </label>
   );
@@ -497,8 +513,8 @@ function ImageField({
 function TextArea({ label, value, onChange }: { label: string; value: string; onChange: (value: string) => void }) {
   return (
     <label className="mt-3 block text-sm">
-      <span className="mb-1 block font-medium">{label}</span>
-      <textarea className="min-h-24 w-full resize-y rounded-md border border-[#d8d0c1] bg-white px-3 py-2 leading-relaxed outline-none focus:border-[#2f4f46]" value={value} onChange={(event) => onChange(event.target.value)} />
+      <span className="mb-1 block text-xs font-medium text-[#746c60]">{label}</span>
+      <textarea className="min-h-20 w-full resize-y rounded-md border border-[#d8d0c1] bg-white px-3 py-2 text-sm leading-relaxed outline-none focus:border-[#2f4f46]" value={value} onChange={(event) => onChange(event.target.value)} />
     </label>
   );
 }
