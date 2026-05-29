@@ -367,29 +367,7 @@ export function AdminContentEditor() {
           </>
         }
       >
-        <div className="grid grid-cols-[minmax(0,1fr)_5.8rem_6.8rem] gap-2 md:grid-cols-[minmax(12rem,18rem)_1fr_auto] md:items-center">
-          <label className="block min-w-0">
-            <span className="sr-only">검색</span>
-              <input
-              className="h-9 w-full rounded-md border border-[#d8d0c1] px-3 text-sm outline-none focus:border-[#2f4f46]"
-                value={query}
-              placeholder="검색"
-                onChange={(event) => setQuery(event.target.value)}
-              />
-            </label>
-
-          <select
-            className="h-9 min-w-24 rounded-md border border-[#d8d0c1] bg-white px-2 text-sm outline-none focus:border-[#2f4f46] md:min-w-36"
-            value={activeCategory}
-            onChange={(event) => setActiveCategory(event.target.value)}
-          >
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category === 'all' ? '전체' : CATEGORY_LABELS[category] ?? category}
-              </option>
-            ))}
-          </select>
-
+        <div className="grid grid-cols-[6.8rem_5.8rem_minmax(0,1fr)] gap-2 md:grid-cols-[auto_10rem_minmax(12rem,18rem)] md:items-center">
           <div className="flex min-w-0 rounded-md border border-[#bdb3a2] bg-[#f7f3ea] p-0.5">
             {LOCALES.map(({ key, label }) => (
                   <button
@@ -406,6 +384,28 @@ export function AdminContentEditor() {
                   </button>
                 ))}
               </div>
+
+          <select
+            className="h-9 min-w-0 rounded-md border border-[#d8d0c1] bg-white px-2 text-sm outline-none focus:border-[#2f4f46]"
+            value={activeCategory}
+            onChange={(event) => setActiveCategory(event.target.value)}
+          >
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category === 'all' ? '전체' : CATEGORY_LABELS[category] ?? category}
+              </option>
+            ))}
+          </select>
+
+          <label className="block min-w-0">
+            <span className="sr-only">검색</span>
+            <input
+              className="h-9 w-full rounded-md border border-[#d8d0c1] px-3 text-sm outline-none focus:border-[#2f4f46]"
+              value={query}
+              placeholder="검색"
+              onChange={(event) => setQuery(event.target.value)}
+            />
+          </label>
             </div>
       </AdminHeader>
 
