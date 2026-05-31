@@ -92,9 +92,9 @@ export const DEFAULT_CONTENT_ENTRIES = [
     label: '홈 · 사업자등록번호',
     inputType: 'text',
     localeValues: {
-      ko: '사업자등록번호 506-21-96197',
-      en: 'Business registration no. 506-21-96197',
-      zh: '营业执照号码 506-21-96197',
+      ko: '사업자등록번호 506-21-96197 · 농어촌민박사업자 신고번호 한림읍 제1184호',
+      en: 'Business registration no. 506-21-96197 · Rural homestay report no. Hallim-eup 1184',
+      zh: '营业执照号码 506-21-96197 · 农渔村民宿申报编号 翰林邑第1184号',
     },
   },
   {
@@ -409,6 +409,11 @@ export const DEFAULT_CONTENT_ENTRIES = [
     localeValues: {
       ko: [
         [
+          '정원은 ',
+          { text: '기준인원 2인, 최대 3인', strong: true },
+          '입니다. 초등학생 이상 미성년 자녀 2인을 동반하실 경우 최대 4인까지 가능합니다.',
+        ],
+        [
           '해묘서가는 좋은 이웃과 담벼락을 나누고 있습니다. 마당에서 발생하는 소음은 곧바로 담을 넘어 이웃의 귓가로 생생하게 달려가니, ',
           { text: '늦은 시간에는 특히 조심', strong: true },
           '해 주시면 감사하겠습니다.',
@@ -430,6 +435,11 @@ export const DEFAULT_CONTENT_ENTRIES = [
       ],
       en: [
         [
+          'Occupancy is ',
+          { text: '2 standard guests, 3 guests maximum', strong: true },
+          '. Up to 4 guests are allowed when accompanied by 2 minor children of elementary-school age or older.',
+        ],
+        [
           'We share a wall with good neighbors — sound from the yard travels easily. Please be especially ',
           { text: 'quiet at night', strong: true },
           '.',
@@ -450,6 +460,11 @@ export const DEFAULT_CONTENT_ENTRIES = [
         ['The main gate lock does not close by itself — please shut it manually.'],
       ],
       zh: [
+        [
+          '入住人数为 ',
+          { text: '标准2人，最多3人', strong: true },
+          '。如同行者包含2名小学及以上未成年子女，最多可入住4人。',
+        ],
         [
           '海猫书斋与邻居仅一墙之隔，庭院内的声音极易传到邻居耳中，敬请尤其注意 ',
           { text: '夜间保持安静', strong: true },
@@ -491,7 +506,7 @@ export const DEFAULT_CONTENT_ENTRIES = [
     category: 'guide',
     label: '가이드 · 와이파이 네트워크',
     inputType: 'text',
-    localeValues: { ko: 'fanta', en: 'fanta', zh: 'fanta' },
+    localeValues: { ko: 'WAKE UF_5G_198A', en: 'WAKE UF_5G_198A', zh: 'WAKE UF_5G_198A' },
   },
   {
     key: 'guide.wifi.passwordLabel',
@@ -505,7 +520,7 @@ export const DEFAULT_CONTENT_ENTRIES = [
     category: 'guide',
     label: '가이드 · 와이파이 비밀번호',
     inputType: 'text',
-    localeValues: { ko: '12121212', en: '12121212', zh: '12121212' },
+    localeValues: { ko: 'AED01F198B', en: 'AED01F198B', zh: 'AED01F198B' },
   },
   {
     key: 'guide.wifi.copyLabel',

@@ -152,7 +152,7 @@ export function GuideContent({
       <section id="library" className="card">
         <CardHead title={libraryTitle} />
         <div className="block-body toggle">
-          <LocalizedRichParagraphs value={libraryParagraphs} />
+          <LocalizedRichList value={libraryParagraphs} />
         </div>
       </section>
 
