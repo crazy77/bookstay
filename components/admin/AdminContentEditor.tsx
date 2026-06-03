@@ -841,8 +841,8 @@ function ImageListItemEditor({
           </div>
           <input
             className="h-9 w-full rounded-md border border-[#d8d0c1] bg-white px-3 text-sm outline-none focus:border-[#2f4f46]"
-            value={slide.caption}
-            placeholder="캡션"
+            value={slide.caption ?? ''}
+            placeholder="캡션 선택 입력"
             onChange={(event) => onChange({ caption: event.target.value })}
           />
         </div>

@@ -160,6 +160,15 @@
   .home-hero-photo__slide {
     @apply absolute inset-0;
   }
+  .home-hero-photo__nav {
+    @apply absolute top-1/2 z-[3] hidden size-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-white/75 bg-surface/80 pb-0.5 font-sans text-2xl leading-none text-ink shadow-sm backdrop-blur-sm transition-colors hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:inline-flex;
+  }
+  .home-hero-photo__nav--prev {
+    @apply left-2;
+  }
+  .home-hero-photo__nav--next {
+    @apply right-2;
+  }
   .home-hero-photo__caption {
     @apply m-0 border-t border-border-muted/80 px-1 pt-2 pb-1 text-center font-serif-ko text-[0.88rem] font-medium tracking-[0.18em] text-ink-secondary;
   }

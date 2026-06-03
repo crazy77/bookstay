@@ -1,6 +1,6 @@
 export type HomeHeroSlide = {
   src: string;
-  caption: string;
+  caption?: string;
 };
 
 /** 홈 대표 사진 슬라이드 — CMS가 없을 때 사용하는 기본값 */

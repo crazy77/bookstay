@@ -15,7 +15,7 @@ export type RichSegment =
 export type RichLine = RichSegment[];
 export type ImageListItem = {
   src: string;
-  caption: string;
+  caption?: string;
 };
 export type LocaleContentValue = string | string[] | RichLine[] | ImageListItem[];
 export type ContentInputType =

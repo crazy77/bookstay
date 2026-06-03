@@ -1,11 +1,12 @@
 'use client';
 
 import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { HomeHeroSlide } from '@/data/home';
 import { cn } from '@/lib/cn';
 
 const ROTATE_MS = 5000;
+const SWIPE_THRESHOLD_PX = 48;
 
 type HomeHeroPhotoProps = {
   slides: HomeHeroSlide[];
@@ -15,8 +16,10 @@ type HomeHeroPhotoProps = {
 export function HomeHeroPhoto({ slides, onPhotoReady }: HomeHeroPhotoProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [loaded, setLoaded] = useState<Set<number>>(() => new Set());
+  const pointerStartX = useRef<number | null>(null);
   const hasImage = loaded.size > 0;
   const slideCount = slides.length;
+  const canNavigate = slideCount > 1;
 
   const notifyReady = useCallback(
     (ready: boolean) => {
@@ -42,6 +45,34 @@ export function HomeHeroPhoto({ slides, onPhotoReady }: HomeHeroPhotoProps) {
     return () => window.clearInterval(id);
   }, [hasImage, slideCount]);
 
+  useEffect(() => {
+    setActiveIndex((index) => (slideCount ? Math.min(index, slideCount - 1) : 0));
+  }, [slideCount]);
+
+  const showPrevious = useCallback(() => {
+    if (!canNavigate) return;
+    setActiveIndex((index) => (index - 1 + slideCount) % slideCount);
+  }, [canNavigate, slideCount]);
+
+  const showNext = useCallback(() => {
+    if (!canNavigate) return;
+    setActiveIndex((index) => (index + 1) % slideCount);
+  }, [canNavigate, slideCount]);
+
+  const handleTouchEnd = (clientX: number) => {
+    const startX = pointerStartX.current;
+    pointerStartX.current = null;
+    if (startX === null || !canNavigate) return;
+
+    const distance = clientX - startX;
+    if (Math.abs(distance) < SWIPE_THRESHOLD_PX) return;
+    if (distance > 0) {
+      showPrevious();
+    } else {
+      showNext();
+    }
+  };
+
   const markLoaded = (index: number) => {
     setLoaded((prev) => {
       if (prev.has(index)) return prev;
@@ -61,6 +92,7 @@ export function HomeHeroPhoto({ slides, onPhotoReady }: HomeHeroPhotoProps) {
   };
 
   const active = slides[activeIndex];
+  const activeCaption = active?.caption?.trim();
 
   return (
     <figure
@@ -75,7 +107,20 @@ export function HomeHeroPhoto({ slides, onPhotoReady }: HomeHeroPhotoProps) {
         <span className="home-hero-photo__corner home-hero-photo__corner--tr" aria-hidden />
         <span className="home-hero-photo__corner home-hero-photo__corner--bl" aria-hidden />
 
-        <div className="home-hero-photo__media relative aspect-3/2 w-full overflow-hidden">
+        <div
+          className="home-hero-photo__media relative aspect-3/2 w-full touch-pan-y overflow-hidden"
+          onPointerDown={(event) => {
+            if (event.pointerType === 'mouse') return;
+            pointerStartX.current = event.clientX;
+          }}
+          onPointerUp={(event) => {
+            if (event.pointerType === 'mouse') return;
+            handleTouchEnd(event.clientX);
+          }}
+          onPointerCancel={() => {
+            pointerStartX.current = null;
+          }}
+        >
           {!hasImage && (
             <div className="absolute inset-0 z-[1] flex flex-col items-center justify-center gap-1 border border-dashed border-border bg-gradient-to-br from-surface to-canvas font-serif-ko">
               <span className="text-[0.95rem] tracking-[0.12em] text-ink-secondary">
@@ -91,7 +136,7 @@ export function HomeHeroPhoto({ slides, onPhotoReady }: HomeHeroPhotoProps) {
             <Image
               key={slide.src}
               src={slide.src}
-              alt={slide.caption}
+              alt={slide.caption?.trim() || `해묘서가 대표 사진 ${index + 1}`}
               fill
               sizes="(max-width: 640px) 100vw, 32rem"
               className={cn(
@@ -104,15 +149,36 @@ export function HomeHeroPhoto({ slides, onPhotoReady }: HomeHeroPhotoProps) {
               priority={index === 0}
             />
           ))}
+
+          {hasImage && canNavigate ? (
+            <>
+              <button
+                className="home-hero-photo__nav home-hero-photo__nav--prev"
+                type="button"
+                aria-label="이전 대표 사진"
+                onClick={showPrevious}
+              >
+                ‹
+              </button>
+              <button
+                className="home-hero-photo__nav home-hero-photo__nav--next"
+                type="button"
+                aria-label="다음 대표 사진"
+                onClick={showNext}
+              >
+                ›
+              </button>
+            </>
+          ) : null}
         </div>
 
-        {hasImage ? (
+        {hasImage && activeCaption ? (
           <figcaption
             className="home-hero-photo__caption"
             aria-live="polite"
             aria-atomic="true"
           >
-            {active?.caption}
+            {activeCaption}
           </figcaption>
         ) : null}
       </div>
